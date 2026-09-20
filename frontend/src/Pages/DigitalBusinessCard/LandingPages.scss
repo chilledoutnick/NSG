@@ -1,0 +1,42 @@
+.digital_business_card_con {
+  .image_slider_digital_business_card {
+    padding-right: 0 !important;
+    .digital_business_card_img {
+      position: absolute;
+      height: 710px;
+      top: -100px;
+      bottom: 0;
+      object-fit: contain;
+    }
+  }
+  .image_slider_nfc_business_card {
+    padding-right: 0 !important;
+    height: 658px;
+    img {
+      width: 100%;
+    }
+  }
+}
+.nfc_card_hero_margin {
+  margin-bottom: 74px;
+}
+
+@media (max-width: 576px) {
+  .digital_business_card_con {
+    .image_slider_digital_business_card {
+      margin-bottom: 200px;
+      .digital_business_card_img {
+        height: 427px;
+        top: -100px;
+        bottom: 0;
+        right: 0;
+      }
+    }
+    .image_slider_nfc_business_card {
+      height: 343px;
+    }
+  }
+  .nfc_card_hero_margin {
+    margin-bottom: 0;
+  }
+}

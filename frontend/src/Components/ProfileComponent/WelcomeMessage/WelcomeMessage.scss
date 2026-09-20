@@ -1,0 +1,446 @@
+.welcome_msg_con {
+  border-radius: 24px;
+  width: 656px;
+  height: 180px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  padding: 40px 24px;
+  margin-top: 8px;
+  position: relative;
+
+  h5 {
+    color: #1d1d1d;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 12px;
+  }
+
+  .welcome_msg_text {
+    color: #505050;
+    font-family: var(--font-secondary) !important;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    overflow-wrap: break-word;
+  }
+
+  .profile_edit_btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    color: #4F39F4;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 6px;
+
+    &:hover {
+      background: rgba(79, 57, 244, 0.05);
+    }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+
+  @media screen and (max-width: 576px) {
+    max-width: calc(100% - 16px) !important;
+    min-width: auto !important;
+    padding: 20px !important;
+    border-radius: 16px !important;
+    height: auto !important;
+    margin: 8px auto !important;
+    max-height: 204px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+
+    h2 {
+      font-size: 20px !important;
+      font-weight: 600 !important;
+      margin-bottom: 12px !important;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      line-height: 28px !important;
+      color: #1d1d1d !important;
+    }
+
+    h5 {
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      line-height: 20px !important;
+      margin-bottom: 12px !important;
+      overflow-wrap: break-word;
+      color: #1d1d1d !important;
+      padding-right: 60px !important;
+    }
+
+    .welcome_msg_text {
+      font-size: 14px !important;
+      line-height: 20px !important;
+      margin-bottom: 12px !important;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      white-space: pre-line;
+      color: #505050 !important;
+    }
+
+    .profile_edit_btn {
+      top: 16px !important;
+      right: 10px !important;
+      padding: 6px 8px !important;
+      font-size: 14px !important;
+      color: #410099 !important;
+      font-weight: 600 !important;
+
+      .icon {
+        width: 14px !important;
+        height: 14px !important;
+      }
+
+      &:hover {
+        background: rgba(79, 57, 244, 0.05) !important;
+      }
+    }
+  }
+}
+
+
+
+
+  @media screen and (max-width: 576px) {
+    .blurpopup_con_wrapper.profile_edit_popup {
+    
+    position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      max-width: calc(100vw - 40px) !important;
+      
+        padding: 16px !important;
+       border-radius: 12px !important;
+        background: #fff !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+
+    h2 {
+      font-size: 16px !important;
+      font-weight: 500 !important;
+      margin-bottom: 4px !important;
+      line-height: 24px !important;
+      color: #000 !important;
+      text-align: left !important;
+    }
+
+    h4 {
+      font-size: 12px !important;
+      color: #666 !important;
+      margin-bottom: 12px !important;
+      font-weight: 400 !important;
+      text-align: left !important;
+      line-height: 16px !important;
+    }
+
+    label {
+      font-size: 14px !important;
+      color: #666 !important;
+      margin-bottom: 6px !important;
+      display: block !important;
+      font-weight: 400 !important;
+    }
+
+    input {
+      width: 100% !important;
+      padding: 12px 12px !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      font-size: 14px !important;
+      margin-bottom: 16px !important;
+      font-family: var(--font-secondary) !important;
+      background: #fff !important;
+
+      &:focus {
+        outline: none !important;
+        border-color: #007bff !important;
+      }
+    }
+
+    textarea.add_input {
+      width: 100% !important;
+      min-height: 100px !important;
+      padding: 12px 12px !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      font-size: 14px !important;
+      margin-bottom: 2px !important;
+      font-family: var(--font-secondary) !important;
+      resize: vertical !important;
+      background: #fff !important;
+
+      &:focus {
+        outline: none !important;
+        border-color: #007bff !important;
+      }
+    }
+
+    .profile_btn {
+      display: flex !important;
+      gap: 12px !important;
+      margin-top: 12px !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+
+      .btn-cancel {
+        flex: 1 !important;
+        width: 100px !important;
+        padding: 12px 20px !important;
+        border: 2px solid #000 !important;
+        background: #fff !important;
+        border-radius: 12px !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        color: #000 !important;
+
+        &:hover {
+          background: #f5f5f5 !important;
+        }
+      }
+
+      .btn-save {
+        flex: 1 !important;
+        min-width: 100px !important;
+        padding: 12px 20px !important;
+        border: none !important;
+        background: #000 !important;
+        border-radius: 12px !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        color: #fff !important;
+
+        &:hover:not(.disabled) {
+          background: #000 !important;
+        }
+
+        &.disabled {
+          background: #000 !important;
+          cursor: not-allowed !important;
+        }
+      }
+    }
+  
+
+  @media screen and (max-width: 360px) {
+    width: calc(100vw - 24px) !important;
+    margin: 0 12px !important;
+    padding: 16px 12px !important;
+
+    h2 {
+      font-size: 16px !important;
+    }
+
+    h4 {
+      font-size: 12px !important;
+    }
+
+    input, textarea.add_input {
+      padding: 10px 12px !important;
+      font-size: 13px !important;
+    }
+
+    .profile_btn {
+      gap: 8px !important;
+
+      .btn-cancel,
+      .btn-save {
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+      }
+    }
+  }
+}
+  }
+@media screen and (max-width: 786px) {
+  .welcome_msg_con {
+    max-width: calc(100% - 16px) !important;
+    min-width: auto !important;
+    padding: 20px !important;
+    border-radius: 16px !important;
+    height: auto !important;
+    margin: 8px auto !important;
+    max-height: 204px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+
+    h2 {
+      font-size: 20px !important;
+      font-weight: 600 !important;
+      margin-bottom: 12px !important;
+      line-height: 28px !important;
+      color: #1d1d1d !important;
+    }
+
+    h5 {
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      line-height: 20px !important;
+      margin-bottom: 12px !important;
+      padding-right: 60px !important;
+      color: #1d1d1d !important;
+    }
+
+    .welcome_msg_text {
+      font-size: 14px !important;
+      line-height: 20px !important;
+      margin-bottom: 12px !important;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      white-space: pre-line;
+      color: #505050 !important;
+    }
+
+    .profile_edit_btn {
+      top: 16px !important;
+      right: 10px !important;
+      padding: 6px 8px !important;
+      font-size: 14px !important;
+      color: #410099 !important;
+      font-weight: 600 !important;
+
+      .icon {
+        width: 14px !important;
+        height: 14px !important;
+      }
+
+      &:hover {
+        background: rgba(79, 57, 244, 0.05) !important;
+      }
+    }
+  }
+
+  .blurpopup_con_wrapper.profile_edit_popup {
+          //  position: absolute;
+        max-width: calc(100vw - 200px);
+       height: auto !important;
+        padding: 16px !important;
+        border-radius: 12px !important;
+        background: #fff !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+        width: 100%;
+
+    h2 {
+      font-size: 16px !important;
+      font-weight: 500 !important;
+      margin-bottom: 4px !important;
+      line-height: 24px !important;
+      color: #000 !important;
+      text-align: left !important;
+    }
+
+    h4 {
+      font-size: 12px !important;
+      color: #666 !important;
+      margin-bottom: 12px !important;
+      font-weight: 400 !important;
+      text-align: left !important;
+      line-height: 16px !important;
+    }
+
+    label {
+      font-size: 14px !important;
+      color: #666 !important;
+      margin-bottom: 6px !important;
+      display: block !important;
+      font-weight: 400 !important;
+    }
+
+    input {
+      width: 100% !important;
+      padding: 12px 12px !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      font-size: 14px !important;
+      margin-bottom: 16px !important;
+      font-family: var(--font-secondary) !important;
+      background: #fff !important;
+
+      &:focus {
+        outline: none !important;
+        border-color: #007bff !important;
+      }
+    }
+
+    textarea.add_input {
+      width: 100% !important;
+      min-height: 100px !important;
+      padding: 12px 12px !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      font-size: 14px !important;
+      margin-bottom: 2px !important;
+      font-family: var(--font-secondary) !important;
+      resize: vertical !important;
+      background: #fff !important;
+
+      &:focus {
+        outline: none !important;
+        border-color: #007bff !important;
+      }
+    }
+
+    .profile_btn {
+      display: flex !important;
+      gap: 12px !important;
+      margin-top: 12px !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+
+      .btn-cancel {
+        flex: 1 !important;
+        width: 100px !important;
+        padding: 12px 20px !important;
+        border: 2px solid #000 !important;
+        background: #fff !important;
+        border-radius: 12px !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        color: #000 !important;
+
+        &:hover {
+          background: #f5f5f5 !important;
+        }
+      }
+
+      .btn-save {
+        flex: 1 !important;
+        min-width: 100px !important;
+        padding: 12px 20px !important;
+        border: none !important;
+        background: #000 !important;
+        border-radius: 12px !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        color: #fff !important;
+
+        &:hover:not(.disabled) {
+          background: #000 !important;
+        }
+
+        &.disabled {
+          background: #000 !important;
+          cursor: not-allowed !important;
+        }
+      }
+    }
+  }
+}
+
+

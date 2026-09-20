@@ -1,0 +1,149 @@
+import re
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+def upload_path(instance, filename):
+    try:
+        return '/'.join(['img', re.sub('[^a-zA-Z0-9]]', '', str(instance.name)), filename])
+    except AttributeError:
+        return '/'.join(['img', str('Blog'), filename])
+
+
+class User(AbstractUser):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=15, null=True)
+    profile_picture = models.ImageField(upload_to=upload_path, default=None)
+    password = models.CharField(max_length=255)
+    USERNAME_FIELDS = ['email']
+    REQUIRED_FIELDS = []
+    type_of_user = models.BooleanField(default=True)  # True= Advisor && False = Client
+
+
+# Create your models here.
+class Advisor(models.Model):
+    advisor_id = models.AutoField(primary_key=True)
+    address = models.CharField(max_length=250, null=False, blank=False)
+    video = models.CharField(max_length=512)
+    about = models.CharField(max_length=1024, null=False, blank=False)
+    experience = models.CharField(max_length=512, null=False, blank=False)
+    quote = models.CharField(max_length=1024, null=False, blank=False)
+    region_of_operation = models.CharField(max_length=512, null=False, blank=False)
+    risk_rate = models.DecimalField(max_digits=3, null=False, blank=False, decimal_places=1)
+    success_rate = models.DecimalField(max_digits=3, null=False, blank=False, decimal_places=1)
+    response_rate = models.DecimalField(max_digits=3, null=True, blank=False, decimal_places=1)
+    license_number = models.CharField(max_length=50, null=True, blank=False)
+    fk_user = models.ForeignKey(User, on_delete=models.CASCADE, default=2)
+    url = models.CharField(max_length=512, null=False, blank=False)
+    user_name = models.CharField(max_length=25, null=False, blank=False, default='sidfinlit', unique=True)
+
+
+class Client(models.Model):
+    client_id = models.AutoField(primary_key=True)
+    profile_picture = models.ImageField(upload_to=upload_path)
+    fk_user = models.ForeignKey(User, on_delete=models.CASCADE, default=5)
+
+
+class Follow(models.Model):
+    follow_id = models.AutoField(primary_key=True)
+    fk_client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    fk_advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
+
+
+class Review(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    fk_client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    fk_advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
+    ratings = models.DecimalField(max_digits=2, null=False, blank=False, decimal_places=1)
+    comments = models.CharField(max_length=512, null=False, blank=False)
+    photo = models.ImageField(upload_to=upload_path)
+    create_date = models.DateField()
+    update_date = models.DateField()
+
+
+class Service(models.Model):
+    service_id = models.AutoField(primary_key=True)
+    fk_advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, null=False, blank=False)
+    desc = models.CharField(max_length=512, null=False, blank=False)
+
+
+class Company(models.Model):
+    company_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, null=False, blank=False)
+    logo = models.ImageField(upload_to=upload_path, null=True, blank=False)
+
+
+class Certificate(models.Model):
+    certificate_id = models.AutoField(primary_key=True)
+    fk_advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, null=False, blank=False)
+    certified_by = models.CharField(max_length=50, null=False, blank=False)
+
+
+class BusinessStatistics(models.Model):
+    business_id = models.AutoField(primary_key=True)
+    fk_advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
+    number_of_clients = models.IntegerField(null=False, blank=False)
+    number_of_deals = models.IntegerField(null=False, blank=False)
+    profitability = models.DecimalField(max_digits=4, null=True, blank=False, decimal_places=2)
+    portfolio = models.CharField(max_length=5, null=True, blank=False)
+
+
+class ReviewHighlight(models.Model):
+    review_highlight_id = models.AutoField(primary_key=True)
+    fk_advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
+    fk_review = models.ForeignKey(Review, on_delete=models.CASCADE)
+
+
+class Products(models.Model):
+    product_id = models.AutoField(primary_key=True)
+    product_name = models.CharField(max_length=100, null=False, blank=False)
+    fk_service = models.ForeignKey(Service, on_delete=models.CASCADE)
+
+
+class ServiceCompany(models.Model):
+    service_company_id = models.AutoField(primary_key=True)
+    fk_service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    fk_company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+
+class Appointment(models.Model):
+    appointment_id = models.AutoField(primary_key=True)
+    create_date = models.DateField()
+    create_time = models.TimeField()
+    update_date = models.DateField()
+    update_time = models.TimeField()
+    appointment_date = models.DateField()
+    appointment_time = models.TimeField()
+    status = models.CharField(max_length=10, choices=[('canceled', 'canceled'), ('completed', 'completed')], null=True,
+                              blank=False)
+    fk_client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    fk_advisor = models.ForeignKey(Advisor, on_delete=models.CASCADE)
+    duration = models.TimeField(default='00:00:15')
+
+
+class OTP(models.Model):
+    otpId = models.AutoField(primary_key=True)
+    otp = models.CharField(max_length=8, blank=False, null=False)
+    fk_user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False, default=1)
+    email = models.EmailField(default="abc@xyz.com")
+    create_time = models.DateTimeField()
+    expiry_time = models.DateTimeField()
+    verified = models.BooleanField(blank=False, null=False, default=False)
+    used = models.BooleanField(blank=False, null=False, default=False)
+
+    def __str__(self):
+        return self.otpId
+
+
+class ServiceClient(models.Model):
+    service_client_id = models.AutoField(primary_key=True)
+    fk_service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    fk_client = models.ForeignKey(Client, on_delete=models.CASCADE)
+
+
+class Urls(models.Model):
+    url_id = models.AutoField(primary_key=True)
+    url = models.CharField(max_length=25)

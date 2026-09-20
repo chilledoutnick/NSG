@@ -1,0 +1,288 @@
+.profile-service-list-con {
+
+    padding: 10px 4%;
+  .profile-service-title {
+   color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -.5px;
+    line-height: 18px;
+    margin-bottom: 10px;
+  }
+  .profile-service-card-item-wr {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .profile-service-card-item-main {
+      min-width: 312px;
+      margin-left: 10px;
+      padding: 0px;
+    }
+  }
+  .profile-service-card {
+    display: flex;
+    overflow: hidden;
+    .profile-service-card-item {
+      background: #f4f4f4;
+      margin-bottom: 20px;
+      color: #000;
+      padding: 15px;
+      box-sizing: border-box;
+      height: 94%;
+      margin-right: 15px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 5px 5px 10px 0px rgba(124, 124, 124, 0.2);
+      .service-card-img{
+            height: 232px;
+    width: 100%;
+    object-fit: contain;
+      }
+      .service-card-content{
+       padding: 20px 28px 24px 28px;
+
+       h3{
+        color: #1d1d1d;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    margin-bottom: 20px;
+       }
+       p{
+   color: #404040;
+  font-family: var(--font-secondary) !important;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 40px;
+  word-wrap: break-word;
+       }
+
+      }
+      
+       button {
+          background: none !important;
+          border: none;
+          color: #171717 !important;
+          font-family: var(--font-popins) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+          padding: 0;
+          text-align: end;
+          width: 100%;
+          margin: 0 auto;
+          margin-top: 5px
+        }
+      .service-card-feature {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 17px;
+        margin-top: 30px;
+        height: 25px;
+      }
+      .service-card-feature-more-btn {
+        border: none;
+        background: transparent;
+        color: #000;
+      }
+      .service-card-img-con {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        margin-right: 15px;
+        margin-bottom: 10px;
+        .service-card-img {
+          height: 33px;
+          margin-left: -10px;
+        }
+      }
+    }
+  }
+  .profile-service-card::-webkit-scrollbar {
+    display: none;
+  }
+  .profile_nav {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        display: block;
+        border-radius: 12px;
+        background: #e0e0e0;
+        padding: 6px 8px;
+        color: #656565;
+        text-align: center;
+        font-family: var(--font-popins) !important;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 10px; 
+        letter-spacing: 0.5px;
+      }
+      div {
+        display: flex;
+        gap: 4px;
+      }
+      button {
+        border: none;
+        border-radius: 32px;
+        border: 1px solid #898989;
+        background: #fff;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &:disabled{
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+
+    }
+}
+
+@media (max-width: 576px) {
+  .profile-service-list-con {
+  margin: 10px 4% 0 !important  ; 
+    padding: 10px 3% !important;
+    border-radius: 12px;
+    position: relative;
+    .profile-service-card {
+      margin-right: -5%;
+      overflow-x: auto !important;
+      overflow-y: hidden;
+    }
+    .profile-service-card-item {
+      min-height: 150px !important;
+      margin-bottom: 10px !important;
+    }
+    .profile-service-card-item-wr {
+      flex-wrap: nowrap;
+      .profile-service-card-item-main {
+        min-width: 270px;
+        margin-left: 10px;
+        padding: 0px;
+      }
+    }
+    .service-card-img-con {
+      display: none !important;
+    }
+    .service-card-desc {
+      font-family: var(--font-popins) !important;
+      font-size: 16px !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+      line-height: 18px !important; /* 112.5% */
+      span {
+        color: #4f39f4 !important;
+      }
+    }
+    .service-card-name {
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 16px !important;
+      font-style: normal;
+      font-weight: 600 !important;
+      line-height: 20px; /* 125% */
+    }
+  }
+  .profile_nav {
+      padding-right: 0 !important;
+      margin-top: 16px !important;
+      
+      span {
+        font-size: 12px !important;
+      }
+      
+      div {
+        gap: 4px !important;
+        
+        button {
+          padding: 2px !important;
+        }
+      }
+    }
+}
+
+
+
+
+  .profile-service-list-con {
+        // box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        padding: 24px 5%;
+        margin: 0px 3% 0;
+    // background: #f5f5f5;
+    // padding: 25px 3%;
+    border-radius: 12px;
+    position: relative;
+    transition: 0.4s;
+    // max-height: 275px;
+    .profile-service-card {
+      margin-right: -5%;
+      overflow-x: auto !important;
+      overflow-y: hidden;
+    }
+    .profile-service-card-item {
+      min-height: 150px !important;
+      margin-bottom: 10px !important;
+    }
+    .profile-service-card-item-wr {
+      flex-wrap: nowrap;
+      .profile-service-card-item-main {
+        min-width: 270px;
+        margin-left: 10px;
+        padding: 0px;
+      }
+    }
+    .service-card-img-con {
+      display: none !important;
+    }
+    .service-card-desc {
+      font-family: var(--font-popins) !important;
+      font-size: 16px !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+      line-height: 18px !important; /* 112.5% */
+      span {
+        color: #4f39f4 !important;
+      }
+    }
+    .service-card-name {
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 16px !important;
+      font-style: normal;
+      font-weight: 600 !important;
+      line-height: 20px; /* 125% */
+    }
+  }
+  .profile_nav {
+      padding-right: 0 !important;
+      margin-top: 16px !important;
+      
+      span {
+        font-size: 12px !important;
+      }
+      
+      div {
+        gap: 4px !important;
+        
+        button {
+          padding: 2px !important;
+        }
+      }
+    }

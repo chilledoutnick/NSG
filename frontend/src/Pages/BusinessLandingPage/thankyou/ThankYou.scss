@@ -1,0 +1,122 @@
+.thankyou {
+  min-height: 100vh;
+  background: #f4f5f7;
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;   
+}
+
+.thankyou__card {
+  width: 420px;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+   align-items: center; 
+    text-align: center;
+  justify-content: space-between;   
+  min-height: 600px;                
+}
+
+.thankyou__top {
+  text-align: left;
+}
+
+.thankyou__top,
+.thankyou__bottom {
+  text-align: center;   
+  width: 100%;
+}
+
+.thankyou__icon {
+  width: 92px;
+  height: 92px;
+  background: #5b21b6;
+  border-radius: 50%;
+  display: flex;
+    margin: 0 auto 30px auto;  
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 20px rgba(91, 33, 182, 0.4);
+  
+}
+
+.check-icon {
+  font-size: 60px !important; 
+  color: white;
+}
+
+.thankyou__card h1 {
+  font-size: 30px;
+  font-weight: 800;
+  font-family: var(--font-popins) !important;
+  margin-bottom: 16px;
+}
+
+.thankyou__card p {
+  font-size: 16px;
+  color: #6b7280;
+  font-weight: 400;
+  margin: 0 auto;
+  max-width: 290px;
+  line-height: 1.6;
+  font-family: var(--font-secondary) !important;
+
+}
+
+.thankyou__bottom {
+  text-align: left;
+    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  text-align: center;
+}
+
+.thankyou__bottom span {
+  font-size: 14px;
+  letter-spacing: 2.8px;
+  line-height: 20px;
+  font-family:var(--font-inter);
+  color: #94A3B8;
+  font-weight: 700;
+
+}
+
+.redirect{
+  font-size: 14px;
+  font-family: var(--font-inter);
+    color: #94A3B8;
+      font-weight: 500;
+
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 50px;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #5b21b6;
+  transition: width 1s linear;
+}
+
+.thankyou__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 114px;
+  width: 100%;
+}
+
+.thankyou__logo img {
+  display: block;
+      width: 184px;
+    height: 65px;
+    filter: opacity(0.5);
+}

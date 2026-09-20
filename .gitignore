@@ -1,0 +1,73 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Certificates & Private Keys
+*.pem
+*.p12
+*.p8
+*.key
+*.pkpass
+*google_key*.json
+*serviceAccount*.json
+*service-account*.json
+*credentials*.json
+*credential*.json
+*firebase-adminsdk*.json
+database-migration-*.json
+effective-sonar-*.json
+real-time-notifications-*.json
+google-services.json
+
+
+# Python & Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Static and Media
+mediafiles/
+staticfiles/
+*.csv
+
+# Frontend (Node & React)
+node_modules/
+frontend/node_modules/
+frontend/build/
+frontend/frontend_build/
+frontend/.env
+leapon-card-profile/node_modules/
+leapon_card_prod/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and Editors
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace

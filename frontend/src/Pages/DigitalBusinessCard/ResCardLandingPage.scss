@@ -1,0 +1,383 @@
+@media (max-width: 992px) {
+  .business_card_home_con {
+    overflow: hidden;
+    .nfc_card_hero_sec {
+      padding-bottom: 55px;
+      flex-direction: column-reverse !important;
+      .card_hero_left {
+        padding: 0 10% !important;
+        margin-top: 0 !important;
+      }
+    }
+    .about_join_business {
+      margin-top: -1px;
+      height: 634px;
+      position: relative;
+      align-items: flex-start;
+      margin-bottom: 50px;
+      background: #000;
+      .about_join_right {
+        width: 100%;
+        padding: 31px 12%;
+        h3 {
+          font-size: 22px;
+          margin-bottom: 8px;
+          line-height: 26px;
+        }
+        p {
+          font-size: 18px;
+          width: 100%;
+          margin-bottom: 21px;
+          color: #c0c0c0;
+          font-weight: 400;
+        }
+        button {
+          font-size: 16px;
+        }
+      }
+      .about_join_img {
+        position: absolute;
+        bottom: 0;
+        z-index: 0;
+      }
+    }
+    .card_variant_con {
+      padding: 50px 5%;
+      h3 {
+        color: #000;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 24px;
+      }
+      .card_variant_item_wrapper {
+        flex-direction: column;
+        .card_variant_item {
+          width: 100%;
+          &:hover {
+            margin-top: 0;
+            box-shadow: none;
+            .order_btn {
+              background: unset;
+              color: unset;
+            }
+          }
+          &:nth-child(2) {
+            .order_btn {
+              background: var(--color-primary);
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    .card_more_features {
+      padding: 25px 5%;
+      h3 {
+        font-size: 22px;
+        font-weight: 700;
+      }
+      span {
+        font-size: 14px;
+        margin-bottom: 37px;
+      }
+      .home_features_nav {
+        display: flex;
+      }
+      .card_more_features_wrapper {
+        display: flex;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        .card_more_features_item_wrapper {
+          margin-bottom: 24px;
+          min-width: 90vw;
+          .card_more_features_item {
+            padding: 20px 24px;
+            .card_more_features_item_top {
+              h5 {
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 22px; /* 110% */
+              }
+            }
+            &:hover {
+              border-color: #e7e7e7;
+              box-shadow: unset;
+              .fatures_img_bg {
+                background: #f7f5ff;
+                img {
+                  filter: unset;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .create_card_btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 5%;
+      background: #f7f8f9;
+      // position: fixed;
+      // bottom: 0;
+      // right: 0;
+      // left: 0;
+      z-index: 1;
+      box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.1);
+      button {
+        height: 52px;
+        width: 100%;
+        font-family: var(--font-popins) !important;
+        font-size: 20px;
+        background: var(--color-primary) !important;
+        color: white !important;
+        font-weight: 500;
+        &:hover {
+          background: var(--color-primary) !important;
+          color: white !important;
+        }
+      }
+    }
+    .create_card_btn2 {
+      margin-top: 30px;
+      flex-direction: column;
+      gap: 20px;
+      button,
+      a {
+        width: 100%;
+      }
+      .cta-btn {
+        background: var(--color-primary) !important;
+        color: #fff !important;
+        font-family: var(--font-popins) !important;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        &:hover {
+          background: var(--color-primary) !important;
+          color: #fff !important;
+        }
+      }
+      .video-btn {
+        color: #000;
+        .icon {
+          bottom: 3px !important;
+        }
+        &:hover {
+          .icon {
+            right: -35px;
+          }
+        }
+      }
+    }
+    .home-promise {
+      padding: 34px 5% 73px 5% !important;
+      .home-promise-row {
+        grid-template-columns: auto !important;
+      }
+
+      .btm-card {
+        flex-direction: row !important;
+        background: white !important;
+        color: black !important;
+        padding: 20px 30px !important;
+        height: auto !important;
+        gap: 27px;
+        margin-bottom: 0 !important;
+        .btm-card-text {
+          text-align: start !important;
+          p {
+            text-align: start !important;
+            color: #000 !important;
+            font-size: 20px !important;
+            letter-spacing: 1px !important;
+            margin-bottom: 0 !important;
+          }
+          span {
+            color: #000 !important;
+            text-align: start !important;
+          }
+        }
+      }
+
+      .btm-card1 {
+        background: #000 !important;
+        img {
+          filter: invert(100%) brightness(200%);
+        }
+        .btm-card-text {
+          text-align: start !important;
+          p {
+            color: #fff !important;
+          }
+          span {
+            color: #fff !important;
+          }
+        }
+      }
+      .btm-card0,
+      .btm-card2 {
+        img {
+          filter: none !important;
+        }
+      }
+    }
+    .card_banner {
+      background: white;
+      padding: 54px 0 0 0;
+      h3 {
+        padding: 0 5%;
+        color: #000;
+        font-family: Poppins;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 17px;
+      }
+      p {
+        padding: 0 5%;
+        color: #797979;
+        font-size: 16px;
+        letter-spacing: 0.16px;
+        margin-bottom: 25px;
+      }
+      button {
+        margin: 0 5% 25px 5%;
+        gap: 17px;
+        color: #000;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      .bg_img {
+        display: block;
+        width: 100%;
+        height: 246px;
+        object-fit: cover;
+      }
+    }
+    .header-home-wrapper {
+      padding: 0 5%;
+    }
+    .nfc_card_hero {
+      padding-top: 60px;
+      display: block;
+      background: transparent;
+      height: auto;
+      .image_slider {
+        width: 100%;
+        padding-right: 0;
+        justify-content: center;
+        padding: 20px 0;
+        .smart_card_video {
+          width: 95%;
+          height: auto;
+          &:hover {
+            box-shadow: none;
+          }
+        }
+      }
+      .nfc_card_bottom {
+        padding: 0 5% 30px 5%;
+        width: 100%;
+        .nfc_card_bottom_title {
+          margin-top: 10px;
+          h1 {
+            font-size: 24px;
+            text-align: center;
+            color: #000;
+            font-weight: 600;
+            line-height: normal;
+            margin-bottom: 14px;
+            margin-top: 0;
+            br {
+              display: none;
+            }
+            span {
+              display: block;
+              color: var(--color-primary) !important;
+            }
+          }
+          h4 {
+            color: #000;
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 4px;
+            width: 100%;
+            br {
+              display: none;
+            }
+          }
+        }
+        .nfc_card_bottom_rating {
+          display: none;
+        }
+      }
+    }
+
+    .nfc_banner {
+      display: flex;
+      img {
+        height: 83px;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .card_hero_sec {
+      height: auto;
+      margin-top: 47px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      .card_hero_left {
+        width: 100%;
+        padding: 80px 10% 0 10%;
+        align-items: center;
+        h1 {
+          font-size: 24px;
+          font-weight: 800;
+          line-height: normal;
+          letter-spacing: -0.333px;
+          margin-bottom: 12px;
+        }
+        p {
+          font-size: 15px;
+          font-weight: 400;
+          letter-spacing: -0.333px;
+          margin-bottom: 30px;
+        }
+        .card_hero_btn {
+          flex-direction: column;
+          button {
+            height: 45px;
+            padding: 0 40px !important;
+          }
+        }
+      }
+      .card_hero_right {
+        width: 100%;
+        margin-top: 20px;
+        img {
+          &:nth-child(1) {
+            display: none;
+          }
+          &:nth-last-child(1) {
+            display: flex;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+}

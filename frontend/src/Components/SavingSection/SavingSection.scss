@@ -1,0 +1,175 @@
+.saving_section_con2 {
+  background: #fefefe !important;
+}
+.saving_section_con {
+  padding: 118px 0;
+  background: linear-gradient(180deg, #ffffff, #ffffff 42.04%, #f1f3fb);
+  .saving_section_con_wrapper {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      font-size: 24px !important;
+      line-height: 30px !important;
+      font-weight: 600;
+      font-family: var(--font-popins) !important;
+      text-align: center;
+      margin-bottom: 26px;
+      span{
+        background: linear-gradient(90deg, #410099 22.54%, #afa5ff 88.45%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      }
+    }
+    .saving_section_desc {
+      font-size: 20px;
+      font-family: var(--font-secondary) !important;
+      margin-bottom: 26px;
+      text-align: center;
+    }
+    table {
+      thead {
+        tr {
+          th {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: var(--font-secondary) !important;
+            width: 25%;
+            padding: 20px 50px;
+            .trad_text {
+              text-decoration: underline;
+              transition: 0.2s;
+              cursor: pointer;
+              &:hover {
+                color: #818486;
+              }
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            padding: 20px 50px;
+            font-size: 20px;
+            font-family: var(--font-secondary) !important;
+
+            // Add the border-radius here
+            &:first-child {
+              border-top-left-radius: 20px;
+              border-bottom-left-radius: 20px;
+            }
+            &:last-child {
+              border-top-right-radius: 20px;
+              border-bottom-right-radius: 20px;
+            }
+          }
+        }
+        tr:nth-child(odd) {
+          background: #f4f5f5;
+        }
+        tr:nth-last-child(1) {
+          background: #f5f3ff;
+          .table_title {
+            font-weight: 700;
+          }
+        }
+
+        .table_btm_price {
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          span {
+            padding: 0 7px;
+            display: block;
+            height: 23px;
+            background: #410099;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-secondary) !important;
+            white-space: nowrap;
+            margin-right: 11px;
+            &:nth-child(2) {
+              all: unset;
+              font-weight: 400;
+              padding-left: 3px;
+              padding-top: 3px;
+              font-size: 14px;
+            }
+          }
+        }
+        .checkIcon {
+          height: 24px;
+          width: 24px;
+          img {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+    .cta-btn{
+      display: none !important;
+      border-radius: 20px;
+      margin-top: 48px;
+      padding: 11px 50px;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .saving_section_con {
+    padding: 50px 5%;
+    .saving_section_con_wrapper {
+      h2 {
+        font-size: 36px;
+        line-height: 40px;
+        margin-bottom: 20px;
+        span{
+          display: block;
+        }
+      }
+      .saving_section_desc {
+        font-size: 16px;
+        color: #484c52;
+        br{
+          display: none;
+        }
+      }
+
+      table {
+        width: 100%;
+        thead {
+          tr {
+            th {
+              padding: 15px;
+              font-size: 15px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            td {
+              padding: 15px;
+              font-size: 15px;
+              width: auto;
+              text-wrap: nowrap;
+              .table_btm_price {
+                span {
+                  display: none !important;
+                }
+              }
+            }
+          }
+        }
+      }
+      .cta-btn{
+        display: flex !important;
+      }
+    }
+  }
+}

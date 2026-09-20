@@ -1,0 +1,153 @@
+/* Onboarding.scss */
+
+.onboarding-container {
+  display: flex;
+  min-height: 100vh;
+
+  .onboarding_contant {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 60px 0;
+
+    .onboarding_contant_top {
+      margin-bottom: 25%;
+    }
+
+    h2 {
+      font-size: 16px;
+      color: #535353;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-align: center;
+      font-family: var(--font-popins) !important;
+    }
+
+    .onboarding-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 440px;
+
+      .btn-primary {
+        font-family: var(--font-popins) !important;
+        margin-top: 24px;
+      }
+    }
+
+    &.onboarding_contant_sync {
+      .onboarding_contant_top {
+        margin-bottom: 64px;
+      }
+    }
+  }
+}
+
+.onboarding-sync-wrapper {
+  width: 100%;
+  max-width: 620px;
+}
+
+/* =============================== */
+/* 📞 PHONE INPUT — FIXED STYLING */
+/* =============================== */
+
+.onboarding-phone-container {
+  width: 100%;
+}
+
+/* Root wrapper from library */
+.onboarding-phone-container .react-tel-input {
+  width: 100%;
+}
+
+/* Actual input */
+.onboarding-phone-container .form-control {
+  width: 100% !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  // border: 1px solid #c4c4c4 !important;
+  font-size: 14px;
+  font-family: var(--font-secondary) !important;
+  padding-left: 72px !important; // space for flag + code
+  outline: none;
+}
+
+/* Flag dropdown button */
+.onboarding-phone-container .flag-dropdown {
+  background: transparent !important;
+  border: none !important;
+  // border-right: 1px solid #000 !important;
+  border-radius: 8px 0 0 8px !important;
+}
+
+/* Flag alignment */
+.onboarding-phone-container .selected-flag {
+  padding: 0 18px !important;
+  background: none !important;
+  .flag{
+        margin-top: -5px;
+    position: absolute;
+    top: 40%;
+    height: 11px;
+  }
+}
+
+/* Country dropdown */
+.onboarding-phone-container .country-list {
+  max-height: 220px !important;
+  z-index: 99999 !important;
+  font-family: var(--font-secondary) !important;
+      width: 225px;
+}
+
+/* Error state */
+.error_border .form-control {
+  border-color: red !important;
+}
+
+/* =============================== */
+/* Button */
+/* =============================== */
+
+.btn-primary {
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =============================== */
+/* Mobile */
+/* =============================== */
+
+@media (max-width: 576px) {
+  .onboarding-container {
+    flex-direction: column-reverse;
+    min-height: auto;
+
+    .onboarding_contant {
+      width: 100%;
+      padding: 50px 7%;
+
+      .onboarding_contant_top {
+        display: none;
+      }
+
+      .onboarding-form {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+// 576 PX
+@media (max-width: 576px) {
+    .communication-con{
+        display: flex;
+        flex-direction: column;
+        .sidebar-con{
+            display: none !important;
+        }
+        .sidebar-mobile {
+            display: block !important;
+            position: fixed;
+            z-index: 12;
+          }
+          .communication-content-header-btn{
+            justify-content: flex-end;
+            margin: 20px 20px 5px 20px;
+            .mobile-menu{
+                display: block;
+            }
+            .show_menu_btn_coms{
+                display: block;
+            }
+        }
+        .communication-content-header-btn2{
+            display: flex !important;
+        }
+        .communication-content-left-wrapper{
+            flex-direction: column;
+            width: 100%;
+            padding-bottom: 100px;
+            .communication-content-left{
+                width: 90%;
+            }
+        }
+        .communication-content-right{
+            margin: 15px !important;
+            padding: 15px !important;
+        }
+    }
+}
+// 576 PX

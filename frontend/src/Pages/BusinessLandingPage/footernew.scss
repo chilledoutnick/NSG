@@ -1,0 +1,198 @@
+.nsg-footer {
+  background: #000;
+  color: #fff;
+  padding: 50px 170px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.footer-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  /* Desktop: left content + right logo in one row */
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-around;
+  //   gap: 40px;
+}
+
+/* ===== LEFT SIDE - Social Media + Contact columns ===== */
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-heading {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #fff;
+  font-family: var(--font-popins) !important;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  li {
+    font-size: 16px;
+    line-height: 1.6;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      font-family: var(--font-secondary) !important;
+      font-weight: 300;
+
+      &:hover {
+        color: #b794f6;
+      }
+    }
+  }
+}
+
+.footer-copyright {
+  font-size: 16px;
+  color: #888;
+  margin: 0;
+  line-height: 1.5;
+  font-family: var(--font-primary) !important;
+  font-weight: 600;
+}
+
+/* ===== RIGHT SIDE - Logo only ===== */
+.footer-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  img {
+    // width: 123px;
+    height: 32px;
+  }
+
+  .footer-brand-name {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: "Poppins", sans-serif;
+    white-space: nowrap;
+  }
+}
+
+/* ===== TABLET ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nsg-footer {
+    padding: 50px 60px;
+  }
+
+  .footer-top {
+    gap: 50px;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .desktopp {
+    display: none;
+  }
+
+  .nsg-footer {
+    padding-top: 33px;
+    padding-left: 20px;
+    padding-right: 0px;
+    padding-bottom: 18px;
+    margin-bottom: 80px;
+  }
+
+
+  /* Stack: content on top, logo+copyright below */
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  /* Two columns side by side on mobile */
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .footer-left {
+    gap: 24px;
+    width: 100%;
+  }
+
+  .footer-heading {
+    font-size: 20px;
+    margin-bottom: 14px;
+    letter-spacing: 5%;
+  }
+
+  .footer-links {
+    gap: 10px;
+  }
+
+  .footer-links li {
+    font-size: 14px;
+
+    a {
+      font-size: 16px;
+      line-height: 30px;
+      font-family: var(--font-primary) !important;
+    }
+  }
+
+  /* Logo + copyright stacked, left-aligned below */
+  .footer-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .footer-logo .footer-brand-name {
+    font-size: 18px;
+  }
+
+  .footer-copyright {
+    font-size: 13px;
+    font-family: var(--font-primary) !important;
+    font-weight: 600;
+  }
+}
+
+.mobilee {
+  display: none; // default: sab jagah hidden
+}
+
+@media (max-width: 786px) {
+  .mobilee {
+    display: block; // sirf 786px ya usse kam pe show
+  }
+}

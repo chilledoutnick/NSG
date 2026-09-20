@@ -1,0 +1,161 @@
+.agent_page_wrapper {
+  display: flex;
+  gap: 40px;
+  padding: 32px;
+}
+
+/* ----------------------------
+   POPUP STYLE FORM (LEFT)
+----------------------------- */
+
+.profile_add_popup.agent_popup_form {
+  width: 100%;
+  max-width: 520px;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+  height: fit-content;
+
+  h4 {
+    color: #000;
+    font-family: var(--font-popins);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  h5 {
+    color: #737373;
+    font-family: var(--font-secondary);
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  label {
+    color: #737373;
+    font-size: 14px;
+    margin-bottom: 4px;
+    font-family: var(--font-secondary);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #d4d4d4;
+    background: #fff;
+    padding: 8px 10px;
+    box-shadow: 0px 1px 2px rgba(18,18,23,0.05);
+    font-size: 16px;
+    font-family: var(--font-secondary);
+  }
+
+  textarea {
+    min-height: 110px;
+  }
+}
+
+/* Save Button (matches popup) */
+.profile_btn {
+  display: flex;
+  justify-content: flex-end;
+
+  .btn-save {
+    width: 120px;
+    background: #410099;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: white;
+    font-size: 16px;
+    font-family: var(--font-popins);
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .btn-save:hover {
+    background: #5d15d1;
+  }
+}
+
+/* ----------------------------
+   RIGHT RESULT BOX
+----------------------------- */
+
+.agent_result_box {
+  width: 360px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.12);
+  height: fit-content;
+
+  h3 {
+    font-family: var(--font-popins);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  .twilio_box {
+    margin-top: 20px;
+
+    label {
+      font-size: 16px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .twilio_row {
+      background: #f6f5fe;
+      padding: 12px 15px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      span {
+        font-size: 20px;
+        font-weight: 700;
+        color: #410099;
+      }
+
+      button {
+        background: #410099;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 8px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+  .agent_page_wrapper {
+    flex-direction: column;
+  }
+
+  .agent_result_box {
+    width: 100%;
+  }
+}

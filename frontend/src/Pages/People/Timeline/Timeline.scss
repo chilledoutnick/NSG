@@ -1,0 +1,259 @@
+.people_timeline_con {
+  .timeline_container {
+    display: flex;
+    flex-direction: column;
+    .timeline_item {
+      padding: 16px 8px;
+      border-radius: 8px;
+      // border-bottom: 1px solid #ebebeb;
+      position: relative;
+      .timeline_item_popup {
+        position: absolute;
+        top: 45px;
+        right: 8px;
+        display: flex;
+        gap: 12px;
+        padding: 12px 20px 12px 12px;
+        flex-direction: column;
+        border-radius: 12px;
+        border: 1px solid #c7c7cc;
+        background: #fafafa;
+        box-shadow: 5px 5px 10px 0px rgba(124, 124, 124, 0.2);
+        z-index: 10;
+        button {
+          background: none;
+          border: none;
+          padding: 0;
+          display: flex;
+          gap: 16px;
+          align-items: center;
+          width: fit-content;
+          white-space: nowrap;
+          overflow: hidden;
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 16px; /* 100% */
+          .icon {
+            font-size: 24px;
+            color: #818486;
+          }
+        }
+      }
+      .bg_gray {
+        color: #818486 !important;
+        background: #f0f0f0 !important;
+      }
+      .color_gray {
+        color: #818486 !important;
+      }
+      .timeline_item_top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        .timeline_item_top_left {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          h6 {
+            overflow: hidden;
+            color: #493bb5;
+            text-overflow: ellipsis;
+            font-family: var(--font-secondary) !important;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px; /* 133.333% */
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #eeecff;
+          }
+        }
+        .timeline_item_top_right {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          span {
+            color: #4f39f4;
+            text-align: right;
+            font-family: var(--font-secondary) !important;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-top: 2px;
+          }
+          button {
+            background: none;
+            border: none;
+            padding: 0;
+          }
+          .btn_gray {
+            color: #c7c7cc;
+          }
+        }
+      }
+      .timeline_item_content {
+        padding-left: 24px;
+        p {
+          color: #818486;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          a {
+            color: #4f39f4;
+          }
+        }
+      }
+      .timeline_icon {
+        width: 16px;
+        height: 16px;
+        color: #818486;
+      }
+      .suggestion_cta {
+  display: flex;
+  gap: 20px;
+  padding-left: 24px;
+}
+
+.suggestion_cta button {
+          background: none;
+          border: none;
+          padding: 0;
+          display: flex;
+          // gap: 16px;
+          align-items: center;
+          width: fit-content;
+          white-space: nowrap;
+          overflow: hidden;
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 16px; /* 100% */
+          gap: 4px;
+          .icon {
+            height: 16px;
+width: 16px;
+            color: #818486;
+          }
+        }
+    }
+    .active_timeline {
+      background: #f9f8ff;
+      border-bottom: 1px solid #ebebeb;
+    }
+    .cancel_popup {
+      padding: 24px;
+      width: 358px;
+      h5 {
+        color: #000;
+        text-align: center;
+        font-family: var(--font-popins) !important;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 32px;
+        margin-bottom: 20px;
+      }
+      img {
+        width: 156px;
+        height: 156px;
+        margin: auto;
+        margin-bottom: 20px;
+      }
+      .cancel_popup_btn {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        button {
+          width: 100%;
+          padding: 10px 0;
+        }
+      }
+    }
+    .delete_meeting {
+      .timeline_item_top_left {
+        h6 {
+          background-color: #ffe4d6 !important;
+        }
+      }
+      .timeline_item_top_right {
+        span {
+          color: #818486 !important;
+        }
+      }
+    }
+    .timeline_call {
+      .timeline_item_top_left {
+        h6 {
+          color: #000 !important;
+          background: #efefef !important;
+        }
+      }
+      .timeline_item_top_right {
+        span {
+          color: #000 !important;
+        }
+      }
+    }
+    .note_reminder {
+      .timeline_item_content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        p {
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          font-style: italic;
+          font-weight: 400;
+          line-height: normal;
+          padding: 8px;
+          border-radius: 8px;
+          background: #efefef;
+          width: 70%;
+          word-wrap: break-word; 
+          overflow-wrap: break-word;
+          white-space: normal;
+        }
+        span {
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+        img {
+          height: 156px;
+          width: 70%;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+      }
+    }
+    .timeline_item_note {
+      .timeline_item_content {
+        p {
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          font-style: italic;
+          font-weight: 400;
+          line-height: normal;
+          border-radius: 8px;
+          background: #efefef;
+          padding: 8px;
+          width: fit-content;
+        }
+      }
+    }
+  }
+}

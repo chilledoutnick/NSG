@@ -1,0 +1,25 @@
+.profile_skeleton_client{
+    height: 92vh;
+    .pr1{
+        height: 50px;
+    }
+    .pr2{
+        height: 60px;
+        border-radius: 0 0 10px 10px;
+    }
+    .pr3{
+        height: 110px;
+        border-radius:10px 10px 0 0;
+    }
+}
+@media (max-width: 576px) {
+    .profile_skeleton_client{
+        height: 80vh;
+        .pr1{
+            height: 40px;
+        }
+        .pr3{
+            height: 95px;
+        }
+    }
+}

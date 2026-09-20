@@ -1,0 +1,36 @@
+.input-field {
+  position: relative;
+}
+
+.input-label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+  color: #808080;
+  pointer-events: none;
+  font-size: 16px;
+  font-family: var(--font-secondary) !important;
+}
+
+.focused .input-label {
+  top: 10px;
+  transform: translateY(-100%);
+  font-size: 12px;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 0 3px;
+}
+
+.custom_input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+  font-family: var(--font-secondary) !important;
+  background: transparent;
+  transition: 0.2s;
+}

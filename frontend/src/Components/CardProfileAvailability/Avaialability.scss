@@ -1,0 +1,129 @@
+.schedules_content {
+  padding: 40px 5%;
+  .schedule_content_btn {
+    display: flex;
+    p {
+      color: #101820;
+      font-family: var(--font-secondary);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-right: 20px;
+    }
+    input {
+      width: 36px;
+      height: 20px;
+    }
+    .form-check-input:checked {
+      background-color: #4f39f4;
+      border-color: #4f39f4;
+    }
+  }
+
+  .schedule_content_bottom {
+    margin-top: 70px;
+    .schedule_bottom_btn {
+      display: flex;
+      justify-content: space-between;
+      button {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 4px solid #eceaff;
+        padding-bottom: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        transition: 0.2s;
+      }
+      .active {
+        border-bottom: 4px solid #4f39f4;
+        color: #4f39f4;
+        font-weight: 600;
+      }
+    }
+    .schedule_bottom_btn_content {
+      .schedules_content_calendar {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 60px;
+        img {
+          margin-right: 11px;
+          width: 24px;
+          height: 24px;
+        }
+        p {
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          margin-bottom: 17px;
+          span {
+            color: #4f39f4;
+          }
+        }
+        button {
+          width: 90%;
+        }
+      }
+      .schedules_content_meet {
+        padding: 32px 5%;
+        h4 {
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          margin-bottom: 8px;
+        }
+        p {
+          color: rgba(0, 0, 0, 0.5);
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          margin-bottom: 14px;
+        }
+        input {
+          padding: 10px 22px;
+          border-radius: 10px;
+          border: 1px solid #c4c4c4;
+          background: rgba(255, 255, 255, 0.5);
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          width: 100%;
+          &::placeholder {
+            color: rgba(0, 0, 0, 0.25);
+          }
+        }
+        button {
+          margin-top: 25px;
+          width: 100%;
+        }
+      }
+      .schedules_content_avaialability {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+.schedule_content {
+  width: 100%;
+  border: none;
+}
+
+

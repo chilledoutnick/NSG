@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#410099" />
+    <meta
+      name="description"
+      content="NSG CRM — Network Sales & Growth. Connecting Smarter and Stronger."
+    />
+    <title>NSG CRM — Network Sales & Growth</title>
+
+    <!-- Schema.org markup -->
+    <meta
+      itemprop="name"
+      content="NSG CRM — Network Sales & Growth"
+    />
+    <meta
+      name="keywords"
+      content="NSG CRM, digital business card, smart networking, contact management, sales growth"
+    />
+    <meta
+      name="description"
+      content="NSG CRM is an easy-to-use, smart networking and contact management tool. Share stunning customized profiles with a tap or QR code."
+    />
+
+    <!-- Open Graph data -->
+    <meta property="og:site_name" content="NSG CRM" />
+    <meta property="og:title" content="{{ og_title }}" />
+    <meta property="og:description" content="{{ og_description }}" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:url" content="{{ og_url }}" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ og_title }}" />
+    <meta name="twitter:description" content="{{ og_description }}" />
+    <meta name="twitter:image" content="{{ og_image }}" />
+
+    <!-- Web App Manifest & Apple Icons -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/nsg-logo-192.png" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+
+
+    <!-- Zapier Elements SDK -->
+    <script
+      type="module"
+      src="https://cdn.zapier.com/packages/partner-sdk/v0/zapier-elements/zapier-elements.esm.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.zapier.com/packages/partner-sdk/v0/zapier-elements/zapier-elements.css"
+    />
+
+    <!-- Calendly Widget -->
+    <script
+      src="https://assets.calendly.com/assets/external/widget.js"
+      async
+    ></script>
+  </head>
+  <body>
+    <div id="preloader"></div>
+    <div id="root"></div>
+    <script>
+      window.addEventListener("load", function () {
+        var root = document.getElementById("root");
+        var loader = document.getElementById("preloader");
+        if (loader) loader.style.display = "none";
+        if (root) root.style.display = "block";
+      });
+    </script>
+    <!-- Bootstrap JS -->
+    <script
+      type="text/jsx"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      var renderedApiUrl = "{{ api_url }}";
+      if (!renderedApiUrl || renderedApiUrl.indexOf("{{") !== -1) {
+        window.REACT_APP_API_URL = window.location.origin;
+      } else {
+        window.REACT_APP_API_URL = renderedApiUrl;
+      }
+    </script>
+  </body>
+</html>

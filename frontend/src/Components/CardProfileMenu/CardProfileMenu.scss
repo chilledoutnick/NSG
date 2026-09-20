@@ -1,0 +1,359 @@
+.card_menu_con {
+  position: fixed;
+  z-index: 101;
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  .card_menu_wrapper {
+    margin-top: 30px;
+    padding-bottom: 50px;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    border-radius: 10px 10px 0 0;
+    .card_menu_top {
+      .card_menu_logo {
+        background: black;
+        padding: 40px 200px 23px 20px;
+        img {
+          width: 76.237px;
+        }
+      }
+      .card_menu_progress {
+        position: relative;
+        z-index: 15;
+        .profile_progress_con {
+          margin: 0 24px 16px 24px;
+          box-shadow: none;
+          background: #efefef;
+        }
+      }
+      .get_premium_con {
+        margin: 0 24px 20px 24px;
+        .get_premium {
+          width: 100%;
+          height: 48px;
+          justify-content: center;
+        }
+      }
+
+      .dash-header-popup-info {
+        display: flex;
+        width: 100%;
+        padding: 24px 22px;
+        gap: 12px;
+        .dash-header-popup-name {
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 23px;
+          color: #00261c;
+        }
+        .dash-header-popup-email {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 18px;
+          color: #585d63;
+          margin-top: 5px;
+        }
+        button {
+          position: absolute;
+          background: transparent;
+          border: none;
+          padding: 0;
+          top: 50px;
+          right: 20px;
+          z-index: 10;
+        }
+      }
+      .card_menu_btn {
+        padding: 0px 22px 28px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        button {
+          padding: 12px;
+          display: flex;
+          align-items: center;
+          background: transparent;
+          border: none;
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 21px; /* 150% */
+          letter-spacing: 0.1px;
+          text-align: start;
+          gap: 8px;
+          img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+          }
+          P {
+            color: #000;
+            font-family: var(--font-secondary) !important;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 21px; /* 150% */
+            letter-spacing: 0.1px;
+            text-align: start;
+            transition: 0.2s;
+            span {
+              font-size: 12px;
+              color: var(--color-primary);
+            }
+          }
+          .reset_icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 13px;
+            padding: 10px;
+            width: 39px;
+            height: 39px;
+            border-radius: 50%;
+            background: #f5f3ff;
+            color: #4f4d5e;
+          }
+          &:hover {
+            p {
+              color: #4f39f4;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.edit_info_form {
+  p {
+    color: #000;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px; /* 131.25% */
+    letter-spacing: 0.1px;
+    margin-bottom: 60px;
+  }
+  .edit_info_btn {
+    padding: 100px 13% 17px 13%;
+    p {
+      text-align: center;
+      margin-bottom: 23px !important;
+    }
+  }
+}
+.phone_screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 10%;
+  video {
+    margin-bottom: 30px;
+    width: 250px;
+    border-radius: 15px;
+    object-fit: cover;
+  }
+  p {
+    font-family: var(--font-secondary) !important;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    span {
+      color: #4f39f4;
+    }
+  }
+  button {
+    width: 100%;
+  }
+}
+.refer_content {
+  padding: 24px 5% 0 5%;
+  position: relative;
+  background: #fff;
+  border-radius: 15px 15px 0px 0px;
+  .back_btn {
+    position: absolute;
+    left: 5%;
+    top: 24px;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  .refer_img {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 246px;
+      height: 227px;
+      object-fit: cover;
+    }
+  }
+  h3 {
+    color: #000;
+    text-align: center;
+    font-family: var(--font-popoins) !important;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 140% */
+    span {
+      color: var(--color-primary);
+    }
+  }
+  p {
+    margin-top: 10px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px; /* 131.25% */
+    letter-spacing: 0.1px;
+  }
+
+  .refer_discount_last {
+    margin-top: 15px;
+    margin-bottom: 29px;
+  }
+  .refer_discount {
+    margin-top: 30px;
+    display: flex;
+    border-radius: 20px;
+    padding: 0px 10px 0px 30px;
+    img {
+      width: 28px;
+      height: 28px;
+      margin-right: 19px;
+    }
+    h5 {
+      color: #000;
+      font-family: var(--font-popoins) !important;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 21px; /* 131.25% */
+      letter-spacing: 0.1px;
+    }
+    p {
+      color: rgba(0, 0, 0, 0.5);
+      font-family: var(--font-secondary) !important;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 21px; /* 150% */
+      letter-spacing: 0.1px;
+      text-align: start;
+      margin-top: 0;
+    }
+  }
+  .refer_send_mail {
+    border-radius: 20px 20px 0px 0px;
+    padding: 28px 30px 17px 30px;
+    background: #f1efff;
+    margin: 0 -5%;
+    .refer_link {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-bottom: 20px;
+      button {
+        position: absolute;
+        right: 15px;
+        border-radius: 10px;
+        background: #000;
+        color: white;
+        border: none;
+        padding: 3px 20px;
+        font-size: 14px;
+      }
+      input {
+        padding: 10px 100px 10px 10px;
+      }
+    }
+    .refer_link_active {
+      input {
+        background: #c4c4c4;
+      }
+    }
+    h4 {
+      color: #101820;
+      font-family: var(--font-secondary) !important;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin-bottom: 6px;
+    }
+    input {
+      border-radius: 10px;
+      border: 1px solid #c4c4c4;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 10px 16px;
+      width: 100%;
+      font-family: "Open Sans";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.25);
+      }
+    }
+    .edit_info_btn {
+      padding: 30px 15% 17px 15%;
+      button {
+        display: flex;
+        justify-content: center;
+        height: 46px;
+        width: 100%;
+        padding: 10px 0px 12px 0px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        border: 1px solid #000;
+        background: #000;
+        color: #fff9f9;
+        text-align: center;
+        font-family: var(--font-popins) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.8px;
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .refer_content {
+    .refer_img {
+      margin-bottom: -20px;
+    }
+    .refer_discount {
+      margin-top: 15px;
+    }
+    .refer_discount_last {
+      margin-bottom: 15px;
+    }
+    .refer_send_mail {
+      padding: 20px 30px 17px 30px;
+      .refer_link {
+        margin-bottom: 10px;
+      }
+      .edit_info_btn {
+        padding: 20px 15% 17px 15%;
+      }
+    }
+  }
+}

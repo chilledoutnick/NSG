@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+
+:root {
+  --font-primary: "Sarabun", sans-serif;
+  --font-secondary: "Open Sans", sans-serif;
+  --font-popins: "Poppins", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-dance: "Dancing Script", cursive;
+  --color-primary: #410099;
+  --color-secondary: #101820;
+  --background-color: #fafafa;
+  --btn-background: #b7babc;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary) !important;
+  margin: 0;
+}
+button {
+  color: black;
+  font-family: var(--font-primary) !important;
+}
+
+p {
+  font-family: var(--font-primary) !important;
+  margin: 0;
+}
+#preloader {
+  height: 100vh;
+  background: transparent url(./Components/Loader/image/loader2.gif) no-repeat
+    center;
+  background-size: 100px;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+}

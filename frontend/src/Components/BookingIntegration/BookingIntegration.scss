@@ -1,0 +1,373 @@
+.booking_integration_popup_wrapper {
+  width: 438px;
+  min-height: 618px;
+  position: relative;
+}
+.booking_integration {
+  padding: 48px 24px 24px 24px;
+  overflow: hidden;
+  h3 {
+    color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 133.333% */
+    margin-bottom: 16px;
+  }
+  h5 {
+    color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 16px;
+  }
+  .booking_integration_text {
+    color: #101820;
+    font-family: var(--font-secondary) !important;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 16px;
+    margin-top: 24px;
+  }
+  .booking_integration_select {
+    overflow: hidden;
+    color: #000;
+    text-overflow: ellipsis;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+    margin-bottom: 5px;
+    // margin-bottom: 24px;
+  }
+  .booking_integration_calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    background: #efefef;
+    padding: 16px;
+    gap: 16px;
+    span {
+      color: #000;
+      text-align: center;
+      font-family: var(--font-popins) !important;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px; /* 125% */
+    }
+    .booking_integration_calendar_btns {
+      display: flex;
+      gap: 12px;
+      button {
+        position: relative;
+        width: 112px;
+        height: 104px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        border: none;
+        border: 1px solid #c7c7cc;
+        border-radius: 12px;
+        color: #101820;
+        text-align: center;
+        font-family: var(--font-secondary) !important;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        transition: 0.2s;
+        img {
+          width: 24px;
+          height: 24px;
+          object-fit: contain;
+        }
+        span {
+          position: absolute;
+          bottom: 5px;
+          text-align: center;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          color: #818486;
+        }
+      }
+
+      .active {
+        background: #fafafa;
+      }
+    }
+    .calednar_input {
+      width: 100%;
+      label {
+        background: #efefef;
+      }
+    }
+  }
+
+  .booking_integration_checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    gap: 12px;
+    input {
+      height: 18px;
+      width: 18px;
+    }
+    p {
+      color: #101820;
+      font-family: var(--font-secondary) !important;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      a {
+        color: #101820;
+      }
+    }
+  }
+  .booking_integration_submit {
+    background: white;
+    position: absolute;
+    padding: 24px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    button {
+      width: 100%;
+    }
+  }
+  .booking_calendar {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 80px;
+    .react-datepicker {
+      .react-datepicker__header {
+        background: transparent;
+        color: #000;
+        border-bottom: 0;
+      }
+      .react-datepicker__current-month {
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; /* 171.429% */
+        letter-spacing: 0.5px;
+      }
+      .react-datepicker__day-names {
+        .react-datepicker__day-name {
+          color: #818486;
+          text-align: center;
+          font-family: var(--font-secondary) !important;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 24px;
+          letter-spacing: 0.5px;
+        }
+      }
+      .react-datepicker__day {
+        text-align: center;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        transition: 0.2s;
+        line-height: 2.3rem;
+        height: 2.3rem;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        &:hover {
+          color: #000;
+          border: 1px solid #000;
+          background: transparent;
+        }
+      }
+      .react-datepicker__day--selected {
+        background: #410099 !important;
+        color: white !important;
+      }
+    }
+  }
+  .booking_meeting_duration {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+    margin-bottom: 40px;
+    .meeting_duration_item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      input {
+        width: 18px;
+        height: 18px;
+      }
+      span {
+        overflow: hidden;
+        color: #000;
+        text-overflow: ellipsis;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 125% */
+      }
+    }
+  }
+  .booking_meeting_time {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    grid-template-rows: 50px 50px;
+    gap: 8px;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #e6e6e6;
+      border-radius: 5px;
+    }
+    button {
+      border: 1px solid #818486;
+      border-radius: 12px;
+      background: none;
+      padding: 12px;
+      margin-bottom: 4px;
+      transition: 0.2s;
+      height: fit-content;
+      white-space: nowrap;
+      color: #000;
+      text-align: center;
+      font-family: var(--font-secondary) !important;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 142.857% */
+      &:hover {
+        background: #e5e5ea;
+      }
+    }
+    .active_time {
+      background: #e5e5ea;
+    }
+  }
+  .booking_confirm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .booking_confirm_details {
+      display: flex;
+      align-items: center;
+      p {
+        min-width: 150px;
+        display: flex;
+        justify-content: space-between;
+        color: #000;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 125% */
+        text-wrap: nowrap;
+      }
+      span {
+        padding-left: 5px;
+        color: #000;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 125% */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      button {
+        margin-left: 5px;
+        background: none;
+        border: none;
+        padding: 0;
+        color: #4f39f4;
+      }
+      input {
+        padding: 13px 20px;
+        width: 100%;
+        height: 48px;
+        border-radius: 10px;
+        border: 1px solid #c4c4c4;
+        background: #fafafa;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+      }
+    }
+  }
+  .booking_success_img_con {
+    display: flex;
+    justify-content: center;
+    margin-block-end: 24px;
+    .booking_success_img {
+      width: 222px;
+      height: 222px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .booking_integration_popup {
+    align-items: flex-end;
+  }
+  .booking_integration_submit{
+    button{
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+  .booking_integration_popup_wrapper {
+    height: fit-content;
+    min-height: 515px;
+  }
+  .booking_calendar {
+    padding-bottom: 0 !important;
+  }
+  .booking_integration {
+    padding: 24px 24px 100px 24px;
+    .booking_integration_calendar {
+      .booking_integration_calendar_btns {
+        width: 100%;
+        button {
+          width: 100%;
+        }
+      }
+    }
+    .booking_meeting_time {
+      button {
+      }
+    }
+  }
+}

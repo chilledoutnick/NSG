@@ -1,0 +1,266 @@
+.pricing_card_con2 {
+  z-index: 1;
+  position: relative;
+  padding-bottom: 40px;
+  .pricing_card_btn_wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    .pricing_card_btn {
+      display: flex;
+      width: 370px;
+      height: 64px;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+      border-radius: 44px;
+      border: 1px solid #bcbcbc;
+      background: #fff;
+      button {
+        height: 100%;
+        border-radius: 20px;
+        border: none;
+        background: transparent;
+        transition: 0.2s;
+        color: #454545;
+        text-align: center;
+        font-family: var(--font-popins) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.8px;
+        white-space: nowrap;
+        border: 1px solid transparent;
+        &:nth-child(1) {
+          width: 226px;
+          padding: 12px 24px;
+        }
+        &:nth-child(2) {
+          width: 100%;
+        }
+      }
+      .active_btn {
+        color: #410099;
+        border-radius: 32px;
+        background: #f5f3ff;
+        border: 1px solid #410099;
+      }
+    }
+  }
+  .pricing_card_wrapper_top {
+    margin: 0 auto;
+    max-width: 1080px;
+  }
+  .pricing_options {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-end;
+    color: #727272;
+    margin-bottom: 12px;
+    .pricing_options_line {
+      height: 20px;
+      width: 2px;
+      background-color: #c5c5c5;
+    }
+    span {
+      font-family: var(--font-popins) !important;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.7px;
+      margin-top: 3px;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 4px;
+      &:nth-child(1) {
+        text-decoration: none;
+      }
+    }
+  }
+  .pricing_card_wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+
+    .pricing_card {
+      border-radius: 12px;
+      border: 1px solid #dcdcdc;
+      background: #fff;
+      box-shadow: 5px 5px 10px 0px rgba(124, 124, 124, 0.2);
+      padding: 32px 16px 26px 16px;
+      width: 346px;
+      height: 468px;
+      h5 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #000;
+        font-family: var(--font-popins) !important;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 32px; /* 133.333% */
+        margin-bottom: 8px;
+        span {
+          display: block;
+          margin-bottom: 0;
+          color: #410099;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 24px; /* 150% */
+          padding: 4px 12px;
+          border-radius: 20px;
+          background: #f5f3ff;
+        }
+      }
+      span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        color: #5f5f5f;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; /* 150% */
+        margin-bottom: 8px;
+      }
+      h3 {
+        color: #000;
+        font-family: var(--font-popins) !important;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 44px;
+        margin-bottom: 4px;
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        span {
+          color: #000;
+          font-size: 18px;
+          font-weight: 700;
+        }
+      }
+      p {
+        display: flex;
+        align-items: center;
+        color: #727272;
+        font-family: var(--font-secondary) !important;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        height: 20px;
+        margin-bottom: 8px;
+        span {
+          all: unset;
+          padding: 0 4px;
+          text-decoration: line-through;
+        }
+      }
+      button {
+        border-radius: 20px;
+        margin-bottom: 24px;
+        width: 100%;
+        white-space: nowrap;
+      }
+      .pricing_card_list {
+        list-style: disc;
+        padding-left: 20px;
+        li {
+          color: #5f5f5f;
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 24px;
+          margin-bottom: 8px;
+          text-underline-offset: 4px;
+        }
+        .everything_text {
+          color: #000;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  .pricing_plan {
+    margin-top: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    border: 1px solid #dcdcdc;
+    background: #fff;
+    box-shadow: 5px 5px 10px 0px rgba(124, 124, 124, 0.2);
+    padding: 16px;
+    h5 {
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 32px; /* 133.333% */
+      margin-bottom: 8px;
+    }
+    p {
+      color: #5f5f5f;
+      font-family: var(--font-secondary) !important;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; /* 150% */
+    }
+    button {
+      border-radius: 20px;
+      height: fit-content;
+    }
+  }
+  .compare_btn {
+    margin: 40px auto 0 auto;
+    border-radius: 10px;
+    padding-right: 10px;
+  }
+}
+@media (max-width: 1080px) {
+  .pricing_card_con2 {
+    .pricing_options {
+      margin-bottom: 24px;
+      span {
+        text-align: center;
+        font-weight: 400 !important;
+      }
+      .pricing_options_line {
+        height: 40px;
+      }
+    }
+    .pricing_card {
+      margin: 0 auto;
+    }
+    .pricing_card_wrapper_top {
+      margin: 0 5% !important;
+    }
+    .pricing_card_wrapper {
+      flex-direction: column;
+      .pricing_card_none {
+        display: none;
+      }
+    }
+    .pricing_plan {
+      flex-direction: column;
+      align-items: flex-start;
+      button {
+        margin-top: 11px;
+      }
+    }
+    .pricing_plan_none {
+      display: none !important;
+    }
+  }
+}

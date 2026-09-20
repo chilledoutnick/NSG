@@ -1,0 +1,97 @@
+.account_con {
+  padding: 18px 16px 48px 16px;
+  height: 92vh;
+  overflow-y: auto;
+  .account_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      display: none;
+    }
+  }
+  h1 {
+    color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 133.333% */
+    margin-bottom: 16px;
+  }
+  .account_nav {
+    display: flex;
+    border-bottom: 1px solid #cecece;
+    margin-bottom: 32px;
+    button {
+      background: transparent;
+      border: none;
+      padding: 16px;
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 125% */
+      transition: 0.2s;
+      border-bottom: 4px solid transparent;
+    }
+    .active_nav {
+      border-bottom: 4px solid #493bb5;
+    }
+  }
+  .integrations_con {
+    padding: 0;
+  }
+}
+@media (max-width: 576px) {
+  .account_con {
+    padding: 0;
+    .account_header {
+      background: #000;
+      padding: 16px;
+      position: fixed;
+      right: 0;
+      left: 0;
+      z-index: 1;
+      h1 {
+        color: #fff;
+        margin-bottom: 0;
+        font-weight: 500;
+      }
+      button {
+        display: flex;
+      }
+    }
+    .account_nav {
+      padding-top: 68px;
+      margin: 16px;
+      display: flex;
+      justify-content: space-between;
+      button {
+        font-size: 14px;
+        padding: 12px 8px;
+      }
+    }
+    .subscription_con {
+      padding: 100px 16px;
+      .subscription_plan {
+        width: 100% !important;
+        overflow: hidden;
+      }
+      .subscription_plan_details {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    .account_info_con {
+        padding: 100px 16px;
+      .account_info_details_con{
+        .account_info_plan{
+          width: 100% !important;
+          // overflow: hidden;
+        }
+      }
+    }
+  }
+}

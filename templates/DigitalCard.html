@@ -1,0 +1,34 @@
+<!-- card_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <style>
+        .container {
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+          width: 400px;
+          padding: 30px 50px;
+        }
+        h1 {
+          font-family: sans-serif;
+          font-weight: 800;
+          margin: 0;
+        }
+        p {
+          font-size: 26px;
+          font-weight: 600;
+        }
+        span {
+          font-size: 20px;
+          font-weight: 500;
+        }
+      </style>
+    <div class="digital-card">
+        <h2>{{ name }}</h2>
+        <p>{{ email }}</p>
+        <p>{{ phone }}</p>
+        <img style="width:40px"src="{{ qr_code }}" alt="QR Code">
+    </div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+.profile-service-con {
+  margin: 0 5%;
+  .profile-service-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px; /* 100% */
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+    padding-left: 9px;
+  }
+  .profile-service-card {
+    display: flex;
+    .profile-service-card-item-wr {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      .profile-service-card-item-main {
+        min-width: 312px;
+        margin-left: 10px;
+        padding: 0px;
+      }
+    }
+    .profile-service-card-item {
+      background: #f4f4f4;
+      margin-bottom: 20px;
+      color: #000;
+      padding: 15px;
+      box-sizing: border-box;
+      height: 94%;
+      margin-right: 15px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 5px 5px 10px 0px rgba(124, 124, 124, 0.2);
+      overflow: hidden;
+      .service-card-name {
+        font-weight: 700;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+      .service-card-desc {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #000;
+      }
+      .service-card-feature {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 17px;
+        margin-top: 30px;
+        height: 25px;
+      }
+      .service-card-feature-more-btn {
+        border: none;
+        background: transparent;
+        color: #000;
+      }
+      .service-card-img-con {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        margin-right: 15px;
+        margin-bottom: 10px;
+        .service-card-img {
+          height: 33px;
+          margin-left: -10px;
+        }
+      }
+    }
+  }
+  .profile-service-card::-webkit-scrollbar {
+    display: none;
+  }
+}
+.service-con-right {
+  padding: 10px 5% 50px 5%;
+  .service-list {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .service-item {
+      background: #fff;
+      padding: 10px 15px;
+      list-style: none;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .service-details {
+        width: calc(100% - 65px);
+        overflow: hidden;
+        h3 {
+          font-size: 18px;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+        p {
+          font-size: 16px;
+        }
+      }
+      .service-actions {
+        margin-left: 30px;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        border: none;
+        transition: 0.2s;
+        &:hover {
+          color: red;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .profile-service-con {
+    margin: 0px 5% 0 5%;
+    .profile-service-card {
+      margin-right: -5%;
+      overflow-x: auto !important;
+      overflow-y: hidden;
+    }
+    .profile-service-card-item {
+      min-height: 150px !important;
+      margin-bottom: 10px !important;
+    }
+    .profile-service-card-item-wr {
+      flex-wrap: nowrap;
+      .profile-service-card-item-main {
+        min-width: 312px;
+        margin-left: 10px;
+        padding: 0px;
+      }
+    }
+    .service-card-img-con {
+      display: none !important;
+    }
+    .service-card-desc {
+      font-family: var(--font-popins) !important;
+      font-size: 16px !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+      line-height: 18px !important; /* 112.5% */
+      span {
+        color: #4f39f4 !important;
+      }
+    }
+    .service-card-name {
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 16px !important;
+      font-style: normal;
+      font-weight: 600 !important;
+      line-height: 20px; /* 125% */
+    }
+  }
+}
+
+.learn-more-link {
+  color: #007bff;
+  text-decoration: underline;
+  margin-top: 0.5rem;
+  display: inline-block;
+}

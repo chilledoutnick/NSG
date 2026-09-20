@@ -1,0 +1,121 @@
+.connect_info_btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding-bottom: 65px;
+  button {
+    border: none;
+    border-top: 1px solid #d2d2d7;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    padding: 0;
+    width: 33%;
+    &:nth-last-child(1) {
+      border-bottom: none;
+    }
+    span {
+      width: 100%;
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 26px;
+      text-align: start;
+      padding: 27px 18px;
+      transition: 0.2s;
+      white-space: nowrap;
+      .icon {
+        color: #86868b;
+        font-size: 30px;
+        transition: 0.2s;
+        rotate: 0deg;
+      }
+      .icon_active {
+        rotate: 180deg;
+      }
+    }
+    .connect_info_content {
+      height: 0;
+      opacity: 0;
+      transition: 0.2s;
+      visibility: hidden;
+      padding: 0 18px;
+      p {
+        text-align: start;
+        color: #1d1d1f;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.374px;
+        margin-bottom: 0;
+        b{
+          font-weight: 600;
+        }
+      }
+      a {
+        margin-top: 12px;
+        color: #410099;
+        font-family: var(--font-popins) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        position: relative;
+        text-align: start;
+        display: flex;
+        width: fit-content;
+        .icon {
+          position: absolute;
+          right: -35px;
+          transition: 0.2s;
+          font-size: 28px;
+          top: 0;
+        }
+        &:hover {
+          .icon {
+            right: -45px;
+          }
+        }
+      }
+    }
+    .connect_info_btns_active {
+      opacity: 1;
+      height: 120px;
+      visibility: visible;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .connect_info_btns {
+    width: 100%;
+    flex-direction: column;
+    padding: 0 10% 48px 10%;
+    gap: 0;
+    button {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #d2d2d7;
+      span {
+        font-size: 20px;
+      }
+      .connect_info_content {
+        p {
+          font-size: 16px;
+          margin-bottom: 0px;
+        }
+       
+      }
+      .connect_info_btns_active {
+        height: auto;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

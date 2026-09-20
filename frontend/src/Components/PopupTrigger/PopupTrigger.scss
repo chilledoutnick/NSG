@@ -1,0 +1,13 @@
+.PopupTrigger{
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // background: rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 !important;
+}

@@ -1,0 +1,119 @@
+@media (max-width: 576px) {
+  .client-log-popup {
+    .popup-bottom {
+      padding: 10px 20px !important;
+      input,
+      textarea {
+        width: 100% !important;
+        min-width: auto !important;
+      }
+    }
+  }
+  .client-logs-container {
+    height: 100vh;
+    padding: 10px 0 80px 0;
+    .sidebar-con {
+      display: none;
+    }
+    .client-log-search-input {
+      min-width: auto !important;
+    }
+    .client-log-mobile-menu {
+      display: flex !important;
+    }
+    .client-log-mobile-menu-right-wrapper {
+      display: flex !important;
+    }
+    .client-logs-wrapper {
+      width: 100% !important;
+      padding: 0px !important;
+      height: 100% !important;
+      .client-logs-content {
+        margin-right: 0px !important;
+        padding: 0px !important;
+        height: 9%;
+        .client-log-sorting-header {
+          padding: 10px 15px 10px 15px;
+          z-index: 1;
+        }
+      }
+      .client-log-pagination{
+        height: 9%;
+      }
+      .data-grid-wrapper {
+        table {
+          thead {
+            tr {
+              th {
+                &:nth-child(1) {
+                  padding-left: 15px !important;
+                }
+                &:nth-child(3) {
+                  width: 20%;
+                }
+              }
+            }
+          }
+          tbody {
+            tr {
+              td {
+                &:nth-child(3) {
+                  p {
+                    &:nth-child(2) {
+                      font-size: 10px !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .add-client-button {
+        font-size: 12px !important;
+        text-wrap: nowrap;
+        padding: 5px 20px;
+      }
+    }
+    .no_data_found_con {
+      margin-top: 100px;
+      .bg_img {
+        width: 300px;
+      }
+      p {
+        text-align: center;
+        font-size: 24px;
+      }
+    }
+  }
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    width: 100px;
+  }
+  .css-t89xny-MuiDataGrid-columnHeaderTitle {
+    font-size: 12px !important;
+  }
+
+  .client-log-sorting-down {
+    display: none;
+  }
+  .no-data-text {
+    text-wrap: nowrap;
+    margin-left: 10px !important;
+    margin-top: 10px !important;
+  }
+  .event-popup-wrapper {
+    flex-direction: column;
+    .event-popup-left {
+      flex-basis: 100%;
+      padding-right: 0;
+    }
+    .event-popup-right {
+      margin-left: 0;
+    }
+  }
+  .dot-btn {
+    display: block !important;
+    padding-left: 10px;
+    color: white;
+  }
+}

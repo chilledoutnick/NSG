@@ -1,0 +1,196 @@
+.booking_con {
+           margin: 10px 3% 0;
+        padding: 10px 3%;
+  
+  h3 {
+   color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -.5px;
+    line-height: 18px;
+    margin-bottom: 10px;
+  }
+  .schedule_content {
+    border-radius: 20px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    height: 42px;
+    position: relative;
+    width: 100%;
+    border: none;
+    border: 1px solid #000;
+    img {
+      width: 26px;
+      height: 26px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 14px;
+      margin-left: 10px;
+    }
+    p {
+      color: #000;
+      font-family: var(--font-secondary) !important;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 18px; /* 112.5% */
+      letter-spacing: -0.5px;
+    }
+    span {
+      position: absolute;
+      right: 17px;
+      border-radius: 50%;
+      width: 9px;
+      height: 9px;
+      background: green;
+      animation: breathe 2s infinite;
+    }
+  }
+}
+.booking_popup {
+  padding: 0 !important;
+  position: relative;
+  .booking_popup_header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 0 5%;
+    height: 68px;
+    background: #eeecfe;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    button {
+      padding: 0;
+      background: transparent;
+      border: none;
+      color: #000;
+      text-align: center;
+      font-family: var(--font-popins) !important;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 24px; /* 120% */
+      .icon {
+        font-size: 28px;
+      }
+    }
+  }
+  .booking_popup_content {
+    margin-top: 100px;
+    padding: 0 5%;
+    h3 {
+      color: #000;
+      text-align: center;
+      font-family: var(--font-popins) !important;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 24px; /* 120% */
+      margin-bottom: 75px;
+    }
+    h4 {
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 24px; /* 120% */
+      margin-bottom: 15px;
+    }
+    .booking_popup_time {
+      button {
+        width: 100%;
+        border-radius: 10px;
+        border: 2px solid #4f39f4;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 10px 13px;
+        color: #000;
+        text-align: center;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 20px;
+        transition: 0.2s;
+      }
+      .active {
+        background: #4f39f4;
+        color: white;
+      }
+      .not-time-available {
+        font-weight: 600;
+        font-family: var(--font-secondary) !important;
+        font-size: 14px;
+        color: red;
+      }
+    }
+    h5 {
+      margin-top: 28px;
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 24px; /* 133.333% */
+      padding-bottom: 100px;
+    }
+    .btn_con {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: #fff;
+      box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.02);
+      padding: 17px 20px;
+      .btn-primary {
+        width: 100%;
+      }
+    }
+    .booking_popup_content_form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      input {
+        padding: 10px 22px;
+        border-radius: 10px;
+        border: 1px solid #c4c4c4;
+        background: rgba(255, 255, 255, 0.5);
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        &::placeholder {
+          color: rgba(0, 0, 0, 0.25);
+        }
+        &:focus-visible {
+          outline: 1px solid #4f39f4;
+        }
+      }
+      label {
+        color: #000;
+        text-align: center;
+        font-family: var(--font-secondary) !important;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; /* 133.333% */
+      }
+    }
+  }
+}
+@media (min-width: 576px) {
+  .btn_con {
+    position: relative !important;
+  }
+  .booking_popup {
+    min-width: 500px;
+  }
+}

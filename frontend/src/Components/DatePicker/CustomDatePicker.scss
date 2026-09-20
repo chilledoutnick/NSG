@@ -1,0 +1,67 @@
+.custom-datepicker {
+}
+.react-datepicker {
+  font-family: var(--font-primary);
+  border: none;
+  border-radius: 10px;
+  border: 1px solid gainsboro;
+}
+
+.react-datepicker__header {
+  background-color: #000;
+  color: #fff;
+  padding: 15px;
+}
+.react-datepicker__day--keyboard-selected {
+  background: transparent;
+}
+.react-datepicker__current-month {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+.react-datepicker__day-names {
+  margin-top: 10px;
+}
+.react-datepicker__day-name {
+  color: #fff;
+  font-weight: 600;
+  width: 2.3rem;
+  font-size: 16px;
+}
+
+.react-datepicker__day {
+  font-size: 16px;
+  font-weight: 500;
+  width: 2.3rem;
+  line-height: 2rem;
+  transition: 0.2s;
+  &:hover {
+    color: #fff;
+    background: #000;
+  }
+}
+.react-datepicker__day--selected {
+  background: black;
+  color: white;
+}
+
+.react-datepicker__navigation--previous {
+  top: 15px;
+  left: 5px;
+}
+.react-datepicker__navigation--next {
+  top: 15px;
+  right: 5px;
+}
+@media (max-width: 576px) {
+  .react-datepicker__day-name {
+    width: 2.1rem;
+  }
+
+  .react-datepicker__day {
+    width: 2.1rem;
+    height: 2.1rem !important;
+    line-height: 2.1rem !important;
+  }
+}

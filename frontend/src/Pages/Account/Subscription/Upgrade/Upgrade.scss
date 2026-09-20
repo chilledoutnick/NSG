@@ -1,0 +1,336 @@
+.payment_form_con {
+  .back_btn {
+    background: none;
+    border: none;
+    display: flex;
+    gap: 7px;
+    padding: 0;
+    align-items: center;
+    color: #000;
+    text-align: center;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 32px;
+  }
+  .subscription_monthly_upgrade {
+    h2 {
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 32px; /* 133.333% */
+      margin-bottom: 16px;
+    }
+    .sub_desc {
+      color: #101820;
+      font-family: var(--font-secondary) !important;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 16px;
+    }
+    .sub_desc2 {
+      color: #5c5c5c;
+      font-family: var(--font-secondary) !important;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-top: 16px;
+    }
+    .sub_upgrade_card_con {
+      display: flex;
+      gap: 13px;
+      .sub_upgrade_card {
+        border-radius: 12px;
+        border: 1px solid #dbdbdb;
+        padding: 16px;
+        width: 285px;
+        transition: 0.2s;
+        h3 {
+          color: #3a3a3a;
+          font-family: var(--font-popins) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 20px; /* 125% */
+          margin-bottom: 16px;
+        }
+        h4 {
+          color: #3a3a3a;
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24px; /* 150% */
+          letter-spacing: -0.16px;
+          margin-bottom: 4px;
+        }
+        p {
+          color: #3a3a3a;
+          font-family: var(--font-secondary) !important;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          margin-bottom: 16px;
+        }
+        span {
+          display: block;
+          color: #3a3a3a;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+      .sub_upgrade_card_v2 {
+        background: #f6f4ff;
+        .add_card {
+          border-top: 1px solid #cacaca;
+          border-bottom: 1px solid #cacaca;
+          padding: 12px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 14px 0;
+        }
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 42px;
+          height: 24px;
+          input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            border: 1px solid #8e8e93;
+            &:before {
+              position: absolute;
+              content: "";
+              height: 16px;
+              width: 16px;
+              left: 3px;
+              bottom: 3px;
+              background-color: #8e8e93;
+              -webkit-transition: 0.4s;
+              transition: 0.4s;
+            }
+          }
+          input:checked + .slider {
+            background-color: #493bb5;
+          }
+          input:checked + .slider:before {
+            -webkit-transform: translateX(18px);
+            -ms-transform: translateX(18px);
+            transform: translateX(18px);
+            background-color: white;
+          }
+          input:focus + .slider {
+            box-shadow: 0 0 1px #493bb5;
+          }
+          .slider.round {
+            border-radius: 34px;
+          }
+          .slider.round:before {
+            border-radius: 50%;
+          }
+        }
+
+        .btn-primary {
+          width: 100%;
+          padding: 8px 0px;
+        }
+      }
+    }
+  }
+  .pricing_checkout_wrapper {
+    gap: 60px;
+    justify-content: flex-start;
+    .pricing_checkout_left {
+      align-items: flex-start;
+      width: fit-content;
+    }
+  }
+}
+.pricing_checkout_card_wrapper {
+  display: flex;
+  gap: 60px;
+}
+.pricing_card_form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  h3 {
+    font-size: 24px;
+    font-family: var(--font-popins) !important;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--font-popins) !important;
+    margin: 8px 0;
+  }
+  input {
+    height: 48px;
+    border-radius: 10px;
+    padding: 13px;
+    margin-bottom: 8px;
+    border: 1px solid #c4c4c4;
+    background: gainsboro;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+.pricing_checkout_card {
+  display: flex;
+  width: 457px;
+  background: #f2f2f7;
+  height: fit-content;
+  padding: 32px;
+  flex-direction: column;
+  border-radius: 20px;
+  .subscription_plan_text {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 28px;
+    p {
+      color: #000;
+      font-family: var(--font-secondary) !important;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: -0.54px;
+      margin-bottom: 8px;
+      .icon {
+        cursor: pointer;
+        font-size: 18px;
+      }
+    }
+  }
+  h3 {
+    color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 34px;
+    margin-bottom: 8px;
+  }
+  .price_text {
+    color: #000;
+    font-family: var(--font-secondary) !important;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    letter-spacing: -0.54px;
+    margin-bottom: 28px;
+  }
+  h5 {
+    color: #000;
+    font-family: var(--font-secondary) !important;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.54px;
+    margin-bottom: 8px;
+  }
+  .price_text_access {
+    color: #000;
+    font-family: var(--font-secondary) !important;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    letter-spacing: -0.54px;
+    margin-bottom: 28px;
+  }
+  .price_divier {
+    display: flex;
+    justify-content: space-between;
+    span {
+      color: #000;
+      font-family: var(--font-secondary) !important;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 24px;
+      letter-spacing: -0.54px;
+    }
+  }
+  .coupon_message_text {
+    color: #b3261e;
+    margin-top: -25px;
+    margin-bottom: 20px;
+    font-family: var(--font-secondary) !important;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .coupon_message_text_success {
+    color: gray !important;
+  }
+  .price_divier1 {
+    margin-bottom: 8px;
+  }
+  .price_divier2 {
+    margin-bottom: 28px;
+    span {
+      font-weight: 600;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .payment_form_con {
+    .back_btn {
+      margin-bottom: 16px;
+    }
+    .subscription_monthly_upgrade {
+      .sub_upgrade_card_con {
+        flex-direction: column;
+        .sub_upgrade_card {
+          width: 100%;
+        }
+      }
+    }
+    .pricing_checkout_card {
+      width: 100%;
+      padding: 24px;
+      .price_text {
+        font-size: 16px;
+      }
+      .price_text_access {
+        font-size: 16px;
+      }
+    }
+  }
+  .pricing_checkout_card_wrapper{
+    flex-direction: column;
+    .pricing_card_form{
+      width: 100%;
+    }
+  }
+}

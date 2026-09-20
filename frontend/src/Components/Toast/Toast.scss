@@ -1,0 +1,45 @@
+.toast_con {
+  right: 0;
+  left: 0;
+  bottom: 32px;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  animation: fadeOut 600ms forwards;
+  z-index: 10000;
+  span {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap: 4px;
+    border-radius: 32px;
+    background: #5f5f5f;
+    color: #fafafa;
+    font-family: var(--font-secondary) !important;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-wrap: nowrap;
+    .icon {
+      font-size: 16px;
+    }
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .toast_con {
+    bottom: 80px;
+  }
+}

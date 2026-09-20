@@ -1,0 +1,652 @@
+# import math
+# import jwt
+# import numpy as np
+# import pandas as pd
+# from django.contrib.auth.hashers import make_password
+# from django.core.mail import EmailMultiAlternatives
+# from django.utils import timezone
+# from django.utils.datastructures import MultiValueDictKeyError
+# from rest_framework import viewsets, status
+# from rest_framework.authentication import get_authorization_header
+# from rest_framework.decorators import action
+# from rest_framework.exceptions import AuthenticationFailed
+# from rest_framework.response import Response
+# from advisorapp.settings import EMAIL_HOST_USER
+# from api.serializers import *
+# import datetime
+# from datetime import date
+#
+#
+# def get_slot(minutes):
+#     slot = str(math.floor(minutes / 60) % 24)
+#     if len(slot) == 1:
+#         slot = "0"+slot
+#     return slot+":00"
+#
+#
+# # Create your views here.
+# class AdvisorView(viewsets.ModelViewSet):
+#     serializer_class = AdvisorSerializer
+#     queryset = Advisor.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_advisor(self, request):
+#         advisor_id = request.data['advisor_id']
+#         advisor = Advisor.objects.filter(advisor_id=advisor_id).first()
+#         user = advisor.fk_user
+#         certificate = Certificate.objects.filter(fk_advisor=advisor).first()
+#         business_stats = BusinessStatistics.objects.filter(fk_advisor=advisor).first()
+#         reviews = Review.objects.filter(fk_advisor=advisor)
+#         n = len(reviews)
+#         stars = 0
+#         for review in reviews:
+#             stars += review.ratings
+#         avg_rating = stars / n
+#         data = {
+#             'advisor_id': advisor.advisor_id,
+#             'email': user.email,
+#             'name': user.name,
+#             'address': advisor.address,
+#             'phone': user.phone,
+#             'video': advisor.video,
+#             'about': advisor.about,
+#             'experience': advisor.experience,
+#             'profile_picture': user.profile_picture.url,
+#             "certified_by": certificate.certified_by,
+#             "profitability": business_stats.profitability,
+#             "deals": business_stats.number_of_deals,
+#             "review_count": len(reviews),
+#             "clients_count": business_stats.number_of_clients,
+#             "portfolio": business_stats.portfolio,
+#             "avg_rating": avg_rating,
+#             "response_rate": advisor.response_rate,
+#             "license_number": advisor.license_number,
+#         }
+#         print(data)
+#         return Response(data=data)
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_advisor_by_token(self, request):
+#         token = request.COOKIES.get('jwt')
+#         if not token:
+#             raise AuthenticationFailed('Unauthenticated')
+#         try:
+#             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+#         except jwt.ExpiredSignatureError:
+#             raise AuthenticationFailed('Unauthenticated')
+#         user = User.objects.filter(id=payload['id']).first()
+#         data = {
+#             'email': user.email,
+#             'name': user.name,
+#             'profile_picture': user.profile_picture.url
+#         }
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class ClientView(viewsets.ModelViewSet):
+#     serializer_class = ClientSerializer
+#     queryset = Client.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_client(self, request):
+#         client_id = request.data['client_id']
+#         client = Client.objects.filter(client_id=client_id).first()
+#         user = client.fk_user
+#         data = {
+#             'client_id': client.client_id,
+#             'email': user.email,
+#             'name': user.name,
+#             'phone': user.phone,
+#             'profile_picture': user.profile_picture.url
+#         }
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class FollowView(viewsets.ModelViewSet):
+#     serializer_class = FollowSerializer
+#     queryset = Follow.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_follow_by_client(self, request):
+#         client_id = request.data['client_id']
+#         follows = Follow.objects.filter(fk_client_id=client_id)
+#         data = []
+#         for follow in follows:
+#             data += [{
+#                 "follow_id": follow.follow_id,
+#                 "fk_client_id": follow.fk_client.client_id,
+#                 "fk_advisor_id": follow.fk_advisor.advisor_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_follow_by_advisor(self, request):
+#         advisor_id = request.data['advisor_id']
+#         follows = Follow.objects.filter(fk_advisor_id=advisor_id)
+#         data = []
+#         for follow in follows:
+#             data += [{
+#                 "follow_id": follow.follow_id,
+#                 "fk_client_id": follow.fk_client.client_id,
+#                 "fk_advisor_id": follow.fk_advisor.advisor_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class ReviewView(viewsets.ModelViewSet):
+#     serializer_class = ReviewSerializer
+#     queryset = Review.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_review_by_client(self, request):
+#         client_id = request.data['client_id']
+#         reviews = Review.objects.filter(fk_client_id=client_id)
+#         data = []
+#         for review in reviews:
+#             data += [{
+#                 "review_id": review.review_id,
+#                 "fk_client_id": review.fk_client.client_id,
+#                 "fk_advisor_id": review.fk_advisor.advisor_id,
+#                 "ratings": review.ratings,
+#                 "comments": review.comments,
+#                 "photo": review.fk_client.fk_user.profile_picture.url,
+#                 "create_date": review.create_date,
+#                 "update_date": review.update_date
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_review_by_advisor(self, request):
+#         advisor_id = request.data['advisor_id']
+#         reviews = Review.objects.filter(fk_advisor_id=advisor_id)
+#         data = []
+#         for review in reviews:
+#             data += [{
+#                 "review_id": review.review_id,
+#                 "fk_client_id": review.fk_client.client_id,
+#                 "fk_advisor_id": review.fk_advisor.advisor_id,
+#                 "ratings": review.ratings,
+#                 "comments": review.comments,
+#                 "photo": review.fk_client.fk_user.profile_picture.url,
+#                 "create_date": review.create_date,
+#                 "update_date": review.update_date
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class ServiceView(viewsets.ModelViewSet):
+#     serializer_class = ServiceSerializer
+#     queryset = Service.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_services(self, request):
+#         advisor_id = request.data['advisor_id']
+#         services = Service.objects.filter(fk_advisor_id=advisor_id)
+#         products = []
+#         services_json = []
+#         for service in services:
+#             products += [product.product_name for product in Products.objects.filter(fk_service_id=service.service_id)]
+#             service_companies = ServiceCompany.objects.filter(fk_service_id=service.service_id)
+#             logos = [service_company.fk_company.logo.url for service_company in service_companies]
+#             services_json += [
+#                 {
+#                     "name": service.name,
+#                     "desc": service.desc,
+#                     "products": products,
+#                     "logos": logos
+#                 }
+#             ]
+#             products = []
+#         print(services_json)
+#         return Response(data=services_json)
+#
+#
+# class CompanyView(viewsets.ModelViewSet):
+#     serializer_class = CompanySerializer
+#     queryset = Company.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_company(self, request):
+#         company_id = request.data['company_id']
+#         company = Company.objects.filter(company_id=company_id).first()
+#
+#         data = {
+#             'company_id': company.company_id,
+#             'name': company.name,
+#             'logo': company.logo
+#         }
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class CertificateView(viewsets.ModelViewSet):
+#     serializer_class = CertificateSerializer
+#     queryset = Certificate.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_certificate(self, request):
+#         advisor_id = request.data['advisor_id']
+#         certificates = Certificate.objects.filter(fk_advisor_id=advisor_id)
+#         data = []
+#         for certificate in certificates:
+#             data += [{
+#                 "certificate_id": certificate.certificate_id,
+#                 "fk_advisor_id": certificate.fk_advisor.advisor_id,
+#                 "name": certificate.name,
+#                 "certified_by": certificate.certified_by
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class UserView(viewsets.ModelViewSet):
+#     serializer_class = UserSerializer
+#     queryset = User.objects.all()
+#
+#     @action(methods=["GET"], detail=False)
+#     def get_user(self, request):
+#         token = request.COOKIES.get('jwt')
+#         if not token:
+#             raise AuthenticationFailed('Unauthenticated')
+#         try:
+#             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+#         except jwt.ExpiredSignatureError:
+#             raise AuthenticationFailed('Unauthenticated')
+#         user = User.objects.filter(id=payload['id']).first()
+#         serializer = UserSerializer(user)
+#         return Response(serializer.data)
+#
+#     @action(methods=["POST"], detail=False)
+#     def logout(self, request):
+#         response = Response()
+#         response.delete_cookie('jwt')
+#         response.data = {
+#             'message': 'success'
+#         }
+#         return response
+#
+#     @action(methods=["POST"], detail=False)
+#     def login(self, request):
+#         email = request.data['email']
+#         password = request.data['password']
+#         print(email, password)
+#         user = User.objects.filter(email=email).first()
+#         try:
+#             if user is None:
+#                 raise AuthenticationFailed('User not found!')
+#             if not user.check_password(password):
+#                 raise AuthenticationFailed('Incorrect password!')
+#         except AuthenticationFailed as error:
+#             return Response({'msg': str(error)}, status=status.HTTP_401_UNAUTHORIZED)
+#         payload = {
+#             'id': user.id,
+#             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120),
+#             'iat': datetime.datetime.utcnow()
+#         }
+#         token = jwt.encode(payload, 'secret', algorithm='HS256')
+#         response = Response()
+#         response.set_cookie(key='jwt', value=token, httponly=True)
+#         response.data = {'jwt': token, 'name': user.name, 'email': user.email, 'profile_picture': user.profile_picture.url}
+#         return response
+#
+#     @action(methods=['post'], detail=False)
+#     def send_otp_to_email(self, request):
+#         try:
+#             email = request.data['email']
+#         except MultiValueDictKeyError:
+#             return Response({'msg': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
+#         user = User.objects.filter(email=email)
+#         if not user.exists():
+#             return Response({"msg": "Can't find the email"}, status=status.HTTP_200_OK)
+#         otp = np.random.randint(100000, 999999)
+#         create_time = timezone.localtime()
+#         expiry_time = create_time + pd.DateOffset(minutes=5)
+#         otp_object = OTP()
+#         otp_object.fk_user = user[0]
+#         otp_object.otp = otp
+#         otp_object.email = email
+#         otp_object.create_time = create_time
+#         otp_object.expiry_time = expiry_time
+#         otp_object.save()
+#         subject = f"NSG | Your OTP"
+#         message = f"""
+#                Hi {user[0].name} we got a request to reset your password!
+#                your OTP is {otp}, this code is valid for 5 minutes.
+#                if you think this is a mistake contact us leapon.support@nsgcrm.com
+#                """
+#         msg = EmailMultiAlternatives(
+#             subject,
+#             message,
+#             from_email=EMAIL_HOST_USER,
+#             to=[email]
+#         )
+#         msg.send()
+#         return Response({'msg': 'otp sent'}, status=status.HTTP_200_OK)
+#
+#     @action(methods=['post'], detail=False)
+#     def verify_otp(self, request):
+#         try:
+#             email = request.data['email']
+#             otp = request.data['otp']
+#         except MultiValueDictKeyError:
+#             return Response({'msg': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
+#         otp_objects = OTP.objects.filter(email=email, otp=otp).order_by('-otpId')
+#         if not otp_objects.exists():
+#             return Response({'msg': 'otp is not correct'}, status=status.HTTP_401_UNAUTHORIZED)
+#         print(timezone.now())
+#         if timezone.now() > otp_objects[0].expiry_time:
+#             return Response({'msg': 'otp expired'}, status=status.HTTP_403_FORBIDDEN)
+#         otp_object = OTP.objects.filter(email=email, otp=otp).order_by('-otpId').first()
+#         otp_object.verified = True
+#         otp_object.save()
+#         return Response({'otp': 'verified'}, status=status.HTTP_202_ACCEPTED)
+#
+#     @action(methods=['post'], detail=False)
+#     def update_password(self, request):
+#         try:
+#             email = request.data['email']
+#             otp = request.data['otp']
+#             password = request.data['password']
+#         except MultiValueDictKeyError:
+#             return Response({'msg': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
+#         if len(password) < 8:
+#             return Response({'msg': 'password length is less than eight characters'})
+#         password = make_password(password)
+#         user = User.objects.filter(email=email).first()
+#         otp_object = OTP.objects.filter(email=email, otp=otp).order_by('-otpId').first()
+#         if not otp_object.used and timezone.now() < otp_object.expiry_time:
+#             otp_object.used = True
+#             otp_object.save()
+#             user.password = password
+#             user.save()
+#             return Response({'msg': 'password changed'}, status=status.HTTP_202_ACCEPTED)
+#         elif timezone.now() < otp_object.expiry_time:
+#             return Response({'msg': 'otp expired'}, status=status.HTTP_403_FORBIDDEN)
+#         else:
+#             return Response({'msg': 'otp already used'}, status=status.HTTP_410_GONE)
+#
+#
+# class BusinessStatisticsView(viewsets.ModelViewSet):
+#     serializer_class = BusinessStatisticsSerializer
+#     queryset = BusinessStatistics.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_business_statistics(self, request):
+#         advisor_id = request.data['advisor_id']
+#         businesses = BusinessStatistics.objects.filter(fk_advisor_id=advisor_id)
+#         data = []
+#         for business in businesses:
+#             data += [{
+#                 "business_id": business.business_id,
+#                 "fk_advisor_id": business.fk_advisor.advisor_id,
+#                 "number_of_clients": business.number_of_clients,
+#                 "number_of_deals": business.number_of_deals,
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class ReviewHighlightView(viewsets.ModelViewSet):
+#     serializer_class = ReviewHighlightSerializer
+#     queryset = ReviewHighlight.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_review_highlight_by_review(self, request):
+#         review_id = request.data['review_id']
+#         review_highlights = ReviewHighlight.objects.filter(fk_review_id=review_id)
+#         data = []
+#         for review_highlight in review_highlights:
+#             data += [{
+#                 "review_highlight_id": review_highlight.review_highlight_id,
+#                 "fk_review_id": review_highlight.fk_review.review_id,
+#                 "fk_advisor_id": review_highlight.fk_advisor.advisor_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_review_highlight_by_advisor(self, request):
+#         advisor_id = request.data['advisor_id']
+#         review_highlights = ReviewHighlight.objects.filter(fk_advisor_id=advisor_id)
+#         data = []
+#         for review_highlight in review_highlights:
+#             review = Review.objects.filter(review_id=review_highlight.fk_review.review_id).first()
+#             data += [{
+#                 "name": review.fk_client.fk_user.name,
+#                 "photo": review.fk_client.fk_user.profile_picture.url,
+#                 "create_date": review.create_date,
+#                 "update_date": review.update_date,
+#                 "comment": review.comments
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class ProductsView(viewsets.ModelViewSet):
+#     serializer_class = ProductsSerializer
+#     queryset = Products.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_product(self, request):
+#         service_id = request.data['service_id']
+#         products = Products.objects.filter(fk_service_id=service_id)
+#         data = []
+#         for product in products:
+#             data += [{
+#                 "product_id": product.product_id,
+#                 "fk_service_id": product.fk_service.service_id,
+#                 "product_name": product.product_name
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class ServiceCompanyView(viewsets.ModelViewSet):
+#     serializer_class = ServiceCompanySerializer
+#     queryset = ServiceCompany.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_service_company_by_service(self, request):
+#         service_id = request.data['service_id']
+#         service_companies = ServiceCompany.objects.filter(fk_service_id=service_id)
+#         data = []
+#         for service_company in service_companies:
+#             data += [{
+#                 "service_company_id": service_company.service_company_id,
+#                 "fk_service_id": service_company.fk_service.service_id,
+#                 "fk_advisor_id": service_company.fk_service.fk_advisor.advisor_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_service_company_by_company(self, request):
+#         company_id = request.data['company_id']
+#         service_companies = ServiceCompany.objects.filter(fk_company_id=company_id)
+#         data = []
+#         for service_company in service_companies:
+#             data += [{
+#                 "service_company_id": service_company.service_company_id,
+#                 "fk_service_id": service_company.fk_service.service_id,
+#                 "fk_company_id": service_company.fk_company.company_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#
+# class AppointmentView(viewsets.ModelViewSet):
+#     serializer_class = AppointmentSerializer
+#     queryset = Appointment.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_appointment_by_client(self, request):
+#         client_id = request.data['client_id']
+#         appointments = Appointment.objects.filter(fk_client_id=client_id)
+#         data = []
+#         for appointment in appointments:
+#             data += [{
+#                 "appointment_id": appointment.appointment_id,
+#                 "create_date": appointment.create_date,
+#                 "create_time": appointment.create_time,
+#                 "update_date": appointment.update_date,
+#                 "update_time": appointment.update_time,
+#                 "appointment_date": appointment.appointment_date,
+#                 "appointment_time": appointment.appointment_time,
+#                 "fk_client_id": appointment.fk_client.client_id,
+#                 "fk_advisor_id": appointment.fk_advisor.advisor_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_appointment_by_advisor(self, request):
+#         advisor_id = request.data['advisor_id']
+#         appointments = Appointment.objects.filter(fk_advisor_id=advisor_id)
+#         data = []
+#         for appointment in appointments:
+#             data += [{
+#                 "appointment_id": appointment.appointment_id,
+#                 "create_date": appointment.create_date,
+#                 "create_time": appointment.create_time,
+#                 "update_date": appointment.update_date,
+#                 "update_time": appointment.update_time,
+#                 "appointment_date": appointment.appointment_date,
+#                 "appointment_time": appointment.appointment_time,
+#                 "status": appointment.status,
+#                 "fk_client_id": appointment.fk_client.client_id,
+#                 "fk_advisor_id": appointment.fk_advisor.advisor_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#     @action(methods=["POST"], detail=False)
+#     def get_appointment_by_week_number(self, request):
+#         token = get_authorization_header(request).decode().split(" ")[1]
+#         if not token:
+#             raise AuthenticationFailed('Unauthenticated')
+#         try:
+#             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+#         except jwt.ExpiredSignatureError:
+#             raise AuthenticationFailed('Unauthenticated')
+#         user = User.objects.filter(id=payload['id']).first()
+#         advisor = Advisor.objects.filter(fk_user_id=user.id).first()
+#         week_number = request.data['week_number']
+#         year = datetime.datetime.now().year
+#         today = datetime.datetime.now()
+#         start_date = date.fromisocalendar(year, week_number, 1)  # generating the datetime
+#         end_date = date.fromisocalendar(year, week_number, 7)
+#         if start_date.strftime("%d-%m-%Y") != today.strftime("%d-%m-%Y") and week_number == today.isocalendar()[1]:
+#             diff = today.date() - start_date
+#             start_date = today
+#             end_date += diff
+#         appointments = Appointment.objects.filter(fk_advisor_id=advisor.advisor_id).filter(
+#             appointment_date__range=(start_date, end_date)).order_by('appointment_time', 'appointment_date')
+#         data = {}
+#         for appointment in appointments:
+#             minutes = appointment.appointment_time.hour * 60 + appointment.appointment_time.minute
+#             slot = get_slot(minutes)
+#             formatted_date = appointment.appointment_date.strftime("%d-%m")
+#             try:
+#                 date_array_dict = data[slot]
+#                 date_array = date_array_dict[formatted_date]
+#                 date_array += [
+#                     {
+#                         "title": "Meeting",
+#                         "status": appointment.status,
+#                         "time": appointment.appointment_time,
+#                         "fk_client_id": appointment.fk_client.client_id,
+#                         "client_name": appointment.fk_client.fk_user.name,
+#                         "duration": appointment.duration,
+#                         "date": appointment.appointment_date,
+#                         "url": appointment.fk_advisor.url
+#                     }
+#                 ]
+#                 data[slot][formatted_date] = date_array
+#             except KeyError:
+#                 try:
+#                     data[slot][formatted_date] = [
+#                         {
+#                             "title": "Meeting",
+#                             "status": appointment.status,
+#                             "time": appointment.appointment_time,
+#                             "fk_client_id": appointment.fk_client.client_id,
+#                             "client_name": appointment.fk_client.fk_user.name,
+#                             "duration": appointment.duration,
+#                             "date": appointment.appointment_date,
+#                             "url": appointment.fk_advisor.url
+#                         }
+#                     ]
+#                 except KeyError:
+#                     data[slot] = {
+#                         formatted_date: [
+#                             {
+#                                 "title": "Meeting",
+#                                 "status": appointment.status,
+#                                 "time": appointment.appointment_time,
+#                                 "fk_client_id": appointment.fk_client.client_id,
+#                                 "client_name": appointment.fk_client.fk_user.name,
+#                                 "duration": appointment.duration,
+#                                 "date": appointment.appointment_date,
+#                                 "url": appointment.fk_advisor.url
+#                             }
+#                         ]
+#                     }
+#         return Response(data=data, status=status.HTTP_200_OK)
+#
+#
+# class ServiceClientView(viewsets.ModelViewSet):
+#     serializer_class = ServiceClientSerializer
+#     queryset = ServiceClient.objects.all()
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_service_client_by_service(self, request):
+#         service_id = request.data['service_id']
+#         service_clients = ServiceClient.objects.filter(fk_service_id=service_id)
+#         data = []
+#         for service_client in service_clients:
+#             data += [{
+#                 "service_client_id": service_client.service_client_id,
+#                 "fk_service_id": service_client.fk_service.service_id,
+#                 "fk_client_id": service_client.fk_service.fk_client.client_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+#
+#     @action(methods=['POST'], detail=False)
+#     def get_service_client_by_client(self, request):
+#         client_id = request.data['company_id']
+#         service_clients = ServiceClient.objects.filter(fk_client_id=client_id)
+#         data = []
+#         for service_client in service_clients:
+#             data += [{
+#                 "service_client_id": service_client.service_client_id,
+#                 "fk_service_id": service_client.fk_service.service_id,
+#                 "fk_client_id": service_client.fk_client.client_id
+#             }]
+#         print(data)
+#         return Response(data=data)
+        if user is not None and user.is_advisor:
+            advisor = Advisor.objects.filter(fk_user_id=user.id).first()
+            try:
+                data = {'user_id': user.id, 'name': name, 'phone': phone, 'advisor_id': advisor.advisor_id,
+                        'surname': surname}
+                return Response(data, status=status.HTTP_200_OK)
+            except AttributeError:
+                data = {'user_id': user.id, 'name': name, 'phone': phone, 'advisor_id': None,
+                        'surname': surname}
+                return Response(data, status=status.HTTP_200_OK)
+        if user is not None:
+            client = Client.objects.filter(fk_user_id=user.id).first()
+            if client is not None:
+                data = {'user_id': user.id, 'name': name, 'phone': phone, 'client_id': client.client_id,
+                        'surname': surname}
+            else:
+                data = {'user_id': user.id, 'name': name, 'phone': phone, 'client_id': None,
+                        'surname': surname}
+                return Response(data, status=status.HTTP_200_OK)

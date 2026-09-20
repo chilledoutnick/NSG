@@ -1,0 +1,256 @@
+.note_and_reminder_popup {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  border-radius: 0;
+  max-height: 100vh;
+  height: 100vh;
+  width: 438px;
+  background: #fafafa;
+  overflow: hidden;
+}
+.note_and_reminder_con {
+  height: 100%;
+  .close_btn {
+    right: 24px;
+    top: 24px;
+  }
+  .note_and_reminder_contant {
+    padding: 48px 24px 24px 24px;
+    height: 100%;
+    h5 {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 32px; /* 133.333% */
+      margin-bottom: 24px;
+    }
+    .note_textarea {
+      position: relative;
+      height: 75%;
+      textarea {
+        height: 100%;
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        background: #fafafa;
+        border: 1px solid #d1d1d6;
+        color: #000;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: normal;
+        resize: none;
+        &::placeholder {
+          color: #818486;
+          font-style: italic;
+        }
+      }
+      .note_textarea_input {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        .CameraAltIcon {
+          background: none;
+          border: none;
+          padding: 0;
+          position: relative;
+          input {
+            cursor: pointer !important;
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            opacity: 0;
+            z-index: 10;
+          }
+        }
+      }
+      .note_image_preview {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 24px;
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        .note_image_preview_wrapper {
+          position: relative;
+          img {
+            height: 84px;
+            width: 84px;
+            object-fit: cover;
+            border-radius: 8px;
+          }
+          button {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: none;
+            border: none;
+            padding: 0;
+            .icon {
+              border-radius: 50%;
+              background: #fff;
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .note_btns {
+    background: #fafafa;
+    position: sticky;
+    padding: 24px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    .add_reminder_btn {
+      background: none;
+      border: none;
+      padding: 0;
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; /* 133.333% */
+      letter-spacing: -0.5px;
+    }
+    .note_btns_wrapper {
+      display: flex;
+      gap: 12px;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+.remider_popup {
+  width: 358px;
+  padding: 24px;
+  h3 {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 133.333% */
+    margin-bottom: 16px;
+    .icon {
+      font-size: 28px;
+    }
+  }
+  p {
+    margin-bottom: 8px;
+    color: #101820;
+    font-family: var(--font-secondary) !important;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .reminder_popup_times {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 12px;
+    .reminder_popup_time_item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      input {
+        width: 18px;
+        height: 18px;
+        color: #818486;
+      }
+      span {
+        padding: 8px;
+        overflow: hidden;
+        color: #000;
+        text-overflow: ellipsis;
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px; /* 100% */
+      }
+    }
+  }
+  .show_time_text {
+    text-align: center;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    font-family: var(--font-secondary) !important;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .particular_date_btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 0px;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    .particular_date_btn_wrapper {
+      position: relative;
+      input {
+        position: absolute;
+        right: 0;
+        opacity: 0;
+      }
+    }
+  }
+  .remider_popup_btns {
+    margin-top: 32px;
+    display: flex;
+    gap: 8px;
+    button {
+      width: 100%;
+      padding: 12px 0;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .note_and_reminder_popup {
+    width: 100%;
+    top: unset !important;
+    left: 0;
+    .note_and_reminder_contant {
+      padding: 24px;
+    }
+  }
+  .note_btns {
+    button {
+      padding: 10px 0;
+    }
+  }
+  .remider_popup {
+    width: 100%;
+  }
+  .remider_popup_wrapper {
+    padding: 0 24px;
+  }
+  .note_textarea {
+    height: 55vh !important;
+  }
+}

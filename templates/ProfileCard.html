@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ og_name }}'s Profile</title>
+    <meta property="og:title" content="{{ og_name }}'s Profile" />
+    <meta property="og:description" content="{{ og_description }}" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:url" content="{{ og_url }}" />
+    <meta property="og:type" content="profile" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ og_name }}" />
+    <meta name="twitter:description" content="{{ og_description }}" />
+    <meta name="twitter:image" content="{{ og_image }}" />
+    
+</head>
+<body>
+    <div id="root"></div>  <!-- React mounts here -->
+    <div id="preloader"></div>
+    <script src="{% static 'react_bundle.js' %}"></script>
+</body>
+
+</html>

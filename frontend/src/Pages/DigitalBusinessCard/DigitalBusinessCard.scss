@@ -1,0 +1,34 @@
+.digital_business_card {
+  .networking_con_v2 {
+    background: linear-gradient(270deg, #410099 0%, #8156bb 49.88%, #fff 90%);
+    .networking_con_img {
+      margin-top: 80px;
+    }
+    .networking_con_text {
+      padding-top: 30px;
+    }
+  }
+  .meta_signup_header_timer3 {
+    position: relative;
+    // background: #000000 !important;
+    position: relative !important;
+    height: 92px !important;
+    .timer_desc {
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .digital_business_card {
+    .networking_con_v2 {
+      background: linear-gradient(170deg, #410099 0%, #8156bb 100%, #fff 90%);
+      .networking_con_img {
+        margin-top: 0px;
+      }
+      .networking_con_text {
+        padding-top: 0px;
+      }
+    }
+  }
+}

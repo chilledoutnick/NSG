@@ -1,0 +1,146 @@
+@media (max-width: 576px) {
+  .booking-con-top {
+    h2 {
+      font-size: 16px !important;
+    }
+    .back_btn {
+      margin-bottom: 10px;
+    }
+  }
+  .booking-item-choose {
+    margin-bottom: 10px !important;
+  }
+  .booking-item-duration {
+    h5 {
+      font-size: 20px !important;
+      br {
+        display: none;
+      }
+    }
+  }
+  .booking-container-popup {
+    padding: 100px 5% 0 5% !important;
+  }
+  .booking-con-top-wrapper {
+    flex-direction: column;
+    margin-bottom: 20px !important;
+    h2 {
+      font-size: 18px !important;
+    }
+    img {
+      margin-bottom: 20px;
+    }
+  }
+  .btn_wrapper {
+    grid-template-columns: auto !important;
+    gap: 20px !important;
+    margin-top: 20px;
+    .btn_wrapper_skeleton {
+      .bws {
+        height: 30px !important;
+        gap: 10px !important;
+        margin-bottom: 10px !important;
+      }
+    }
+    button {
+      min-height: fit-content !important;
+      box-shadow: unset !important;
+      border-top: none !important;
+      justify-content: flex-start !important;
+      padding: 0 !important;
+      .icon{
+        margin-left: 20px;
+        position: unset !important;
+      }
+    }
+  }
+  .booking-customer-details-wrapper {
+    margin-top: 20px;
+    padding-left: 0 !important;
+  }
+  .booking-con-bottom {
+    flex-direction: column;
+    .booking-item {
+      width: auto !important;
+      border: none !important;
+      margin-top: 20px;
+      padding: 0 !important;
+      .booking-item-step {
+        display: none !important;
+      }
+      .col-4 {
+        padding: 0 5px;
+      }
+
+      .booking-item-time-periods {
+        display: flex !important;
+      }
+      .booking-time-slot-name {
+        display: none;
+      }
+
+      .booking-time-slot-con {
+        .booking-time-slot-item-wrapper {
+          width: 100%;
+        }
+      }
+      .booking-time-warning {
+        font-size: 11px !important;
+      }
+    }
+    // .booking-item:nth-child(3) {
+    //   display: none;
+    // }
+    // .booking-item:nth-child(1) {
+    //   margin-top: 10px;
+    // }
+  }
+
+  .book-now-btn-con {
+    padding-bottom: 50px;
+    button {
+      width: 100% !important;
+    }
+  }
+  .confirm-booking-go-home-btn {
+    width: unset !important;
+    height: unset !important;
+  }
+
+  .confirm-booking-btns-wrapper {
+    button {
+      width: 140px !important;
+      font-size: 14px !important;
+    }
+  }
+  .confirm-booking-logo {
+    margin-top: 30px !important;
+  }
+  .confirm-booking-logo-check {
+    margin-top: 30px !important;
+  }
+  .booking-show-popup {
+    top: 70px;
+  }
+
+  .time-zone-text {
+    margin-top: 10px !important;
+  }
+  .booking-container-page {
+    padding: 20px 3% !important;
+    justify-content: unset !important;
+  }
+  .booking-container-wrapper {
+    min-width: 100% !important;
+    padding: 20px 30px !important;
+    min-height: fit-content !important;
+  }
+  .booking-item-booking-details {
+    border-right: none !important;
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 10px;
+  }
+  .booking-item-calendar {
+    width: 100% !important;
+  }
+}

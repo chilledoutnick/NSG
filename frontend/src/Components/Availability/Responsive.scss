@@ -1,0 +1,54 @@
+@media (max-width: 576px) {
+  .availability-con {
+    width: auto !important;
+    margin-bottom: 100px;
+    .availability-select-day {
+      display: flex;
+      justify-content: space-between;
+    }
+    .availability-selected-day {
+      .availability-day-name-header {
+        margin-bottom: 10px !important;
+      }
+      .availability-selected-day-item {
+        flex-direction: column;
+        margin-bottom: 10px !important;
+        position: relative;
+        .availability-selected-day-item-in {
+          width: 100%;
+          margin-bottom: 0 !important;
+          .add-time {
+            top: 38px !important;
+          }
+          .availability-time-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .availability-selected-time {
+              margin-bottom: 0;
+              .availability-time-picker {
+                input {
+                  width: 130px;
+                }
+              }
+              .availability-time-to {
+                margin-right: 10px !important;
+              }
+              .availability-time-to2 {
+                display: none;
+              }
+              .remove-time {
+                margin-left: 15px !important;
+              }
+            }
+          }
+        }
+      }
+      .availability-selected-day-item-top {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+    }
+  }
+}

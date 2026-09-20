@@ -1,0 +1,185 @@
+// 576 PX
+@media (max-width: 576px) {
+  .calendar-con {
+    .sidebar-con {
+      display: none !important;
+    }
+    .sidebar-mobile {
+      display: block !important;
+      position: fixed;
+      z-index: 12;
+    }
+    .calendar-content {
+      padding: 20px 3%;
+      flex-basis: 100%;
+      .calendar-nav {
+        gap: 10px;
+        .account_nav {
+          width: 100%;
+          gap: 5px;
+          button {
+            width: 100%;
+            padding: 0 10px;
+            font-size: 14px;
+            height: 35px;
+            white-space: nowrap;
+            padding: 0 5px;
+          }
+
+          .active {
+            border: 2px solid black;
+          }
+        }
+        .show_menu_btn_calendar {
+          display: block;
+        }
+
+        .add-appt-con {
+          right: 30px;
+          .add-appt {
+            height: 45px !important;
+            width: 45px !important;
+          }
+        }
+      }
+      .calendar-event {
+        min-width: 100%;
+        max-width: 100%;
+        height: fit-content;
+        .event-wrapper {
+          padding-right: 0;
+          height: fit-content;
+          gap: 20px;
+          .event-wrapper-skeleton {
+            height: 50px;
+            margin-bottom: 20px;
+          }
+          .calendar-event-items {
+            button {
+              padding: 10px 5px 10px 0px !important;
+              .event-icon {
+                margin-right: 10px;
+              }
+              .items-wrapper {
+                h5 {
+                  font-size: 16px;
+                  margin-bottom: 4px;
+                }
+                p {
+                  font-size: 12px;
+                }
+              }
+            }
+            .event_nav_btn_con {
+              gap: 10px !important;
+            }
+          }
+        }
+        .calendar-event-btn {
+          .calendar-event-btn-left {
+            button {
+              font-size: 14px;
+              padding: 10px 6px;
+              margin-right: 0;
+              height: 40px;
+            }
+          }
+          .share_meet_link_con {
+            width: 90px;
+            height: 40px;
+            padding: 10px 0;
+            gap: 8px;
+            button {
+              font-size: 14px;
+              padding: 0;
+              span {
+                display: none;
+              }
+            }
+            .share_meet_link_popup {
+              width: 200px;
+              left: unset;
+            }
+          }
+        }
+      }
+      .calendar-settings {
+        .calendar-timezone {
+          h4 {
+            font-size: 16px;
+          }
+          p {
+            font-size: 14px;
+          }
+          button {
+            margin-left: 0;
+            white-space: normal;
+            padding: 5px 10px;
+            font-size: 16px;
+          }
+        }
+        .calendar-meet-link {
+          gap: 10px;
+          align-items: flex-start;
+          h4 {
+            font-size: 16px;
+          }
+          p {
+            font-size: 14px;
+          }
+          .add-meet-btn {
+            margin-left: 0;
+            padding: 5px 10px;
+            font-size: 16px;
+          }
+          .meet-link-input {
+            margin-left: 0;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+            input {
+              min-width: auto;
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .schedule_toggle {
+      display: none !important;
+    }
+  }
+  .availability-settings {
+    .availability-con {
+      .Durations_con {
+        .minutes_select {
+          display: grid;
+          grid-template-columns: 50% 50%;
+        }
+      }
+      .availability_bottom_wrapper {
+        flex-direction: column;
+        gap: 20px;
+        .availability-select-day {
+          display: grid;
+          grid-template-columns: 50% 50%;
+          border-right: none;
+          margin-right: 0;
+          padding-right: 0;
+          button {
+            width: 100%;
+          }
+        }
+        .availability_selectedDayName {
+          padding: 16px;
+          h5 {
+            br {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

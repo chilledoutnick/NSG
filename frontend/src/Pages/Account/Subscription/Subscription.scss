@@ -1,0 +1,642 @@
+.subscription_con {
+  .subscription_details_con {
+    .subscription_details {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 8px;
+      .subscription_details_img {
+        width: 88px;
+        height: 88px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .subscription_text {
+        display: flex;
+        gap: 3px;
+        flex-direction: column;
+        h5 {
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24px; /* 150% */
+          letter-spacing: -0.16px;
+        }
+        p {
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+    }
+    .subscription_plan {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid #cbcbcb;
+      background: #fff;
+      width: 584px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      .subscription_plan_text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        h5 {
+          color: #000;
+          font-family: var(--font-secondary) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24px; /* 150% */
+          letter-spacing: -0.16px;
+        }
+        p {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: #101820;
+          font-family: var(--font-secondary) !important;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          .icon {
+            cursor: pointer;
+            font-size: 18px;
+          }
+        }
+        span {
+          color: #5c5c5c;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+    }
+    .subscription_plan_pro {
+      .subscription_plan_item {
+        div {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          span {
+            display: flex;
+            align-items: center;
+            min-width: 64px;
+            color: #5c5c5c;
+            font-family: var(--font-secondary) !important;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            .icon{
+              font-size: 12px;
+              margin-left: 4px;
+            }
+          }
+        }
+      }
+    }
+    .subscription_plan_tips {
+      flex-direction: column;
+      align-items: flex-start;
+      .subscription_plan_text {
+        gap: 12px;
+        button {
+          border-radius: 10px;
+          border: 1px solid #545454;
+          width: fit-content;
+          gap: 8px;
+          width: 292px;
+        }
+        a {
+          color: #410099;
+          font-family: var(--font-secondary) !important;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          text-decoration: none;
+        }
+      }
+    }
+    .subscription_plan_details {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      .subscription_plan_text {
+        // width: 50%;
+      }
+    }
+    .subscription_contact_us {
+      color: #5c5c5c;
+      font-family: var(--font-secondary) !important;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      a {
+        color: #5c5c5c;
+      }
+      button {
+        background: transparent;
+        border: none;
+        text-decoration: underline;
+        color: #5c5c5c;
+        padding: 0;
+      }
+    }
+  }
+  .dummy_btn {
+    position: fixed;
+    right: 100px;
+    top: 100px;
+  }
+}
+.booking_integration_popup_pause {
+  padding: 24px;
+  width: 438px;
+  height: 618px;
+  position: relative;
+  .back_btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+  }
+  h3 {
+    font-size: 24px;
+    font-family: var(--font-popins) !important;
+    font-weight: 600;
+    margin: 16px 0;
+  }
+  h5 {
+    font-size: 16px;
+    font-family: var(--font-popins) !important;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 16px;
+  }
+  p {
+    font-size: 14px;
+    font-family: var(--font-secondary) !important;
+    margin-bottom: 16px;
+  }
+  .pause_card {
+    background: #efefef;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      button {
+        width: 100%;
+        height: 104px;
+        border: 1px solid #acacac;
+        border-radius: 12px;
+        font-size: 16px;
+        font-family: var(--font-popins) !important;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+      .active {
+        background: #fff;
+      }
+    }
+  }
+  .pause_btn {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    left: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    button {
+      width: 100%;
+    }
+  }
+  .success_pause {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h3 {
+      margin-top: 40px;
+      text-align: center;
+    }
+    h4 {
+      font-size: 16px;
+      font-family: var(--font-secondary) !important;
+      font-weight: 400;
+      text-align: center;
+    }
+    .success_pause_img {
+      width: 213px;
+      margin-bottom: 24px;
+      img {
+        width: 100%;
+      }
+    }
+    button {
+      width: fit-content;
+      margin: 0 auto;
+    }
+  }
+}
+.booking_integration_popup_shipping {
+  padding: 24px;
+  width: 438px;
+  height: 648px;
+  position: relative;
+  .shipping_con_popup {
+    display: flex;
+    flex-direction: column;
+    h3 {
+      font-size: 24px;
+      font-family: var(--font-popins) !important;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    label {
+      font-size: 16px;
+      font-weight: 600;
+      font-family: var(--font-popins) !important;
+      margin: 8px 0;
+    }
+    input {
+      height: 48px;
+      border-radius: 10px;
+      padding: 13px;
+      margin-bottom: 8px;
+      border: 1px solid #c4c4c4;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* For Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    .shipping_input {
+      display: flex;
+      gap: 8px;
+      input {
+        width: 50%;
+      }
+    }
+  }
+  .shipping_btn {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    left: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    button {
+      width: 100%;
+    }
+  }
+}
+
+
+
+
+// .subscription_con {
+//   .subscription_details_con {
+//     .subscription_details {
+//       display: flex;
+//       align-items: center;
+//       gap: 16px;
+//       margin-bottom: 8px;
+//       .subscription_details_img {
+//         width: 88px;
+//         height: 88px;
+//         img {
+//           width: 100%;
+//           height: 100%;
+//           object-fit: cover;
+//           border-radius: 50%;
+//         }
+//       }
+//       .subscription_text {
+//         display: flex;
+//         gap: 3px;
+//         flex-direction: column;
+//         h5 {
+//           color: #000;
+//           font-family: var(--font-secondary) !important;
+//           font-size: 16px;
+//           font-style: normal;
+//           font-weight: 600;
+//           line-height: 24px; /* 150% */
+//           letter-spacing: -0.16px;
+//         }
+//         p {
+//           color: #000;
+//           font-family: var(--font-secondary) !important;
+//           font-size: 12px;
+//           font-style: normal;
+//           font-weight: 400;
+//           line-height: normal;
+//         }
+//       }
+//     }
+//     .subscription_plan {
+//       padding: 16px;
+//       border-radius: 8px;
+//       border: 1px solid #cbcbcb;
+//       background: #fff;
+//       width: 584px;
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//       margin-bottom: 8px;
+//       .subscription_plan_text {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 4px;
+//         h5 {
+//           color: #000;
+//           font-family: var(--font-secondary) !important;
+//           font-size: 16px;
+//           font-style: normal;
+//           font-weight: 600;
+//           line-height: 24px; /* 150% */
+//           letter-spacing: -0.16px;
+//         }
+//         p {
+//           display: flex;
+//           align-items: center;
+//           gap: 5px;
+//           color: #101820;
+//           font-family: var(--font-secondary) !important;
+//           font-size: 14px;
+//           font-style: normal;
+//           font-weight: 400;
+//           line-height: normal;
+//           .icon {
+//             cursor: pointer;
+//             font-size: 18px;
+//           }
+//         }
+//         span {
+//           color: #5c5c5c;
+//           font-family: var(--font-secondary) !important;
+//           font-size: 12px;
+//           font-style: normal;
+//           font-weight: 400;
+//           line-height: normal;
+//         }
+//       }
+//     }
+//     .subscription_plan_pro {
+//       .subscription_plan_item {
+//         div {
+//           display: flex;
+//           gap: 12px;
+//           align-items: center;
+//           span {
+//             display: flex;
+//             align-items: center;
+//             min-width: 64px;
+//             color: #5c5c5c;
+//             font-family: var(--font-secondary) !important;
+//             font-size: 12px;
+//             font-style: normal;
+//             font-weight: 400;
+//             line-height: normal;
+//             .icon{
+//               font-size: 12px;
+//               margin-left: 4px;
+//             }
+//           }
+//         }
+//       }
+//     }
+//     .subscription_plan_tips {
+//       flex-direction: column;
+//       align-items: flex-start;
+//       .subscription_plan_text {
+//         gap: 12px;
+//         button {
+//           border-radius: 10px;
+//           border: 1px solid #545454;
+//           width: fit-content;
+//           gap: 8px;
+//           width: 292px;
+//         }
+//         a {
+//           color: #410099;
+//           font-family: var(--font-secondary) !important;
+//           font-size: 12px;
+//           font-style: normal;
+//           font-weight: 700;
+//           line-height: normal;
+//           text-decoration: none;
+//         }
+//       }
+//     }
+//     .subscription_plan_details {
+//       display: flex;
+//       align-items: flex-start;
+//       gap: 32px;
+//       .subscription_plan_text {
+//         // width: 50%;
+//       }
+//     }
+//     .subscription_contact_us {
+//       color: #5c5c5c;
+//       font-family: var(--font-secondary) !important;
+//       font-size: 12px;
+//       font-style: normal;
+//       font-weight: 400;
+//       line-height: normal;
+//       a {
+//         color: #5c5c5c;
+//       }
+//       button {
+//         background: transparent;
+//         border: none;
+//         text-decoration: underline;
+//         color: #5c5c5c;
+//         padding: 0;
+//       }
+//     }
+//   }
+//   .dummy_btn {
+//     position: fixed;
+//     right: 100px;
+//     top: 100px;
+//   }
+// }
+// .booking_integration_popup_pause {
+//   padding: 24px;
+//   width: 438px;
+//   height: 618px;
+//   position: relative;
+//   .back_btn {
+//     background: transparent;
+//     border: none;
+//     padding: 0;
+//     position: absolute;
+//     right: 24px;
+//     top: 24px;
+//   }
+//   h3 {
+//     font-size: 24px;
+//     font-family: var(--font-popins) !important;
+//     font-weight: 600;
+//     margin: 16px 0;
+//   }
+//   h5 {
+//     font-size: 16px;
+//     font-family: var(--font-popins) !important;
+//     font-weight: 600;
+//     line-height: 20px;
+//     margin-bottom: 16px;
+//   }
+//   p {
+//     font-size: 14px;
+//     font-family: var(--font-secondary) !important;
+//     margin-bottom: 16px;
+//   }
+//   .pause_card {
+//     background: #efefef;
+//     padding: 16px;
+//     border-radius: 12px;
+//     text-align: center;
+//     div {
+//       display: flex;
+//       justify-content: space-between;
+//       gap: 12px;
+//       button {
+//         width: 100%;
+//         height: 104px;
+//         border: 1px solid #acacac;
+//         border-radius: 12px;
+//         font-size: 16px;
+//         font-family: var(--font-popins) !important;
+//         font-weight: 600;
+//         transition: 0.2s;
+//       }
+//       .active {
+//         background: #fff;
+//       }
+//     }
+//   }
+//   .pause_btn {
+//     position: absolute;
+//     bottom: 24px;
+//     right: 24px;
+//     left: 24px;
+//     display: flex;
+//     justify-content: space-between;
+//     gap: 12px;
+//     button {
+//       width: 100%;
+//     }
+//   }
+//   .success_pause {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     h3 {
+//       margin-top: 40px;
+//       text-align: center;
+//     }
+//     h4 {
+//       font-size: 16px;
+//       font-family: var(--font-secondary) !important;
+//       font-weight: 400;
+//       text-align: center;
+//     }
+//     .success_pause_img {
+//       width: 213px;
+//       margin-bottom: 24px;
+//       img {
+//         width: 100%;
+//       }
+//     }
+//     button {
+//       width: fit-content;
+//       margin: 0 auto;
+//     }
+//   }
+// }
+// .booking_integration_popup_shipping {
+//   padding: 24px;
+//   width: 438px;
+//   height: 648px;
+//   position: relative;
+//   .shipping_con_popup {
+//     display: flex;
+//     flex-direction: column;
+//     h3 {
+//       font-size: 24px;
+//       font-family: var(--font-popins) !important;
+//       font-weight: 600;
+//       margin-bottom: 8px;
+//     }
+//     label {
+//       font-size: 16px;
+//       font-weight: 600;
+//       font-family: var(--font-popins) !important;
+//       margin: 8px 0;
+//     }
+//     input {
+//       height: 48px;
+//       border-radius: 10px;
+//       padding: 13px;
+//       margin-bottom: 8px;
+//       border: 1px solid #c4c4c4;
+//     }
+//     input[type="number"]::-webkit-inner-spin-button,
+//     input[type="number"]::-webkit-outer-spin-button {
+//       -webkit-appearance: none;
+//       margin: 0;
+//     }
+//     /* For Firefox */
+//     input[type="number"] {
+//       -moz-appearance: textfield;
+//     }
+//     .shipping_input {
+//       display: flex;
+//       gap: 8px;
+//       input {
+//         width: 50%;
+//       }
+//     }
+//   }
+//   .shipping_btn {
+//     position: absolute;
+//     bottom: 24px;
+//     right: 24px;
+//     left: 24px;
+//     display: flex;
+//     justify-content: space-between;
+//     gap: 12px;
+//     button {
+//       width: 100%;
+//     }
+//   }
+// }

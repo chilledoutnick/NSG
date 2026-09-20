@@ -1,0 +1,19 @@
+@media (max-width: 992px) {
+  .meta_footer_con {
+    padding: 70px 30px 50px 30px;
+    .meta_footer_con_wrapper {
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 40px;
+    }
+    .res-footer-right-top {
+      div {
+        justify-content: center;
+      }
+    }
+    .res-footer-right-bottom {
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

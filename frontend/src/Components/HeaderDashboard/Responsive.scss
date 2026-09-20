@@ -1,0 +1,19 @@
+// 576 PX
+@media (max-width: 576px) {
+    .dash-header{
+        display: none;
+    }
+    .edit-profile-back{
+        margin-top: 15px !important;
+    }
+    .edit-profile-txt{
+        text-align: start !important;
+        padding-left: 15%;
+        padding-bottom: 10px;
+        border-bottom: 1px solid gainsboro;
+    }
+    .header-edit-popup-update {
+        padding: 0 30px !important;
+    }
+}
+// 576 PX

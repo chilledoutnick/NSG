@@ -1,0 +1,13 @@
+.layout_con {
+  width: 100%;
+  .layout_con_wrapper {
+    display: flex;
+  }
+}
+@media (max-width: 576px) {
+  .layout_con {
+    .layout_con_wrapper {
+      height: 100%;
+    }
+  }
+}

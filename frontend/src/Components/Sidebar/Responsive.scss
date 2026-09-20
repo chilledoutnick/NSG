@@ -1,0 +1,101 @@
+// 576 PX
+@media (max-width: 576px) {
+  .dash-sidebar-logo {
+    display: none !important;
+    padding: 10px 20px 10px 30px;
+    .sidebar-logo {
+      display: none;
+    }
+    .sidebar-advisor-info {
+      display: flex !important;
+      flex-direction: column;
+    }
+  }
+  .header-qr-popup {
+    width: 300px !important;
+  }
+
+  .sidebar-btn-con {
+    padding: 0px;
+    margin: 0 20px 20px 20px;
+    .sidebar-btn {
+      font-size: 14px !important;
+      display: flex;
+      color: #00140e;
+      height: 50px;
+      padding-right: 0px;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .sidebar-btn-dashboard {
+      font-size: 14px !important;
+      opacity: 2;
+      display: flex;
+      color: #00140e;
+      height: 50px;
+      padding-right: 0px;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+  .sidebar-btn-active {
+    border-bottom: #101820 !important;
+  }
+
+  .sidebar-advisor-wc {
+    display: flex !important;
+    background: #101820;
+    width: 280px;
+    flex-shrink: 0;
+    padding: 11px 30px;
+  }
+  .addAppt {
+    bottom: 50px;
+    right: 30px;
+  }
+  .sidebar-btn:hover {
+    color: none;
+  }
+  .dash-sidebar {
+    width: 280px;
+    height: 100vh;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    justify-content: flex-start;
+  }
+  .dashboard-footer {
+    margin-bottom: 10px;
+    .beta-text {
+      margin-bottom: 5px;
+    }
+    .sidebar-btn-back {
+      display: flex;
+      padding: 8px 20px;
+      justify-content: center;
+      align-items: center;
+      height: 36px;
+      color: black;
+      font-weight: 500;
+      border-radius: 10px;
+      border: 1px solid var(--P1, #101820);
+      background: var(--surface, #fff);
+      margin-bottom: 20px;
+      gap: 5px;
+      button {
+        width: 150px;
+        height: 36px;
+      }
+    }
+  }
+
+  .sidebar-btn:active .sidebar-btn:focus {
+    background: var(
+      --states-primary-overlay-selected,
+      rgba(105, 78, 214, 0.08)
+    );
+  }
+}
+// 576 PX

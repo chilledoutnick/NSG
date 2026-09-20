@@ -1,0 +1,961 @@
+.calendar-con {
+  // display: flex;
+  height: 92vh;
+  width: 100%;
+  .sidebar-con {
+    flex-basis: 15%;
+  }
+  .calendar-content {
+    height: 92vh;
+    overflow-y: auto;
+    flex-basis: 85%;
+    padding: 48px 16px;
+    background: #ffffff;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+    width: 0px;
+    height: 0px;
+  }
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #000;
+      font-family: var(--font-popins) !important;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 32px;
+      margin-bottom: 10px;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: transparent;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+        border: 1px solid #8e8e93;
+        &:before {
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          left: 3px;
+          bottom: 3px;
+          background-color: #8e8e93;
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+        }
+      }
+      input:checked + .slider {
+        background-color: #493bb5;
+      }
+      input:checked + .slider:before {
+        -webkit-transform: translateX(18px);
+        -ms-transform: translateX(18px);
+        transform: translateX(18px);
+        background-color: white;
+      }
+      input:focus + .slider {
+        box-shadow: 0 0 1px #493bb5;
+      }
+      .slider.round {
+        border-radius: 34px;
+      }
+      .slider.round:before {
+        border-radius: 50%;
+      }
+    }
+    .calendar-content-desc {
+      color: #000;
+      font-family: var(--font-secondary) !important;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      margin-bottom: 16px;
+    }
+    .schedule_toggle {
+      margin-bottom: 10px;
+      display: flex;
+      input {
+        margin-right: 16px;
+      }
+      .form-check-input:checked {
+        background-color: #4f39f4;
+        border-color: #4f39f4;
+      }
+      p {
+        color: #101820;
+        font-family: var(--font-secondary) !important;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+    .schedule_contant_wrapper {
+      border-radius: 20px;
+      transition: 0.2s;
+    }
+    .schedule_contant_wrapper_disable {
+      opacity: 0.4;
+      pointer-events: none !important;
+    }
+    .calendar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .account_nav {
+        display: flex;
+        gap: 24px;
+        border-bottom: 1px solid #cecece;
+        margin-bottom: 32px;
+        width: 100%;
+        button {
+          background: transparent;
+          border: none;
+          padding: 16px;
+          color: #000;
+          font-family: var(--font-popins) !important;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px; /* 125% */
+          transition: 0.2s;
+          border-bottom: 4px solid transparent;
+        }
+        .active_nav {
+          border-bottom: 4px solid #493bb5;
+        }
+      }
+      .disable_nav {
+        color: #ababab !important;
+      }
+      .show_menu_btn_calendar {
+        display: none;
+        width: fit-content;
+        background: transparent;
+        border: none;
+        border-radius: 50%;
+        padding: 0;
+        img {
+          width: 27px;
+          height: 18px;
+        }
+      }
+      .add-appt-con {
+        position: fixed;
+        z-index: 1;
+        right: 70px;
+        bottom: 110px;
+        display: flex;
+        align-items: center;
+        .add-appt {
+          color: white;
+          border: none;
+          background: black;
+          border-radius: 50%;
+          transition: 0.2s;
+          border: 5px solid gainsboro;
+          height: 50px;
+          width: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: 0.2s;
+          z-index: 1;
+          .icon {
+            transition: 0.2s;
+          }
+        }
+        .add-app-text {
+          opacity: 0;
+          background: #efedff;
+          border-radius: 5px;
+          padding: 3px 10px;
+          transition: 0.3s;
+          margin-right: -50px;
+          font-weight: 500;
+          h5 {
+            font-size: 14px;
+          }
+        }
+        .show_text {
+          opacity: 10;
+          margin-right: 10px;
+        }
+      }
+
+      .appt-active {
+        border-color: gray;
+        .icon {
+          rotate: -315deg;
+          transition: 0.2s;
+        }
+      }
+    }
+
+    .booking-popup {
+      position: relative;
+      .booking-close {
+        border: 1px solid black;
+        border-radius: 20px;
+        position: absolute;
+        font-size: 20px;
+        font-weight: 600;
+        height: 40px;
+        width: 40px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        right: 50px;
+        top: 30px;
+        transition: 0.2s;
+      }
+
+      .booking-close:hover {
+        color: red;
+        border-color: red;
+      }
+    }
+    .calendar-event {
+      border: 1px solid #cbcbcb;
+      width: fit-content;
+      min-width: 738px;
+      max-width: 738px;
+      height: 60vh;
+      padding: 16px;
+      border-radius: 8px;
+      h3 {
+        font-family: var(--font-secondary) !important;
+        font-size: 16px;
+        font-weight: 600;
+        color: black;
+        margin-bottom: 4px;
+      }
+      h5 {
+        font-size: 14px;
+        font-family: var(--font-secondary) !important;
+        color: #4e4f51;
+        margin-bottom: 20px;
+      }
+      .calendar-event-btn {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+        justify-content: space-between;
+        .calendar-event-btn-left {
+          display: flex;
+          gap: 8px;
+          button {
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 48px;
+            width: fit-content;
+            border-radius: 8px;
+            border: 0.5px solid gray;
+            margin-right: 10px;
+            background: transparent;
+            font-size: 16px;
+            font-family: var(--font-popins) !important;
+            color: black;
+            background: #fff;
+            border: 1px solid #cbcbcb;
+          }
+          .active {
+            background: #f9f8fb;
+            border: 1px solid #000;
+          }
+        }
+        .share_meet_link_con {
+          width: 210px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          background: #000;
+          height: 48px;
+          border-radius: 8px;
+          padding: 12px 16px;
+          position: relative;
+          button {
+            padding: 0;
+            height: 100%;
+            background: transparent;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            font-family: var(--font-popins) !important;
+            font-weight: 600;
+            &:nth-child(2) {
+              border-left: 1px solid #686868;
+              padding-left: 4px;
+            }
+          }
+          .share_meet_link_popup {
+            position: absolute;
+            top: 52px;
+            right: 0;
+            left: 0;
+            background: #ffffff;
+            border: 1px solid #d4d4d4;
+            padding: 12px;
+            border-radius: 12px;
+            z-index: 1;
+            .btn-outline {
+              border: 1px solid #d4d4d4;
+              color: #000;
+              padding: 12px 0px;
+              width: 100%;
+            }
+            h5 {
+              font-size: 14px;
+              font-family: var(--font-secondary) !important;
+              font-weight: 700;
+              margin-bottom: 4px;
+            }
+            p {
+              font-size: 12px;
+              font-family: var(--font-secondary) !important;
+              color: #6c6c6c;
+              margin-bottom: 24px;
+            }
+          }
+        }
+      }
+      .event-wrapper {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        height: 40vh;
+        padding-right: 20px;
+        padding-bottom: 30px;
+
+
+        
+
+        .event-wrapper-skeleton {
+          height: 60px;
+          margin-bottom: 25px;
+          border-radius: 5px;
+        }
+        .no_data_con {
+          margin-top: 10%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          img {
+            height: 59px;
+            width: 53px;
+          }
+          .no_data {
+            font-weight: 500;
+            text-align: center;
+            color: #6f6f6f;
+            font-size: 16px;
+            font-family: var(--font-popins) !important;
+            margin-bottom: 0;
+          }
+        }
+        &::-webkit-scrollbar {
+          width: 5px;
+          height: 8px;
+        }
+        /* Track */
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: gray;
+          border-radius: 5px;
+        }
+        .loading-con {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 150px;
+        }
+        .calendar-event-items {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+          border-bottom: 1px solid #dcdcdc;
+          .event-icon {
+            font-size: 26px;
+            margin-right: 20px;
+          }
+          .items-wrapper {
+            display: flex;
+            flex-direction: column;
+            text-align: start;
+          }
+          h5 {
+            color: #000;
+            font-family: var(--font-secondary) !important;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+          }
+          p {
+            color: #4e4f51;
+            font-size: 14px;
+            font-family: var(--font-secondary) !important;
+          }
+
+          button {
+            display: flex;
+            align-items: center;
+            border: none;
+            width: fit-content;
+          }
+          .event_item_btn {
+            display: flex;
+            text-align: start;
+            background: transparent;
+            width: 100%;
+            padding: 12px 15px;
+          }
+          .event_nav_btn_con {
+            display: flex;
+            gap: 18px;
+            button {
+              background: transparent;
+              .icon {
+                font-size: 22px;
+              }
+            }
+          }
+          .event_nav_btn {
+            background: transparent;
+          }
+        }
+      }
+    }
+
+    .availability-con{
+      
+    }
+    .availability-settings {
+      // height: 75vh;
+      // overflow-y: auto;
+    }
+    .calendar-settings {
+      .calendar-timezone {
+        margin-top: 10px;
+        display: none;
+        align-items: center;
+        padding-bottom: 30px;
+        border-bottom: 1px solid gainsboro;
+        h4 {
+          font-weight: 700;
+          font-size: 20px;
+          margin-bottom: 5px;
+        }
+        p {
+          font-size: 16px;
+          font-weight: 600;
+          color: gray;
+        }
+        button {
+          margin-left: 175px;
+          background: transparent;
+          border: 1px solid gray;
+          border-radius: 5px;
+          padding: 8px 20px;
+          font-weight: 600;
+          font-size: 18px;
+          white-space: nowrap;
+        }
+      }
+      .calendar-manage-account {
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        h4 {
+          font-weight: 700;
+          font-size: 20px;
+          margin-bottom: 16px;
+        }
+        hr {
+          margin: 10px 0;
+          width: 260px;
+        }
+        .calendar_manage_btn_disabled {
+          opacity: 0.4 !important;
+          pointer-events: none !important;
+        }
+        .calendar_manage_btn {
+          display: flex;
+          align-items: center;
+          opacity: 1;
+          pointer-events: unset;
+          p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 220px;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+            img {
+              height: 20px;
+            }
+          }
+        }
+        .calendar_manage_desc {
+          margin-top: 10px;
+          font-size: 14px;
+          font-weight: 600;
+          color: gray;
+          line-height: 16px;
+        }
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 42px;
+          height: 24px;
+          input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            border: 1px solid #8e8e93;
+            &:before {
+              position: absolute;
+              content: "";
+              height: 16px;
+              width: 16px;
+              left: 3px;
+              bottom: 3px;
+              background-color: #8e8e93;
+              -webkit-transition: 0.4s;
+              transition: 0.4s;
+            }
+          }
+          input:checked + .slider {
+            background-color: #493bb5;
+          }
+          input:checked + .slider:before {
+            -webkit-transform: translateX(18px);
+            -ms-transform: translateX(18px);
+            transform: translateX(18px);
+            background-color: white;
+          }
+          input:focus + .slider {
+            box-shadow: 0 0 1px #493bb5;
+          }
+          .slider.round {
+            border-radius: 34px;
+          }
+          .slider.round:before {
+            border-radius: 50%;
+          }
+        }
+      }
+      .calendar-meet-link-enable {
+        opacity: 1 !important;
+        pointer-events: unset !important;
+      }
+      .calendar-meet-link {
+        opacity: 0.2;
+        pointer-events: none;
+        margin-top: 25px;
+        display: flex;
+        padding-bottom: 10px;
+        transition: 0.2s;
+        min-height: 60px;
+        h4 {
+          font-weight: 700;
+          font-size: 18px;
+          margin-bottom: 5px;
+        }
+        p {
+          font-size: 14px;
+          font-weight: 600;
+          color: gray;
+        }
+        .add-meet-btn {
+          margin-left: 100px;
+          background: transparent;
+          border: 1px dashed gray;
+          border-radius: 5px;
+          padding: 8px 20px;
+          font-weight: 600;
+          font-size: 18px;
+          white-space: nowrap;
+          transition: 0.2s;
+          &:hover {
+            border: 1px solid black;
+          }
+        }
+        .meet-link-input {
+          margin-left: 100px;
+          display: flex;
+          align-items: center;
+          input {
+            padding: 10px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            margin-right: 20px;
+            background: transparent;
+            min-width: 300px;
+            font-weight: 500;
+            font-size: 16px;
+            &::placeholder {
+              font-weight: 500;
+              font-size: 16px;
+            }
+          }
+          button {
+            padding: 10px 20px;
+            border: 1px solid gainsboro;
+            border-radius: 5px;
+            background: black;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            &:nth-last-child(1) {
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+
+      .calendar-add-account {
+        margin-top: 25px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid gainsboro;
+        h4 {
+          font-weight: 700;
+          font-size: 20px;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+
+  .calendar-btn {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    color: black;
+    border: none;
+    background: gainsboro;
+    padding: 7px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    gap: 10px;
+    img {
+      height: 30px;
+      object-fit: cover;
+    }
+  }
+}
+.calendar-events-popup {
+  padding: 24px !important;
+  position: relative;
+  width: 438px;
+  .calender_event_item {
+    border-radius: 16px;
+    h2 {
+      margin-top: 24px;
+      font-family: var(--font-popins) !important;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 60px;
+    }
+    .calender_event_item_text {
+      margin-bottom: 32px;
+      h5 {
+        font-family: var(--font-popins) !important;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 4px 0;
+      }
+      p {
+        color: #4e4f51;
+        font-size: 14px;
+        font-family: var(--font-secondary) !important;
+      }
+      .icon{
+        font-size: 24px;
+      }
+    }
+    .calender_event_item_btn{
+      display: flex;
+      gap: 12px;
+      margin-top: 92px;
+      button{
+        width: 100%;
+      }
+    }
+  }
+  .close-btn {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    background: transparent;
+    border: none;
+    transition: 0.2s;
+    &:hover {
+      color: red;
+    }
+  }
+
+  .custom-hint-bottom {
+    margin-top: 15px;
+    display: flex;
+    .fa-video {
+      font-size: 18px;
+    }
+    .custom-hint-bottom-top {
+      width: 100%;
+      margin-left: 20px;
+      .copy-url {
+        border: none;
+        background: transparent;
+        color: #00000080;
+        transition: 0.2s;
+      }
+
+      .copy-url:hover {
+        color: var(--color-primary);
+      }
+
+      .meet-url-btn {
+        font-size: 12px;
+        font-weight: 500;
+        background: transparent;
+        border: none;
+        padding: 0;
+        color: #0d6efd;
+      }
+      .btn-primary {
+        border-radius: 10px;
+        height: 34px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0.32px;
+      }
+
+      .guests-item {
+        margin-bottom: 5px;
+        p {
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 16px;
+          color: #0d6efd;
+        }
+      }
+    }
+    .guests-con {
+      margin-top: 10px;
+      margin-left: 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: self-end;
+
+      h5 {
+        font-weight: 700;
+        margin-top: 20px;
+        display: flex;
+
+        i {
+          margin-right: 25px;
+        }
+
+        .add-guest-btn {
+          background: transparent;
+          border-radius: 10px;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 18px;
+          text-align: center;
+          color: #585d63;
+          padding: 3px 10px;
+          margin-right: 10px;
+          display: flex;
+          white-space: nowrap;
+          overflow: hidden;
+          align-items: center;
+          margin-left: 30px;
+          margin-top: 10px;
+          border: 1px solid rgba(129, 132, 134, 0.5);
+          transition: 0.2s;
+        }
+
+        .add-guest-btn:hover {
+          color: var(--color-primary);
+          border-color: var(--color-primary);
+        }
+      }
+
+      .custom-hint-bottom-icon {
+        color: #585d63;
+        margin-right: 10px;
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        color: #afafaf;
+      }
+
+      .custom-hint-bottom-meet {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        color: #000000;
+        margin-left: 35px;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      input {
+        border: 1px solid #585d63;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        color: black;
+        width: 100%;
+        padding: 10px 10px;
+      }
+
+      .custom-hint-bottom-con {
+        margin-top: 20px;
+
+        .custom-hint-bottom-client {
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 16px;
+          color: #585d63;
+          margin-bottom: 5px;
+        }
+      }
+
+      .custom-hint-bottom-input-con {
+        position: relative;
+
+        a {
+          position: absolute;
+          top: 7px;
+          right: 10px;
+          color: #000000;
+        }
+      }
+    }
+  }
+  .custom-hint-guest {
+    display: flex;
+    margin-top: 10px;
+    align-items: self-start;
+
+    .guests-con {
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+
+      h5 {
+        color: #282828;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .name-user-icon {
+        font-size: 12px;
+        height: 16px;
+        width: 16px;
+        margin-right: 10px;
+      }
+
+      .guests-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        p {
+          font-weight: 600;
+          color: #282828;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .add-guest-btn {
+      background: transparent;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 18px;
+      color: #585d63;
+      padding: 3px 10px;
+      display: flex;
+      width: 90px;
+      justify-content: center;
+      border: 1px solid rgba(129, 132, 134, 0.5);
+      transition: 0.2s;
+      margin-top: 5px;
+      margin-left: 20px;
+    }
+
+    .add-guest-btn:hover {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+  }
+
+  .custom-hint-alert {
+    display: flex;
+    margin-top: 20px;
+
+    .custom-hint-alert-inner {
+      margin-left: 20px;
+
+      p {
+        color: #282828;
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+.email_verification_container {
+  margin-top: 48px;
+  .backButton {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-family: var(--font-secondary) !important;
+    gap: 7px;
+    margin-bottom: 34px;
+    padding: 0;
+  }
+  h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: var(--font-secondary) !important;
+    margin-bottom: 32px;
+  }
+
+  .inputContainer {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 8px;
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* Remove arrows in Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+  }
+
+  .inputBox {
+    width: 81px;
+    height: 56px;
+    text-align: center;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+  }
+  .sent_otp {
+    color: #5b4397;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    text-align: center;
+  }
+  .linkContainer {
+    margin: 32px 0;
+    p {
+      color: #8c8c8c;
+      font-size: 16px;
+      font-family: var(--font-secondary) !important;
+      button {
+        display: flex;
+        background: none;
+        border: none;
+        padding: 0;
+        color: #2a2a2a;
+        font-weight: 700;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+  .error_otp {
+    font-size: 16px;
+    font-family: var(--font-secondary) !important;
+    color: #b3261e;
+    text-align: center;
+  }
+  .cta-btn {
+    width: 100%;
+    font-family: var(--font-popins) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .email_verification_container {
+    margin-top: 0;
+    .inputContainer {
+      .inputBox {
+        width: 51px;
+        height: 56px;
+      }
+    }
+  }
+}

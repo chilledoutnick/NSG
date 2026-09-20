@@ -1,0 +1,26 @@
+.NotFoundCon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  h1 {
+    font-size: 100px;
+    font-weight: 800;
+    font-family: var(--font-inter) !important;
+  }
+  h5{
+    font-size: 40px;
+    font-weight: 800;
+    font-family: var(--font-inter) !important;
+  }
+  button{
+    border: none;
+    margin-top: 20px;
+    background: black;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+}

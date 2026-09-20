@@ -1,0 +1,137 @@
+.gallery_con {
+  background: gainsboro;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 5%;
+  min-height: 100vh;
+  h1 {
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
+  }
+  input {
+    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .gallery_img {
+    margin-top: 30px;
+    border: 1px solid gray;
+    button {
+      position: relative;
+      background: transparent;
+      border: 3px solid white;
+      padding: 0;
+      transition: 0.2s;
+      img {
+        width: 100%;
+        height: 300px;
+        object-fit: contain;
+      }
+      &:hover {
+        border-color: blue;
+        button {
+          display: flex !important;
+        }
+      }
+      button {
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        display: none;
+        color: white;
+        padding: 5px;
+        border-radius: 50%;
+        border: none;
+        font-weight: 700;
+        background: black;
+        transition: 0.2s;
+        &:hover {
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+/* App.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.crop-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: #333;
+  margin-top: 20px;
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.upload_profile_wrapper {
+  padding: 20px 40px;
+  .upload_profile_wrapper_img {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .upload_profile_btns {
+    height: 70px;
+    padding-top: 20px;
+    border-top: 1px solid gainsboro;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .upload_profile_btns_edit {
+      display: flex;
+      gap: 20px;
+      button {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: transparent;
+        border: none;
+        font-size: 16px;
+        transition: 0.2s;
+        border-radius: 10px;
+        padding: 10px;
+        span {
+          display: block;
+        }
+        input {
+          cursor: pointer;
+          border: none;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          opacity: 0;
+        }
+        &:hover {
+          background: gainsboro;
+        }
+      }
+    }
+    .btn-primary {
+      height: 40px;
+      font-size: 16px;
+    }
+  }
+}
+

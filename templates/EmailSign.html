@@ -1,0 +1,114 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Email Signature</title>
+</head>
+
+<body>
+  <div style="font-family: Arial, sans-serif; max-width: 450px">
+    <div style="display: flex; align-items: center">
+      <img src="{{ user.profile_picture.url }}" alt="Profile Picture" style="width: 94px;
+            height: 94px;
+            border-radius: 5px;
+            object-fit: cover;
+            display: block;
+            margin-right: 15px;" />
+      <div style="
+            display: flex;
+            height: 94px;
+            width: 1px;
+            background: #7b7b7b;
+            margin-right: 10px;
+          "></div>
+      <div>
+        <p style="
+              margin: 0;
+              font-weight: bold;
+              font-size: 16px;
+              color: Black;
+              margin-bottom: 6px;
+            ">
+          {{user.name}}
+        </p>
+        <p style="margin: 0; font-size: 12px; color: #777777">
+          {{ user.designation }}{% if user.company %} at {{ user.company }}{% endif %}
+        </p>
+        <p style="margin: 3px 0; font-size: 14px; color: #777777; font-weight: 400 " ;>
+          {% if formatted_phone %}
+            {{ formatted_phone }}{% if user.email %}, <a href="mailto:{{ user.email }}"
+              style="color: #777777; text-decoration: none;">{{ user.email }}</a>{% endif %}
+          {% else %}
+          {% if user.email %}
+            <a href="mailto:{{ user.email }}" style="color: #777777; text-decoration: none;">{{ user.email }}</a>
+          {% endif %}
+          {% endif %}
+        </p>
+
+        <div style="margin-top: 5px">
+          {% if user.linkedin %}
+          <a href="{{ user.linkedin }}" style="text-decoration: none; margin-right: 5px">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="24" height="24" alt="LinkedIn" />
+          </a>
+          {% endif %}
+          {% if user.instagram %}
+          <a href="{{ user.instagram }}" style="text-decoration: none; margin-right: 5px">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="24" height="24" alt="Instagram" />
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 16px; display: flex">
+    {% if user.scheduling %}
+    <a href="https://nsgcrm.com/{{user.username}}/booking" style="
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: black;
+            color: white;
+            padding: 9px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            text-decoration: none !important; 
+            border: none;
+            font-weight: 600;
+            margin-right: 10px;
+          ">
+      Schedule Meeting
+    </a>
+    {% endif %}
+    <a href="https://nsgcrm.com/{{user.username}}" style="
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: none;
+            color: #000;
+            border: 1px solid #000000;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            text-decoration: none !important; 
+            font-weight: 600;
+          ">
+      Business Card</a>
+  </div>
+  {% if referral_code %}
+  <div style="margin-top: 14px; padding: 10px; border-top: 1px solid #ddd;">
+    <p style="margin: 0 0 5px 0; font-size: 12px; color: #777777;">
+      Click
+      <a href="https://nsgcrm.com/signup/{{ referral_code }}" style="color: 5640FA; text-decoration: underline;">
+        here
+      </a>
+      to Sign up for NSG using my referral link and get a month free.
+      <img src="https://storage.googleapis.com/nsg-crm-storage-public/img/link.png" width="12" height="12" alt="link icon"
+        style="vertical-align: middle; margin-left: 4px; filter: brightness(0) saturate(100%) invert(38%) sepia(0%) saturate(0%) hue-rotate(181deg) brightness(97%) contrast(85%);" />
+    </p>
+  </div>
+  {% endif %}
+
+  </div>
+</body>
+
+</html>

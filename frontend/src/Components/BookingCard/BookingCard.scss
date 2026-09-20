@@ -1,0 +1,80 @@
+.share_link_wrapper {
+  margin-top: 20px;
+  padding-bottom: 100px;
+  .share_link_details {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 20px;
+    h4 {
+      font-weight: 700;
+      font-family: 20px;
+    }
+    button {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #0d6efd;
+    }
+  }
+  .share_link_card_wrapper {
+    display: grid;
+    grid-template-columns: 320px 320px;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .share_link_card {
+    border-top: 10px solid black;
+    min-width: 320px;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    transition: 0.2s;
+    &:hover {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    h5 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .view_btn {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #0d6efd;
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    .share_btn_con {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid gainsboro;
+      padding-top: 20px;
+      button {
+        background: transparent;
+        padding: 0;
+        color: #0d6efd;
+      }
+      .copy_btn {
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .share_btn {
+        padding: 3px 25px;
+        border: 1.5px solid #0d6efd;
+        border-radius: 20px;
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .share_link_card_wrapper {
+    grid-template-columns: auto !important;
+  }
+}

@@ -1,0 +1,27 @@
+.layout_dashboard_con {
+  width: 100%;
+  min-height: 100vh;
+  .layout_con_wrapper {
+    display: flex;
+    .layout_outlet {
+      margin-left: 100px;
+      width: calc(100% - 120px);
+      box-sizing: border-box;
+      min-height: 100vh;
+      background-color: #f9f9f9;
+      position: relative;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .layout_dashboard_con {
+    .layout_con_wrapper {
+      flex-direction: column;
+      .layout_outlet {
+        margin-left: 0;
+        width: 100%;
+        padding: 0px;
+      }
+    }
+  }
+}

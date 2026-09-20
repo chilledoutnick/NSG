@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sarabun:wght@200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <body style="
+      margin: 0;
+      padding: 0;
+      font-family: 'Sarabun',
+      sans-serif;"
+  >
+    <div class="container"
+         style="
+          background-color: #00000;
+          width: 600px;
+          border: 1px solid #585d63;
+          color: #101820;"
+    >
+      <p class="header"
+         style="
+          font-weight: 800;
+          font-size: 30px;
+          line-height: 52px;
+          margin: 0;
+          padding: 30px 30px 30px 80px;
+          color: #00000;"
+      >
+        {{title}}
+      </p>
+      <div class="bottom-content"
+           style="padding: 30px 80px 30px 80px;"
+      >
+        <p class="bottom-content-text"
+           style="
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            color: #101820;"
+        >
+           Dear {{contact_name}},
+        </p>
+        <p class="bottom-content-text"
+           style="
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            color: #101820;"
+        >
+          {{contact_message}}{{message0}}. {{message}}
+          If you have any further questions or need to make any changes, please contact us.
+        </p>
+        <p class="bottom-content-text"
+           style="
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            margin-bottom: 30px;
+            color: #101820;"
+        >
+        <h3>Here are the details of your {{ schedule }} appointment:</h3>
+
+        <p class="bottom-content-Date"
+           style="
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 31px;
+            letter-spacing: 0.02em;
+            color: #101820;
+            margin: 10px 0 30px 0;"
+        >
+<b>When:</b>  {{appointment_date}} . {{appointment_start_time}} - {{appointment_end_time}} {{timezone}} ({{appointment_duration}} minutes)<br>
+<b>Where:</b> {% if meet_link %}Online ({{ meet_platform }} Meet){% else %}N/A{% endif %}<br>
+
+<b>Meeting Link:</b> {% if meet_link %}{{click}}{% else %}N/A <br>Please Contact {{user_email}}{% endif %}
+        <br>
+        Thank you for scheduling with us.
+        </p>
+          <p class="bottom-content-text"
+           style="
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            color: #101820;">
+        <a href="{% if meet_link %}{{meet_link}}{% else %}#{% endif %}"
+     class="bottom-content-btn"
+     style="
+        background: {% if meet_link %}#101820{% else %}#b7babc{% endif %};
+        border: 1px solid #b7babc;
+        border-radius: 8px;
+        padding: 8px 24px;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: center;
+        color: #ffffff;
+        text-decoration: none;"
+        {% if not meet_link %}disabled{% endif %}
+  >
+    {% if meet_link %}{{click}}{% else %}N/A{% endif %}
+  </a>
+              <br><br>
+          You can join this meeting from your computer, tablet or mobile phone.
+
+          </p>
+        <p class="bottom-content-text"
+           style="
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            color: #101820;">
+        <a href={{calendar_url}}
+           target="_blank"
+           rel="nofollow"
+           class="bottom-content-text"
+           style="
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            margin-bottom: 30px;
+            gap: 12px;
+            text-decoration: underline;
+            color: #101820;"
+        >
+          Add to Calender
+        </a></p>
+        <p class="bottom-content-text"
+           style="
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            color: #101820;">
+          {{user_name}} - Organiser <br>
+          Reply To: {{user_email}}
+        </p>
+        <p class="bottom-content-text"
+           style="
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.02em;
+            color: #101820;">
+          Powered by NSG.tech
+
+        </p>
+
+      </div>
+    </div>
+  </body>
+</html>

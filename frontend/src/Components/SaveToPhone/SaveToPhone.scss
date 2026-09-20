@@ -1,0 +1,56 @@
+.people_save_contact_popup_wrapper {
+  width: 438px;
+}
+.people_save_contact_popup {
+  padding: 24px;
+  position: relative;
+  .close_btn {
+    right: 24px;
+  }
+  h2 {
+    color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 133.333% */
+    margin-bottom: 24px;
+  }
+  p {
+    color: #000;
+    font-family: var(--font-popins) !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 125% */
+    margin-bottom: 13px;
+  }
+  .number_copy_btn {
+    color: #000;
+    font-family: var(--font-secondary) !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .icon {
+      color: #aeaeb2;
+      font-size: 20px;
+    }
+  }
+  .people_save_btns {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    button {
+      width: 100%;
+    }
+  }
+}

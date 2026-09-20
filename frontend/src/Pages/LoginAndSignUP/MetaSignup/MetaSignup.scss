@@ -1,0 +1,261 @@
+.meta_signup_con {
+  background: #ffffff;
+  display: block;
+  min-height: auto;
+  .meta_signup_con_wrapper {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-bottom: 120px;
+  }
+  .meta_signup_header_logo {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    .meta_signup_header_logo_con {
+      max-width: 1080px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    img {
+      width: 76px;
+      object-fit: contain;
+    }
+    button {
+      background: #ffffff;
+      color: #410099;
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 4px 4px #d7d7d7;
+      &:hover {
+        color: #fff;
+        background: #410099 !important;
+      }
+    }
+  }
+  .meta_signup_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 190px;
+    h1 {
+      font-size: 56px;
+      font-family: var(--font-popins) !important;
+      font-weight: 600;
+      line-height: 60px;
+      margin-bottom: 14px;
+      text-align: center;
+      span {
+        -webkit-text-fill-color: #0000;
+        background: linear-gradient(90deg, #410099 22.54%, #afa5ff 88.45%);
+        -webkit-background-clip: text;
+      }
+    }
+    p {
+      font-size: 16px;
+      font-family: var(--font-secondary) !important;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .nfc_card_bottom_rating {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      margin-bottom: 9px;
+      img {
+        height: 17px;
+        width: auto;
+        min-width: 75px;
+        object-fit: contain;
+        margin-bottom: 0;
+      }
+      span {
+        color: #737373;
+        font-family: var(--font-popins);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+        white-space: nowrap;
+      }
+    }
+  }
+  .meta_signup_wrapper {
+    display: flex;
+    gap: 120px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 52px;
+    .signup_con_left {
+      width: 440px;
+    }
+    .signup_con_right {
+      // margin-top: 122px;
+      .smart_card_video {
+        height: 255px;
+        width: 448px;
+        border-radius: 20px;
+        border: 2px solid #fff;
+        box-shadow: 0px 4px 50px 4px rgba(255, 255, 255, 0.25);
+        transition: 0.5s;
+        z-index: 1;
+        margin-bottom: 20px;
+      }
+      p {
+        color: #8c8c8c;
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+  }
+}
+.meta_signup_header_timer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  height: 62px;
+  background: #410099 !important;
+  width: 100%;
+  color: #fff;
+  z-index: 100;
+  .timer_desc {
+    font-family: var(--font-popins) !important;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  .timer_desc_mobile {
+    display: none;
+  }
+  .count_down_timer {
+    width: 200px;
+    display: flex;
+    margin-top: 13px;
+    p {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    span {
+      &:nth-child(1) {
+        top: -10px;
+        position: absolute;
+        font-family: var(--font-popins) !important;
+        font-size: 10px;
+        font-weight: 400;
+      }
+      &:nth-child(2) {
+        font-family: var(--font-popins) !important;
+        font-size: 20px;
+        font-weight: 400;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .meta_signup_con {
+    .meta_signup_con_wrapper {
+      padding-bottom: 60px;
+      .meta_signup_header_logo {
+        top: 50px;
+        .meta_signup_header_logo_con {
+          padding: 0 5%;
+        }
+        img {
+          width: 32px;
+        }
+        button {
+          height: 30px !important;
+          width: 120px;
+          font-size: 14px;
+          height: fit-content;
+        }
+      }
+      .meta_signup_header {
+        text-align: center;
+        padding: 120px 5% 0 5%;
+        h1 {
+          font-size: 34px;
+          line-height: 45px;
+        }
+        p {
+          font-size: 14px;
+          padding: 0 5%;
+          br {
+            display: none;
+          }
+        }
+      }
+      .meta_signup_wrapper {
+        flex-direction: column;
+        gap: 0px;
+        margin-top: 0;
+        .signup_con_left {
+          width: 100%;
+          height: auto;
+          padding: 32px 5%;
+        }
+        .signup_con_right {
+          width: 100%;
+          margin-top: 8px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 0 5%;
+          .smart_card_video {
+            width: 100%;
+            height: auto;
+          }
+          P {
+            br {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .meta_signup_header_timer {
+    height: auto;
+    padding: 5px 5%;
+    justify-content: center;
+    gap: 22px;
+    .timer_desc_mobile {
+      display: block;
+    }
+    .timer_desc_pc {
+      display: none;
+    }
+    .timer_desc {
+      font-size: 20px;
+      text-transform: capitalize !important;
+      br {
+        display: none;
+      }
+    }
+    .count_down_timer {
+      width: 100px;
+      p {
+        white-space: nowrap;
+        span {
+          &:nth-child(1) {
+            font-size: 8px;
+          }
+          &:nth-child(2) {
+            font-size: 14px;
+            padding-right: 3px;
+          }
+        }
+      }
+    }
+  }
+}
