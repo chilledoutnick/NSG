@@ -34,7 +34,7 @@ const handleSaveToken = async (fcmToken, user_id) => {
   }
 };
 
-const createNotification = (title, body, url) => {
+export const createNotification = (title, body, url) => {
   const notification = new Notification(title, {
     body,
     icon: "https://storage.googleapis.com/nsg-db-storage-public/media/webp_images/NSG_512x512_png.webp",

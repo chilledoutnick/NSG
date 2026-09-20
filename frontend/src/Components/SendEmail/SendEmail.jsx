@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect, useRef, lazy, use } from "react";
+import { useState, useEffect, useRef, lazy } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import $ from "jquery";
 import Swal from "sweetalert2";
@@ -37,7 +37,6 @@ function SendEmail(props) {
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
   const [activeIntent, setActiveIntent] = useState(null);
   const user = JSON.parse(localStorage.getItem("user_info"));
-  const [directEmail, setdirectEmail] = useState(false);
   
 
   const handleChange = (event) => {

@@ -484,7 +484,7 @@ useEffect(() => {
   const isValidUrl = (url) => {
     if (!url) return true; 
     
-    return /^(https?:\/\/)?(www\.)?[\w\-]+\.[\w\-]+[^\s]*$/.test(url.trim());
+    return /^(https?:\/\/)?(www\.)?[\w-]+\.[\w-]+[^\s]*$/.test(url.trim());
   };
 
   const scrollRight = () => {

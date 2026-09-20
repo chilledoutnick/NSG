@@ -117,7 +117,7 @@ const getPlatformFromUrl = (url) => {
 };
 
 const validateLink = (url) => {
-  const pattern = /^(https?:\/\/)?([\w\-])+(\.[\w\-]+)+[/#?]?.*$/;
+  const pattern = /^(https?:\/\/)?([\w-]+)+(\.[\w-]+)+[/#?]?.*$/;
   return pattern.test(url);
 };
 

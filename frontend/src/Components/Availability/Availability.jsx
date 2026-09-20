@@ -285,11 +285,11 @@ function Availability(props) {
       .post(url, {}, config)
       .then((res) => {
         let day = [];
-        res.data.map((item) => {
+        res.data.forEach((item) => {
           day.push(item.dayName);
           selectedTime[item.dayName] = [];
-          item.working_hour.map((hour) => {
-            return selectedTime[item.dayName].push({
+          item.working_hour.forEach((hour) => {
+            selectedTime[item.dayName].push({
               start_time: hour.start_time,
               end_time: hour.end_time,
               last_time: hour.start_time,
@@ -305,10 +305,10 @@ function Availability(props) {
     setLoading(true);
     create_slot_time();
     let payload = [];
-    selectedDay.map((item) => {
+    selectedDay.forEach((item) => {
       let working_hour = [];
-      selectedTime[item].map((tm) => {
-        return working_hour.push({
+      selectedTime[item].forEach((tm) => {
+        working_hour.push({
           start_time: tm.start_time,
           end_time: tm.end_time,
         });
@@ -466,18 +466,16 @@ function Availability(props) {
                                     ? selectedTime[selectedDayName.dayNumber][
                                         index - 1
                                       ].last_time !== ""
-                                      ? AllTime.map((item, index) => {
-                                          if (time["last_time"] <= item.value) {
-                                            return (
-                                              <option
-                                                key={"time" + index}
-                                                value={item.value}
-                                              >
-                                                {item.name}
-                                              </option>
-                                            );
-                                          }
-                                        })
+                                      ? AllTime.filter(
+                                          (item) => time["last_time"] <= item.value
+                                        ).map((item, index) => (
+                                          <option
+                                            key={"time" + index}
+                                            value={item.value}
+                                          >
+                                            {item.name}
+                                          </option>
+                                        ))
                                       : ""
                                     : AllTime.map((item, index) => {
                                         return (
@@ -506,18 +504,16 @@ function Availability(props) {
                                     );
                                   }}
                                 >
-                                  {AllTime.map((item, index) => {
-                                    if (time["last_time"] < item.value) {
-                                      return (
-                                        <option
-                                          key={"time" + index}
-                                          value={item.value}
-                                        >
-                                          {item.name}
-                                        </option>
-                                      );
-                                    }
-                                  })}
+                                   {AllTime.filter(
+                                     (item) => time["last_time"] < item.value
+                                   ).map((item, index) => (
+                                     <option
+                                       key={"time" + index}
+                                       value={item.value}
+                                     >
+                                       {item.name}
+                                     </option>
+                                   ))}
                                 </select>
                               </div>
                               <p

@@ -1,7 +1,6 @@
 // import { useState } from "react";
 import { useState, useRef, useEffect } from "react";
 import "./Shipping.scss";
-import Footer from "../footerNew";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
@@ -47,9 +46,6 @@ const PRICE_MAP = {
   metal79: { original: 79, price: 59 },
   metal99: { original: 99, price: 74 },
 };
-
-const SHIPPING_ICON =
-  "https://storage.googleapis.com/nsg-db-storage-public/media/webp_images/8be9bfa1838e483ca8f57bffa50d06bd.webp";
 
 const USERS_AVATAR =
   "https://storage.googleapis.com/nsg-db-storage-public/media/webp_images/82cfc541430f41f287edfd6633a9e00c.webp";

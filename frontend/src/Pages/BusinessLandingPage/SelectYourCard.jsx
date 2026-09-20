@@ -8,7 +8,6 @@ import StarHalfIcon from "@mui/icons-material/StarHalf";
 import FAQ from "./faQ/faq";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import Footer from "./footerNew";
-import CompareTable from "./CompareTable/CompareTable";
 
 const logo =
   "https://storage.googleapis.com/nsg-db-storage-public/media/webp_images/915d14d99c1b4a27a5f03047e2213333.webp";

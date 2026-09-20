@@ -115,7 +115,7 @@ const UploadUserPage = ({ handleClickImportBack, handleFetchContact }) => {
           <ArrowBackOutlinedIcon /> contact list
         </button>
       </div>
-      {headers.length == 0 && (
+      {headers.length === 0 && (
         <>
           <div className="tab-bar">
             <div
@@ -243,7 +243,7 @@ const UploadUserPage = ({ handleClickImportBack, handleFetchContact }) => {
             </div>
           </>
         )}
-        {successImportContacts != "0" && (
+        {successImportContacts !== "0" && (
           <div className="success-box">
             <div className="success-header">
               <h3>✅ Successfully imported {successImportContacts} contacts</h3>

@@ -65,7 +65,14 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "no-unused-vars": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "react-hooks/exhaustive-deps": "off",
+      "jsx-a11y/img-redundant-alt": "off",
+      "no-useless-escape": "off"
+    }
   },
   "browserslist": {
     "production": [

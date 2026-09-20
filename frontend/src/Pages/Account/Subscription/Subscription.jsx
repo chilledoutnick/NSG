@@ -1,6 +1,6 @@
 import axios from "axios";
 import  { useEffect, useState, lazy } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import momentTz from "moment-timezone";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
@@ -49,6 +49,7 @@ const CustomTooltip = styled(({ className, ...props }) => (
 
 function Subscription() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { advisor_data, get_advisor_data } = useStore();
   const [ActivePlan, setActivePlan] = useState(0);
   const [subscription_details, setSubscription_details] = useState({});
@@ -114,13 +115,12 @@ function Subscription() {
 
   
   useEffect(() => {
-    const url2 = window.location.pathname;
-    if (url2 === "/account/card-upgrade") {
+    if (location.pathname === "/account/card-upgrade") {
       setShowCard_purchase(true);
     } else {
       setShowCard_purchase(false);
     }
-  }, [window.location.pathname]);
+  }, [location.pathname]);
   
 
 

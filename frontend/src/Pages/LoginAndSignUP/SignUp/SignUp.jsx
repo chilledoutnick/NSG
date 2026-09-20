@@ -222,36 +222,12 @@ function SignUp() {
           is_advisor: true,
           phone: "",
         };
-        signup(payload);
+        submit_check_email(res.data.email, payload);
       })
       .catch((err) => {
         console.log("err", err.response?.data || err.message);
         setLoadingGoogle(false);
       });
-  };
-
-
-  const google_proxy = (access_token) => {
-    const url = "api/user/google_proxy/";
-    const payload = {
-      access_token: access_token,
-    };
-    axios
-      .post(url, payload)
-      .then((res) => {
-        const payload = {
-          access_token: access_token,
-          name: res.data.name,
-          email: res.data.email,
-          password: res.data.id,
-          username: res.data.id,
-          profile_picture: res.data.picture.replace("s96-c", "s600-c"),
-          is_advisor: true,
-          phone: "",
-        };
-        submit_check_email(res.data.email, payload);
-      })
-      .catch(() => setLoadingGoogle(false));
   };
 
   const check_email = (email, checkExist) => {

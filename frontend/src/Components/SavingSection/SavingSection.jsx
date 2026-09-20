@@ -42,7 +42,7 @@ function SavingSection(props) {
         }
       }, 1000);
     }
-  }, [window.location.hash]);
+  }, []);
 
   const HtmlTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />

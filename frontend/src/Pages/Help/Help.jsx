@@ -4,15 +4,12 @@ import { ThreeDots } from "react-loader-spinner";
 import swal from "sweetalert";
 import "./Help.scss";
 
-const search =
-  "https://storage.googleapis.com/nsg-db-storage-public/media/webp_images/magnifying-glass--glass-search-magnifying_png.webp";
 const send =
   "https://storage.googleapis.com/nsg-db-storage-public/media/webp_images/arrow-cursor-2--mouse-select-cursor_png.webp";
 
 function Help() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
   const user_info = JSON.parse(localStorage.getItem("user_info"));
 
   const handleSubmit = () => {
@@ -26,7 +23,6 @@ function Help() {
     axios
       .post(url, payload)
       .then((res) => {
-        setErrorMsg("");
         swal({
           text: "Success",
           icon: "success",
@@ -37,7 +33,6 @@ function Help() {
         setMessage("");
       })
       .catch((err) => {
-        setErrorMsg(err.response.data.message);
         setLoading(false);
       });
   };

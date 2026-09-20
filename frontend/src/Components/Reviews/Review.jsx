@@ -1,20 +1,14 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { ThreeDots } from "react-loader-spinner";
-import $ from "jquery";
-import moment from "moment/moment";
 import swal from "sweetalert";
 import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
-import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
-import WestRoundedIcon from "@mui/icons-material/WestRounded";
-import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import Dialog from "@mui/material/Dialog";
 import "./Review.scss";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import StarIcon from "@mui/icons-material/Star"; // optional for solution #3
 
 function Review(props) {
   const [loading, setLoading] = useState(false);

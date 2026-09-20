@@ -365,7 +365,7 @@ function Booking(props) {
   const addEvent = (contact_id) => {
     let guests = [];
     guests = [{ email: Advisor_details.email }, { email: formData.email }];
-    Guests.map((item) => {
+    Guests.forEach((item) => {
       guests.push({
         email: item,
       });
@@ -439,7 +439,7 @@ function Booking(props) {
   const AddOutlookEvent = (contact_id) => {
     let guests = [];
     guests = [{ email: Advisor_details.email }, { email: formData.email }];
-    Guests.map((item) => {
+    Guests.forEach((item) => {
       guests.push({
         email: item,
       });
