@@ -24,19 +24,30 @@ SUPRSEND_WORKSPACE_KEY_PUBLIC_KEY = getattr(settings, "SUPRSEND_PUBLIC_KEY", os.
 SUPRSEND_API_BASE = "https://api.suprsend.com"
 
 
+SUPRSEND_ENABLED = getattr(settings, "SUPRSEND_ENABLED", False)
+
 logger = logging.getLogger(__name__)
 
-# initialize client (adjust args if SDK expects different names)
-client = Suprsend(
-    workspace_key=SUPRSEND_WORKSPACE_KEY,
-    workspace_secret=SUPRSEND_WORKSPACE_SECRET
-)
+# Lazy/conditional client initialization
+client = None
+if SUPRSEND_ENABLED:
+    try:
+        client = Suprsend(
+            workspace_key=SUPRSEND_WORKSPACE_KEY,
+            workspace_secret=SUPRSEND_WORKSPACE_SECRET
+        )
+    except Exception as e:
+        logger.warning("Failed to initialize SuprSend client: %s", e)
+        client = None
 
 
 def sync_user_profile(user):
     """
     Create or update a SuprSend profile for `user`.
     """
+    if not client or not getattr(settings, "SUPRSEND_ENABLED", False):
+        logger.debug("SuprSend not enabled; skipping profile sync for user %s", getattr(user, 'id', None))
+        return None
     try:
         distinct_id = str(user.id)
         schedule_data = WorkingHour.objects.filter(fk_user_id=user.id, status='active')
@@ -77,6 +88,8 @@ def save_push_subscription_on_profile(user, push_subscription: dict):
     Stores push subscription (web push token / device info) on user's SuprSend profile.
     push_subscription is expected to be the raw object from browser subscription.
     """
+    if not client or not getattr(settings, "SUPRSEND_ENABLED", False):
+        return None
     try:
         distinct_id = str(user.id)
         sub = client.users.get_edit_instance(distinct_id)
@@ -87,26 +100,22 @@ def save_push_subscription_on_profile(user, push_subscription: dict):
         return resp
     except Exception:
         logger.exception("SuprSend: failed to save push subscription for user %s", user.id)
-        raise
+        return None
 
 def trigger_event(event_name: str, distinct_id: str, properties: dict = None):
     """
     Fire an event to SuprSend. distinct_id should be str(user.id).
     """
+    if not client or not getattr(settings, "SUPRSEND_ENABLED", False):
+        logger.debug("SuprSend not enabled; skipping event '%s' for %s", event_name, distinct_id)
+        return None
     try:
-        # payload = {
-        #     "distinct_id": str(distinct_id),
-        #     "event_name": event_name,
-        #     "properties": properties or {}
-        # }
         event = Event(distinct_id=str(distinct_id), event_name=event_name, properties=properties)
-        resp = client.track_event(event)  # using SDK event API as used earlier
-        # sometimes SDK uses client.track; adjust if required by your SDK version
-        # resp = client.track(payload)
+        resp = client.track_event(event)
         return resp
     except Exception:
         logger.exception("SuprSend: failed to fire event %s for %s", event_name, distinct_id)
-        raise
+        return None
 
 def create_suprsend_user_token(distinct_id: str, ttl_seconds: int = 3600) -> str:
     """
@@ -114,6 +123,9 @@ def create_suprsend_user_token(distinct_id: str, ttl_seconds: int = 3600) -> str
     `distinct_id` is your user’s distinct id (string).
     Returns the JWT as a string.
     """
+    if not signing_key_pem or not getattr(settings, "SUPRSEND_ENABLED", False):
+        return "development_suprsend_token"
+
     payload = {
         "entity_type": "subscriber",
         "entity_id": distinct_id,
@@ -121,10 +133,12 @@ def create_suprsend_user_token(distinct_id: str, ttl_seconds: int = 3600) -> str
         'iat': datetime.datetime.now(datetime.timezone.utc)
     }
 
-    # secret = base64.b64decode('your_base64_signingKey').decode('utf-8')
+    try:
+        signed_user_token = jwt.encode(payload, signing_key_pem, algorithm='ES256')
+        if isinstance(signed_user_token, bytes):
+            signed_user_token = signed_user_token.decode("utf-8")
+        return signed_user_token
+    except Exception as e:
+        logger.warning("Failed to encode SuprSend token: %s", e)
+        return "development_suprsend_token"
 
-    signed_user_token = jwt.encode(payload, signing_key_pem, algorithm='ES256')
-    # In PyJWT >= 2.x, jwt.encode returns a str; if bytes, decode to str
-    if isinstance(signed_user_token, bytes):
-        signed_user_token = signed_user_token.decode("utf-8")
-    return signed_user_token

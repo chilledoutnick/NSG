@@ -19,7 +19,8 @@ import os
 import datetime
 from api.views.suprsend_helpers import sync_user_profile
 
-stripe.api_key = STRIPE_SECRET_KEY
+if STRIPE_SECRET_KEY:
+    stripe.api_key = STRIPE_SECRET_KEY
 
 
 class UserProfileView(viewsets.GenericViewSet):

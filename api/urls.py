@@ -58,6 +58,7 @@ router.register(r'potential_contact', views.PotentialContactView, 'potential_con
 
 urlpatterns = [
     path("", include(router.urls)),
+    path("integrations_status/", views.IntegrationsStatusView.as_view(), name="integrations_status"),
     path('download-pass/<int:id>/', views.AppleView.as_view({'get': 'download_pass'}), name='download_pass'),
 path(
     "contact/<uuid:public_id>-<slug:slug>/",

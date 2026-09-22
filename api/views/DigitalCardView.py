@@ -8,7 +8,6 @@ from rest_framework import viewsets, status
 from api.models.DigitalCard import *
 from api.models import *
 from api.views.Services import *
-from google.cloud import vision
 from datetime import datetime
 import requests
 import base64
@@ -16,8 +15,21 @@ import io
 import os
 from django.conf import settings
 from PIL import Image
-from google.oauth2 import service_account
-import google.generativeai as genai
+
+try:
+    from google.cloud import vision
+except ImportError:
+    vision = None
+
+try:
+    from google.oauth2 import service_account
+except ImportError:
+    service_account = None
+
+try:
+    import google.generativeai as genai
+except ImportError:
+    genai = None
 
 API_KEY = getattr(settings, "GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
 
@@ -26,37 +38,40 @@ def parse_contact_details(credentials, text):
     """
     Extract contact details from text using Gemini LLM.
     """
-    print("text received in parse function: ", text)
-    genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel("gemini-3.1-pro-preview")
+    if not API_KEY or genai is None:
+        return {"notes": text}
+    try:
+        genai.configure(api_key=API_KEY)
+        model = genai.GenerativeModel("gemini-1.5-flash")
 
-    prompt = f"""
-    Extract structured contact details from the following text:
+        prompt = f"""
+        Extract structured contact details from the following text:
 
-    {text}
+        {text}
 
-    Return the result in dictionary format with the following keys like:
-    {{
-    "name":"ABC"
-    "email":"abc@abc.com"
-    "phone":"1234567890"
-    "company":"ABC"
-    "designation":"abc"
-    "website":"abc.in"
-    }}
-    Note: if any of this value is null replace it with empty string like:
-    "email":""
-    "phone":""
-    "company":""
-    "designation":""
-    "website":""
-    """
+        Return the result in dictionary format with the following keys like:
+        {{
+        "name":"ABC"
+        "email":"abc@abc.com"
+        "phone":"1234567890"
+        "company":"ABC"
+        "designation":"abc"
+        "website":"abc.in"
+        }}
+        Note: if any of this value is null replace it with empty string like:
+        "email":""
+        "phone":""
+        "company":""
+        "designation":""
+        "website":""
+        """
 
-    response = model.generate_content(prompt)
-    print("generated response: ", response.text)
-    res = eval(response.text.split("```")[1][5:-1])
-
-    return res
+        response = model.generate_content(prompt)
+        res = eval(response.text.split("```")[1][5:-1])
+        return res
+    except Exception as e:
+        print("Gemini extraction error:", e)
+        return {"notes": text}
 
 
 def generate_vcard(contact):
@@ -652,6 +667,11 @@ FN:{contact.name or ''}
 
             # Load credentials from the JSON file
             json_path = os.path.join(os.path.dirname(__file__), "../../effective-sonar-415015-c27f2957a4d7.json")
+            if service_account is None or vision is None or not os.path.exists(json_path):
+                return Response(
+                    {'message': 'Google Vision OCR service is not configured or credentials file is missing.'},
+                    status=status.HTTP_503_SERVICE_UNAVAILABLE
+                )
             with open(json_path) as f:
                 GOOGLE_CREDENTIALS = json.load(f)
 

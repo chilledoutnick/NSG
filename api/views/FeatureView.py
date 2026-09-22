@@ -10,6 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from advisorapp.settings import SENDER_TOKEN, LINKEDIN_CLIENT_ID, LINKEDIN_CLIENT_SECRET, PROXYCURL_API_KEY
+from django.conf import settings
 from api.models import WorkingHour, Outlook
 from api.models.refer import ReferralCode
 from api.views.Services import *
@@ -80,8 +81,13 @@ class FeatureView(viewsets.GenericViewSet):
     #     else:
     #         return Response({'success': False}, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(methods=["POST"], detail=False)
-    def linkedin_access(self, request):
+    @action(methods=['POST'], detail=False)
+    def get_linkedin_token(self, request):
+        if not getattr(settings, "LINKEDIN_ENABLED", False):
+            return Response(
+                {"status": False, "message": "LinkedIn integration is not configured in development."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         code = request.data.get('code')
         redirect_uri = request.data.get('redirect_uri', '{{ FRONTEND_URL }}/card')
 
@@ -137,6 +143,11 @@ class FeatureView(viewsets.GenericViewSet):
 
     @action(methods=["POST"], detail=False)
     def linkedin_profile(self, request):
+        if not getattr(settings, "PROXYCURL_ENABLED", False):
+            return Response(
+                {"status": False, "message": "LinkedIn enrichment service is not configured in development."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         try:
             user = get_user_from_token(request)
 

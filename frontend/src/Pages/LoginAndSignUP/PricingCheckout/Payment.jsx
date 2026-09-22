@@ -162,6 +162,41 @@ else{
       .catch((error) => console.error("Error fetching payment intent:", error));
   };
 
+  const publishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
+  const isStripeConfigured = Boolean(publishableKey && publishableKey.trim() !== "");
+
+  if (!isStripeConfigured) {
+    return (
+      <div style={{ maxWidth: '600px', margin: '80px auto', padding: '40px 30px', textAlign: 'center', background: '#fff', borderRadius: '16px', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+        <div style={{ fontSize: '42px', marginBottom: '16px' }}>🎉</div>
+        <h2 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '12px', color: '#111827' }}>
+          Stripe Payment Not Configured
+        </h2>
+        <p style={{ color: '#4b5563', marginBottom: '28px', lineHeight: '1.6', fontSize: '15px' }}>
+          Payment processing is not set up yet. The platform is operating in <strong>Free Mode</strong> — no credit card or payment is required.
+        </p>
+        <button
+          onClick={() => {
+            sessionStorage.setItem("signup_start_url", "free");
+            window.location.href = isUpgrade ? "/account" : "/signup/domain";
+          }}
+          style={{
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: '12px 28px',
+            borderRadius: '8px',
+            border: 'none',
+            fontSize: '15px',
+            fontWeight: '600',
+            cursor: 'pointer',
+          }}
+        >
+          Continue with Free Setup →
+        </button>
+      </div>
+    );
+  }
+
   // Loader condition
   if (loading || !clientSecret || !stripePromise) {
     return <CheckoutSkeleton />;

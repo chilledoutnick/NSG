@@ -22,9 +22,10 @@ from api.tasks import send_event_summary_email
 
 # A cache or similar mechanism can track daily additions
 from django.core.cache import cache
-import stripe
+from api.utils.stripe_compat import stripe
 
-stripe.api_key = STRIPE_SECRET_KEY
+if STRIPE_SECRET_KEY and hasattr(stripe, 'api_key'):
+    stripe.api_key = STRIPE_SECRET_KEY
 
 
 # @receiver(post_save, sender=Contact)

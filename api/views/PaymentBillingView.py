@@ -12,9 +12,10 @@ from advisorapp import settings
 from api.models.PaymentBilling import Order
 from api.serializers import PaymentBillingSerializer
 from api.views.Services import *
-import stripe
+from api.utils.stripe_compat import stripe
 
-stripe.api_key = STRIPE_SECRET_KEY
+if STRIPE_SECRET_KEY and hasattr(stripe, 'api_key'):
+    stripe.api_key = STRIPE_SECRET_KEY
 
 
 # stripe.api_key = STRIPE_TEST_SECRET_KEY
@@ -64,6 +65,14 @@ class PaymentBillingView(viewsets.GenericViewSet):
 
     @action(methods=['POST'], detail=False)
     def create_payment_intent(self, request):
+        if not STRIPE_SECRET_KEY:
+            return Response({
+                'id': 'free_setup_intent',
+                'client_secret': 'free_client_secret',
+                'customer': {'id': 'free_customer', 'email': request.data.get('email', '')},
+                'free_mode': True,
+                'message': 'Stripe is not setup yet. Free mode active.'
+            })
         name = request.data["name"]
         email = request.data["email"].strip()
 
@@ -92,6 +101,12 @@ class PaymentBillingView(viewsets.GenericViewSet):
    
     @action(methods=['POST'], detail=False)
     def create_payment_subscription(self, request):
+        if not STRIPE_SECRET_KEY:
+            return Response({
+                'message': 'Stripe is not setup yet. Subscriptions are currently free.',
+                'status': 'active',
+                'free_mode': True
+            }, status=status.HTTP_200_OK)
         set_up_intent_id = request.data.get("session_id")
         price_id = request.data.get("price_id")
         coupon = request.data.get("coupon", None)
@@ -473,6 +488,12 @@ class PaymentBillingView(viewsets.GenericViewSet):
 
     @action(methods=['POST'], detail=False)
     def create_combined_checkout_session(self, request):
+            if not STRIPE_SECRET_KEY:
+                return Response({
+                    'message': 'Stripe is not setup yet. Subscriptions are currently free.',
+                    'free_mode': True,
+                    'url': '/signup/domain'
+                }, status=status.HTTP_200_OK)
             email = request.data["email"].strip()
             name = request.data["name"]
             price_id_subscription = request.data.get("price_id_subscription")
@@ -489,40 +510,38 @@ class PaymentBillingView(viewsets.GenericViewSet):
                 )
 
             # Create a Stripe Checkout Session
-            line_items = []
-            if price_id_subscription:
-                line_items.append({"price": price_id_subscription, "quantity": 1})
-            if price_id_card:
-                line_items.append({"price": price_id_card, "quantity": 1})
-
             try:
                 checkout_session = stripe.checkout.Session.create(
                     customer=customer.id,
-                    line_items=line_items,
-                    mode="subscription" if price_id_subscription else "payment",
-                    success_url="http://localhost:3000/completion",
-                    cancel_url="http://localhost:3000/error",
+                    payment_method_types=['card'],
+                    line_items=[
+                        {
+                            'price': price_id_subscription,
+                            'quantity': 1,
+                        },
+                        {
+                            'price': price_id_card,
+                            'quantity': 1,
+                        },
+                    ],
+                    mode='subscription',
+                    success_url=settings.REDIRECT_DOMAIN + 'signup/domain?session_id={CHECKOUT_SESSION_ID}',
+                    cancel_url=settings.REDIRECT_DOMAIN + 'signup/cancel',
                 )
-                return Response({"checkout_url": checkout_session.url}, status=status.HTTP_200_OK)
-
+                return Response({'url': checkout_session.url})
             except stripe.error.StripeError as e:
-                return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-        # @action(methods=['POST'], detail=False)
-    # def test(self, request):
-    #     payment_intent_id = request.data.get("session_id")
-    #     amount = 699
     #     intent = stripe.Coupon.retrieve("webhook2")
-    #     print(intent.applies_to)
-    #     return Response(intent)
+    #     print("intent", intent)
+    #     coupon_id = intent.id
+    #     print("coupon_id", coupon_id)
 
-    @csrf_exempt
     @action(methods=['POST'], detail=False)
     def stripe_webhook(self, request):
-        # time.sleep(10)
         payload = request.body
         signature_header = request.META['HTTP_STRIPE_SIGNATURE']
-        # event = None
+
         try:
             event = stripe.Webhook.construct_event(
                 payload, signature_header, settings.STRIPE_WEBHOOK_SECRET
@@ -532,40 +551,41 @@ class PaymentBillingView(viewsets.GenericViewSet):
         except stripe.error.SignatureVerificationError:
             return HttpResponse(status=400)
 
-        # # Handle different types of events
-        # if event['type'] in [
-        #     'price.created', 'price.deleted', 'price.updated',
-        #     'product.created', 'product.deleted', 'product.updated'
-        # ]:
+        event_type = event['type']
+        print(f"Received event: {event_type}")
+
         #     stripe_object = event['data']['object']
         #     event_type = event['type']
         #
-        #     # Handling different event types
-        #     if event_type.startswith('price'):
-        #         print("----------price------------", event)
-        #
+        #     # Handle Price and Product events
+        #     if event_type.startswith('price.'):
         #         handle_price_events(stripe_object, event_type)
-        #         print("-----------------------------------------------------------------------")
-        #
-        #     elif event_type.startswith('product'):
-        #         print("----------product------------", event)
-        #
+        #     elif event_type.startswith('product.'):
         #         handle_product_events(stripe_object, event_type)
-        #         print("-----------------------------------------------------------------------")
 
+        if event_type == 'checkout.session.completed':
+            session = event['data']['object']
+            customer_id = session.get('customer')
+            subscription_id = session.get('subscription')
+            payment_intent = session.get('payment_intent')
+            amount_total = session.get('amount_total', 0) / 100
+            currency = session.get('currency', 'usd')
+            customer_email = session.get('customer_details', {}).get('email')
 
-        # return HttpResponse(status=400 if 'failed' in event['type'] else 419)
-        if event["type"] == "checkout.session.completed":
-            session = event["data"]["object"]
+            PaymentBilling.objects.create(
+                stripe_customer_id=customer_id,
+                stripe_subscription_id=subscription_id,
+                email=customer_email,
+                amount=amount_total,
+                currency=currency,
+                payment_intent_id=payment_intent,
+                billing_status="active"
+            )
 
-            handle_checkout_completed(session)
-            # order, created = handle_partial_checkout_completed(session)
-
-        if event["type"] == "payment_intent.payment_failed":
-            pi = event["data"]["object"]
-            customer_id = pi["customer"]
-
-            Order.objects.filter(
+        elif event_type == 'invoice.payment_failed':
+            invoice = event['data']['object']
+            customer_id = invoice.get('customer')
+            PaymentBilling.objects.filter(
                 stripe_customer_id=customer_id,
                 remaining_paid=False
             ).update(status="failed")
@@ -574,6 +594,15 @@ class PaymentBillingView(viewsets.GenericViewSet):
 
     @action(methods=["POST"], detail=False)
     def create_one_time_payment(self, request):
+        if not STRIPE_SECRET_KEY:
+            return Response({
+                "client_secret": "free_client_secret",
+                "payment_intent_id": "free_intent",
+                "amount": 0,
+                "currency": "usd",
+                "free_mode": True,
+                "customer_id": "free_customer",
+            })
         name = request.data["name"]
         email = request.data["email"].strip()
         price_id = request.data["price_id"]  # Should be for a one-time product
@@ -628,6 +657,17 @@ class PaymentBillingView(viewsets.GenericViewSet):
 
     @action(methods=["POST"], detail=False)
     def payment_details(self, request):
+        if not STRIPE_SECRET_KEY:
+            return Response({
+                "status": True,
+                "free_mode": True,
+                "stripe_subscription_id": "free_sub",
+                "payment_intent_id": "free_intent",
+                "session_id": request.data.get("session_id", "free_session"),
+                "email": request.data.get("email", ""),
+                "amount": 0,
+                "message": "Stripe is not setup yet. Platform operating in free mode."
+            }, status=status.HTTP_200_OK)
         session_id = request.data.get("session_id")
 
         if not session_id:

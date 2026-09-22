@@ -101,13 +101,19 @@ Reschedule: https://cal.com/{host['username']}/{resp_data['eventType']['slug']}?
 
 Cancel: https://cal.com/booking/{resp_data['uid']}?cancel=true&allRemainingBookings=false&cancelledBy={host['email']}
                     """
-    print(body)
-    client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-    client.messages.create(
-        body=body,
-        from_=TWILIO_FROM_NUMBER,
-        to=user_number,
-    )
+    if not getattr(settings, "TWILIO_ENABLED", False):
+        logger.info("Twilio is not configured in development; skipping SMS to %s.", user_number)
+        return body
+
+    try:
+        client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+        client.messages.create(
+            body=body,
+            from_=TWILIO_FROM_NUMBER,
+            to=user_number,
+        )
+    except Exception as e:
+        logger.warning("Twilio SMS send error: %s", e)
     return body
 
 class AgentView(viewsets.GenericViewSet):
@@ -773,6 +779,11 @@ Before ending the call:
         STEP 2: BUY TWILIO NUMBER
         -------------------------
         """
+        if not getattr(settings, "TWILIO_ENABLED", False):
+            return Response(
+                {"status": False, "message": "Twilio integration is not configured in development."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         account_sid = TWILIO_ACCOUNT_SID
         auth_token = TWILIO_AUTH_TOKEN

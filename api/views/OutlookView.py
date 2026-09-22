@@ -9,6 +9,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 
 from advisorapp.settings import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, OUTLOOK_CLIENT_ID, OUTLOOK_CLIENT_SECRET
+from django.conf import settings
 from api.models import *
 from api.models.Outlook import Outlook
 from api.views.Services import get_user_from_token, sync_outlook_emails, sync_outlook_calendar
@@ -25,12 +26,13 @@ def save_outlook_token(user, token_data):
             'expiry_time': datetime.now(timezone.utc) + timedelta(seconds=token_data.get('expires_in', 0)),
         }
     )
-    sync_outlook_emails(user, outlook)
-    sync_outlook_calendar(user, outlook)
+    return outlook
 
 class OutlookView(viewsets.GenericViewSet):
     @action(methods=['POST'], detail=False)
     def outlookToken(self, request):
+        if not getattr(settings, "OUTLOOK_ENABLED", False):
+            return JsonResponse({'status': False, 'message': 'Outlook integration is not configured in development.'}, status=400)
         user = get_user_from_token(request)
         code = request.data['code']
         redirect_uri = request.data['redirect_uri']

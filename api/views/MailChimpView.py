@@ -19,9 +19,9 @@ class AddContactView(viewsets.GenericViewSet):
             tags = [tags]
         
 
-        # Ensure that MAILCHIMP_AUDIENCE_ID and mailchimp_dc are properly defined in settings
-        if not MAILCHIMP_AUDIENCE_ID or not MAILCHIMP_DC:
-            return JsonResponse({'error': 'Mailchimp settings are not configured correctly'}, status=500)
+        from django.conf import settings
+        if not getattr(settings, "MAILCHIMP_ENABLED", False):
+            return JsonResponse({'status': False, 'message': 'Mailchimp integration is not configured in development.'}, status=400)
 
         # Mailchimp API endpoint
         #url = f'https://{MAILCHIMP_DC}.api.mailchimp.com/3.0/lists/{MAILCHIMP_AUDIENCE_ID}/members/'

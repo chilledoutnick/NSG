@@ -6,7 +6,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from django.core.files.uploadedfile import TemporaryUploadedFile, InMemoryUploadedFile
 from django.core.files.base import ContentFile
-import stripe
+from api.utils.stripe_compat import stripe
 from api.models import *
 from api.models import NSGSmartCard
 from api.models import AdvisorLogo

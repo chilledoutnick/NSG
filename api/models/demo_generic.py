@@ -26,7 +26,10 @@ from googleapiclient.errors import HttpError
 from google.oauth2.service_account import Credentials
 from google.auth import jwt, crypt
 
-from advisorapp.settings import GOOGLE_APPLICATION_CREDENTIALS, API_URL
+from django.conf import settings
+
+GOOGLE_APPLICATION_CREDENTIALS = getattr(settings, "GOOGLE_APPLICATION_CREDENTIALS", "")
+API_URL = getattr(settings, "API_URL", "")
 
 
 # [END imports]
@@ -44,14 +47,22 @@ class DemoGeneric:
     def __init__(self):
         self.key_file_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS',
                                             GOOGLE_APPLICATION_CREDENTIALS)
-        # Set up authenticated client
-        self.auth()
+        self.credentials = None
+        self.client = None
+        # Set up authenticated client if credentials file exists
+        if self.key_file_path and os.path.exists(self.key_file_path):
+            try:
+                self.auth()
+            except Exception:
+                pass
 
     # [END setup]
 
     # [START auth]
     def auth(self):
         """Create authenticated HTTP client using a service account file."""
+        if not self.key_file_path or not os.path.exists(self.key_file_path):
+            raise FileNotFoundError("Google Application Credentials file not found")
         self.credentials = Credentials.from_service_account_file(
             self.key_file_path,
             scopes=['https://www.googleapis.com/auth/wallet_object.issuer'])

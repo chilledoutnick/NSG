@@ -164,7 +164,8 @@ if os.getenv("PROD") == "TRUE":
 GCP_STORAGE_BUCKET_NAME = get_env("GCP_STORAGE_BUCKET_NAME", "nsg-crm-storage")
 GS_QUERYSTRING_AUTH = False
 
-credentials_path = get_env("GOOGLE_APPLICATION_CREDENTIALS", "")
+GOOGLE_APPLICATION_CREDENTIALS = get_env("GOOGLE_APPLICATION_CREDENTIALS", "")
+credentials_path = GOOGLE_APPLICATION_CREDENTIALS
 NEW_GOOGLE_APPLICATION_CREDENTIALS = credentials_path
 if credentials_path and os.path.exists(credentials_path):
     try:
@@ -213,11 +214,17 @@ WHITENOISE_USE_FINDERS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Email Configuration
-EMAIL_BACKEND = get_env("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+EMAIL_HOST_USER = get_env("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = get_env("EMAIL_HOST_PASSWORD", "")
+# Default to console backend if SMTP credentials are not configured
+default_email_backend = (
+    "django.core.mail.backends.smtp.EmailBackend"
+    if (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD)
+    else "django.core.mail.backends.console.EmailBackend"
+)
+EMAIL_BACKEND = get_env("EMAIL_BACKEND", default_email_backend)
 EMAIL_USE_TLS = get_env("EMAIL_USE_TLS", True, cast=bool)
 EMAIL_HOST = get_env("EMAIL_HOST", "smtp.gmail.com")
-EMAIL_HOST_USER = get_env("EMAIL_HOST_USER", "noreply@nsgcrm.com")
-EMAIL_HOST_PASSWORD = get_env("EMAIL_HOST_PASSWORD", "")
 EMAIL_PORT = get_env("EMAIL_PORT", 587, cast=int)
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -227,8 +234,15 @@ MAILER_EMAIL_THROTTLE = 3600
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 1024
 
-# Celery Configuration
-CELERY_BROKER_URL = get_env("CELERY_BROKER_URL", "amqp://guest:guest@localhost:5672//")
+# Celery & Broker Configuration
+CELERY_BROKER_URL = get_env("CELERY_BROKER_URL", "")
+# If broker is not configured, execute tasks eagerly in-process so background jobs do not fail
+CELERY_TASK_ALWAYS_EAGER = get_env(
+    "CELERY_TASK_ALWAYS_EAGER",
+    not bool(CELERY_BROKER_URL),
+    cast=bool,
+)
+CELERY_TASK_EAGER_PROPAGATES = True
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_TASK_TRACK_STARTED = True
@@ -239,10 +253,31 @@ CELERY_TASK_TIME_LIMIT = 600
 CELERY_TASK_SOFT_TIME_LIMIT = 540
 CELERY_RESULT_BACKEND = "django-db"
 
-# Stripe Configuration
+# Redis Cache Configuration (fallback to in-memory LocMemCache if Redis is not configured)
+REDIS_URL = get_env("REDIS_URL", "")
+if REDIS_URL:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            },
+        }
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "nsg-crm-locmem-cache",
+        }
+    }
+
+# Stripe Configuration (Empty = Free Mode active)
 STRIPE_SECRET_KEY = get_env("STRIPE_SECRET_KEY", "")
 STRIPE_PUBLISHABLE_KEY = get_env("STRIPE_PUBLISHABLE_KEY", "")
 STRIPE_WEBHOOK_SECRET = get_env("STRIPE_WEBHOOK_SECRET", "")
+STRIPE_FREE_MODE = not bool(STRIPE_SECRET_KEY)
 
 # OAuth Configuration
 GOOGLE_CLIENT_ID = get_env("GOOGLE_CLIENT_ID", "")
@@ -284,6 +319,14 @@ WHITENOISE_ROOT = FRONTEND_BUILD_DIR
 
 # Encryption & Tokens
 FERNET_KEY = get_env("FERNET_KEY", "")
+if not FERNET_KEY:
+    if DEBUG:
+        # Development fallback: 32 url-safe base64-encoded bytes
+        FERNET_KEY = "dGVzdGluZ2RldmtleWZvcmZlcm5ldDEyMzQ1Njc4OTA="
+    else:
+        from django.core.exceptions import ImproperlyConfigured
+        raise ImproperlyConfigured("Missing required environment variable: FERNET_KEY")
+
 JWT_SECRET = get_env("JWT_SECRET", SECRET_KEY)
 SENDER_TOKEN = get_env("SENDER_TOKEN", "")
 
@@ -291,7 +334,7 @@ csrf_origins = get_env("CSRF_TRUSTED_ORIGINS", "http://localhost:3000,http://127
 CSRF_TRUSTED_ORIGINS = [o.strip() for o in csrf_origins.split(",") if o.strip()]
 
 # Wallet Defaults (Google Wallet & Apple Wallet)
-WALLET_ISSUER_ID = get_env("WALLET_ISSUER_ID", "3388000000022321439")
+WALLET_ISSUER_ID = get_env("WALLET_ISSUER_ID", "")
 WALLET_CLASS_SUFFIX = get_env("WALLET_CLASS_SUFFIX", "nsg_business_card")
 WALLET_OBJECT_SUFFIX = get_env("WALLET_OBJECT_SUFFIX", "nsg_business_obj")
 APPLE_PASS_PASSWORD = get_env("APPLE_PASS_PASSWORD", "")
@@ -301,6 +344,79 @@ APPLE_TEAM_IDENTIFIER = get_env("APPLE_TEAM_IDENTIFIER", "")
 APPLE_CERTIFICATE_PATH = get_env("APPLE_CERTIFICATE_PATH", "")
 APPLE_WWDR_PATH = get_env("APPLE_WWDR_PATH", "")
 APPLE_PASS_AUTH_TOKEN = get_env("APPLE_PASS_AUTH_TOKEN", "")
+
+# ------------------------------------------------------------------------------
+# Feature Flags for Optional Third-Party Integrations
+# ------------------------------------------------------------------------------
+STRIPE_ENABLED = bool(STRIPE_SECRET_KEY and STRIPE_SECRET_KEY.strip())
+STRIPE_FREE_MODE = not STRIPE_ENABLED
+
+GOOGLE_OAUTH_ENABLED = bool(
+    GOOGLE_CLIENT_ID
+    and GOOGLE_CLIENT_SECRET
+    and GOOGLE_CLIENT_ID.strip()
+    and GOOGLE_CLIENT_SECRET.strip()
+)
+GOOGLE_CALENDAR_ENABLED = GOOGLE_OAUTH_ENABLED
+
+OUTLOOK_ENABLED = bool(
+    OUTLOOK_CLIENT_ID
+    and OUTLOOK_CLIENT_SECRET
+    and OUTLOOK_CLIENT_ID.strip()
+    and OUTLOOK_CLIENT_SECRET.strip()
+)
+
+LINKEDIN_ENABLED = bool(
+    LINKEDIN_CLIENT_ID
+    and LINKEDIN_CLIENT_SECRET
+    and LINKEDIN_CLIENT_ID.strip()
+    and LINKEDIN_CLIENT_SECRET.strip()
+)
+PROXYCURL_ENABLED = bool(PROXYCURL_API_KEY and PROXYCURL_API_KEY.strip())
+
+TWILIO_ENABLED = bool(
+    TWILIO_ACCOUNT_SID
+    and TWILIO_AUTH_TOKEN
+    and TWILIO_ACCOUNT_SID.strip()
+    and TWILIO_AUTH_TOKEN.strip()
+)
+
+MAILCHIMP_ENABLED = bool(
+    MAILCHIMP_API_KEY
+    and MAILCHIMP_AUDIENCE_ID
+    and MAILCHIMP_API_KEY.strip()
+    and MAILCHIMP_AUDIENCE_ID.strip()
+)
+
+SUPRSEND_ENABLED = bool(
+    SUPRSEND_WORKSPACE_KEY
+    and SUPRSEND_WORKSPACE_SECRET
+    and SUPRSEND_WORKSPACE_KEY.strip()
+    and SUPRSEND_WORKSPACE_SECRET.strip()
+)
+
+GOOGLE_WALLET_ENABLED = bool(
+    FIREBASE_CREDENTIALS_PATH
+    and WALLET_ISSUER_ID
+    and os.path.exists(FIREBASE_CREDENTIALS_PATH)
+)
+
+APPLE_WALLET_ENABLED = bool(
+    APPLE_CERTIFICATE_PATH
+    and APPLE_WWDR_PATH
+    and os.path.exists(APPLE_CERTIFICATE_PATH)
+    and os.path.exists(APPLE_WWDR_PATH)
+)
+
+REDIS_ENABLED = bool(REDIS_URL and REDIS_URL.strip())
+CELERY_ENABLED = bool(CELERY_BROKER_URL and CELERY_BROKER_URL.strip())
+SMTP_ENABLED = bool(
+    EMAIL_HOST_USER
+    and EMAIL_HOST_PASSWORD
+    and EMAIL_HOST_USER.strip()
+    and EMAIL_HOST_PASSWORD.strip()
+)
+GCP_STORAGE_ENABLED = bool(USE_S3 and GCP_STORAGE_BUCKET_NAME and FIREBASE_CREDENTIALS_PATH)
 
 # Fail-Fast Production Security Validation
 if not DEBUG:

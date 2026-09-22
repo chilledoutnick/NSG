@@ -15,6 +15,13 @@ class GooglePass(viewsets.GenericViewSet):
     @action(methods=['POST'], detail=False)
     def google_pass(self, request):
         try:
+            from django.conf import settings
+            if not getattr(settings, "GOOGLE_WALLET_ENABLED", False):
+                return JsonResponse({
+                    'status': False,
+                    'message': 'Google Wallet pass is not configured in development.'
+                }, status=400)
+
             user = get_user_from_token(request)
             username = request.data.get('username')
             if not username:

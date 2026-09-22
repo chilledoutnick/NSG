@@ -1,21 +1,35 @@
 from advisorapp.settings import STRIPE_SECRET_KEY
-from stripe.error import InvalidRequestError
+from api.utils.stripe_compat import stripe, InvalidRequestError
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets, status
 from api.models import PaymentBilling, StripeDetails
-import stripe
 from datetime import datetime, timedelta
 
 from api.views.Services import get_user_from_token
 
-stripe.api_key = STRIPE_SECRET_KEY
+if STRIPE_SECRET_KEY and hasattr(stripe, 'api_key'):
+    stripe.api_key = STRIPE_SECRET_KEY
 
 
 class StripeDetailsView(viewsets.GenericViewSet):
 
     @action(methods=['POST'], detail=False)
     def get_stripe_details(self, request):
+        if not STRIPE_SECRET_KEY:
+            product_id = request.data.get('product_id', 'free_tier')
+            return Response({
+                "message": "Stripe is not setup yet. Subscriptions are currently free.",
+                "stripe_active": False,
+                "free_mode": True,
+                "amount": 0,
+                "price": 0.0,
+                "unit_amount": 0,
+                "price_id": "free_tier_price",
+                "product_id": product_id,
+                "currency": "usd",
+                "client_secret": "free_mode_client_secret",
+            }, status=status.HTTP_200_OK)
         try:
             product_id = request.data.get('product_id')
             period = request.data.get('period', 'monthly')  # Default period to 'monthly' if not provided

@@ -1,51 +1,94 @@
-from api.views.AdvisorAppointmentView import AdvisorAppointmentView
-from api.views.ExchangeContactsView import ExchangeContactsView
-from api.views.PaymentBillingView import PaymentBillingView
-from api.views.AdvisorGalleryView import AdvisorGalleryView
-from api.views.LeadGenerationView import LeadGenerationView
-from api.views.StripeDetailsView import StripeDetailsView
-from api.views.ContactSalesView import ContactSalesView
-from api.views.PublicReviewView import PublicReviewView
-from api.views.NoteReminderView import NoteReminderView
-from api.views.UserProfileView import UserProfileView
-from api.views.WorkingHourView import WorkingHourView
-from api.views.TeamGalleryView import TeamGalleryView
-from api.views.DigitalCardView import DigitalCardView
-from api.views.AdvisorLogoView import AdvisorLogoView
-from api.views.SuperAdminView import SuperAdminView
-from api.views.TeamMemberView import TeamMemberView
-from api.views.MailChimpView import AddContactView
-from api.views.AdminTeamView import AdminTeamView
-from api.views.GooglePassView import GooglePass
-from api.views.TimelineView import TimelineView
-from api.views.FeatureView import FeatureView
-from api.views.PackageView import PackageView
-from api.views.ContactView import ContactView
-from api.views.ServiceView import ServiceView
-from api.views.CampainView import CampainView
-from api.views.ApplePassView import AppleView
-from api.views.WebPGallery import webPGallery
-from api.views.ReviewView import ReviewView
-from api.views.ZapierView import ZapierView
-from api.views.ReferView import ReferView
-from api.views.UserView import UserView
-from api.views.MetaView import MetaView
-from api.views.OutlookView import OutlookView
-from api.views.CalDavView import CalDavView
-from api.views.UserAddressView import UserAddressView
-from api.views.NSGSmartCardView import NSGSmartCardView
-from api.views.NotificationView import NotificationView
-from api.views.DashboardView import DashboardView
-from api.views.DynamicDateView import DynamicDateView
-from api.views.ProfileView import ProfileView
-from api.views.ProfileReviewView import ProfileReviewView
-from api.views.ProfileGalleryView import ProfileGalleryView
-from api.views.ProfileServiceView import ProfileServiceView
-from api.views.AgentView import AgentView
-from api.views.ProfileLayoutView import ProfileLayoutViewSet
-from api.views.ProfileContactInfoView import ProfileContactInfoView
-from api.views.robots_txt import robots_txt
-from api.views.PotentialContactView import PotentialContactView
+"""
+api.views - Safe and fault-tolerant view module loader.
+
+Safely imports CRM viewsets and endpoints so that missing third-party packages
+or external service credentials never crash Django startup or route registration.
+"""
+
+import importlib
+import logging
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+
+logger = logging.getLogger(__name__)
 
 
+def _make_unavailable_viewset(view_name, exc):
+    logger.warning("Optional view %s is unavailable: %s", view_name, exc)
 
+    class _Unavailable(viewsets.GenericViewSet):
+        def dispatch(self, request, *args, **kwargs):
+            return Response(
+                {
+                    "error": f"Integration endpoint '{view_name}' is unavailable in this environment.",
+                    "details": str(exc),
+                    "status": "unavailable",
+                },
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
+
+    _Unavailable.__name__ = view_name
+    return _Unavailable
+
+
+_VIEWS = [
+    ('AdvisorAppointmentView', 'AdvisorAppointmentView'),
+    ('ExchangeContactsView', 'ExchangeContactsView'),
+    ('PaymentBillingView', 'PaymentBillingView'),
+    ('AdvisorGalleryView', 'AdvisorGalleryView'),
+    ('LeadGenerationView', 'LeadGenerationView'),
+    ('StripeDetailsView', 'StripeDetailsView'),
+    ('ContactSalesView', 'ContactSalesView'),
+    ('PublicReviewView', 'PublicReviewView'),
+    ('NoteReminderView', 'NoteReminderView'),
+    ('UserProfileView', 'UserProfileView'),
+    ('WorkingHourView', 'WorkingHourView'),
+    ('TeamGalleryView', 'TeamGalleryView'),
+    ('DigitalCardView', 'DigitalCardView'),
+    ('AdvisorLogoView', 'AdvisorLogoView'),
+    ('SuperAdminView', 'SuperAdminView'),
+    ('TeamMemberView', 'TeamMemberView'),
+    ('AddContactView', 'MailChimpView'),
+    ('AdminTeamView', 'AdminTeamView'),
+    ('GooglePass', 'GooglePassView'),
+    ('TimelineView', 'TimelineView'),
+    ('FeatureView', 'FeatureView'),
+    ('PackageView', 'PackageView'),
+    ('ContactView', 'ContactView'),
+    ('ServiceView', 'ServiceView'),
+    ('CampainView', 'CampainView'),
+    ('AppleView', 'ApplePassView'),
+    ('webPGallery', 'WebPGallery'),
+    ('ReviewView', 'ReviewView'),
+    ('ZapierView', 'ZapierView'),
+    ('ReferView', 'ReferView'),
+    ('UserView', 'UserView'),
+    ('MetaView', 'MetaView'),
+    ('OutlookView', 'OutlookView'),
+    ('CalDavView', 'CalDavView'),
+    ('UserAddressView', 'UserAddressView'),
+    ('NSGSmartCardView', 'NSGSmartCardView'),
+    ('NotificationView', 'NotificationView'),
+    ('DashboardView', 'DashboardView'),
+    ('DynamicDateView', 'DynamicDateView'),
+    ('ProfileView', 'ProfileView'),
+    ('ProfileReviewView', 'ProfileReviewView'),
+    ('ProfileGalleryView', 'ProfileGalleryView'),
+    ('ProfileServiceView', 'ProfileServiceView'),
+    ('AgentView', 'AgentView'),
+    ('ProfileLayoutViewSet', 'ProfileLayoutView'),
+    ('ProfileContactInfoView', 'ProfileContactInfoView'),
+    ('robots_txt', 'robots_txt'),
+    ('PotentialContactView', 'PotentialContactView'),
+    ('IntegrationsStatusView', 'SystemStatusView'),
+]
+
+__all__ = [class_name for class_name, _ in _VIEWS]
+
+for class_name, module_name in _VIEWS:
+    try:
+        mod = importlib.import_module(f".{module_name}", package=__name__)
+        cls = getattr(mod, class_name)
+        globals()[class_name] = cls
+    except Exception as exc:
+        globals()[class_name] = _make_unavailable_viewset(class_name, exc)

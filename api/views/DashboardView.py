@@ -9,14 +9,11 @@ from rest_framework import viewsets, status
 from api.models.DigitalCard import *
 from api.models import *
 from api.views.Services import *
-from google.cloud import vision
 from datetime import datetime, timedelta
 import requests
 import base64
 import io
 from PIL import Image
-from google.oauth2 import service_account
-import google.generativeai as genai
 
 from api.views.suprsend_helpers import trigger_event
 

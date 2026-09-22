@@ -23,12 +23,19 @@ class AppleView(viewsets.GenericViewSet):
     @action(methods=['POST'], detail=False)
     def generate_pass(self, request):
         try:
+            from django.conf import settings
+            if not getattr(settings, "APPLE_WALLET_ENABLED", False):
+                return JsonResponse({
+                    'status': False,
+                    'message': 'Apple Wallet pass is not configured in development.'
+                }, status=400)
+
             user_id = request.data.get('user_id', None)
             user = User.objects.filter(id=user_id).first()
 
             if not user_id:
                 user = get_user_from_token(request)
-            username = request.data.get('username', user.username)
+            username = request.data.get('username', user.username if user else None)
             if not username:
                 raise TypeError("Username is required")
             pkpass_file_path = "api/models/NSG.pkpass"

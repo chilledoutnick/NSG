@@ -2,7 +2,7 @@ import base64
 
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
-from advisorapp.settings import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SENDER_TOKEN, JWT_SECRET
+from advisorapp.settings import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SENDER_TOKEN, JWT_SECRET, STRIPE_SECRET_KEY
 from api.models import ApplePass
 from api.models.DigitalCard import DigitalCardEmail
 from api.models.Referral_email import ReferralEmail
@@ -70,7 +70,7 @@ Sign-up or tap “Continue with Google” to register.
             if not user.check_password(password):
                 raise AuthenticationFailed('Incorrect password')
             user = User.objects.filter(id=user.id).first()
-            if user and not user.payment_status and user.account_status:
+            if STRIPE_SECRET_KEY and user and not user.payment_status and user.account_status:
                 return Response({'message': 'Complete your payment to login'}, status=status.HTTP_403_FORBIDDEN)
 
             payload = {
@@ -392,6 +392,11 @@ Sign-up or tap “Continue with Google” to register.
 
     @action(methods=["POST"], detail=False)
     def google_login(self, request):
+        if not getattr(settings, "GOOGLE_OAUTH_ENABLED", False):
+            return Response(
+                {"status": False, "message": "Google authentication is not configured in development."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
         access_token = request.data.get('access_token')
         try:
             email = ""
@@ -429,14 +434,16 @@ Sign-up or tap “Continue with Google” to register.
 
                 # Proceed with using the access_token
                 pass
-            # Make a request to the Google API with the provided access token
-            google_api_url = 'https://www.googleapis.com/oauth2/v1/userinfo'
+            # Use the access_token to fetch user info from Google
             headers = {'Authorization': f'Bearer {access_token}'}
+            google_api_url = 'https://www.googleapis.com/oauth2/v1/userinfo'
             response = requests.get(google_api_url, headers=headers)
 
-            # Process the response and return the data to the frontend
-            if response.status_code == 200:
-                data = response.json()
+            if response.status_code != 200:
+                return Response({'message': 'Failed to fetch user info'}, status=status.HTTP_400_BAD_REQUEST)
+
+            data = response.json()
+            if "email" in data:
                 email = data["email"].strip()
             user = User.objects.filter(email=email).first()
 
@@ -447,7 +454,7 @@ Sign-up or tap “Continue with Google” to register.
                                 status=status.HTTP_403_FORBIDDEN)
 
             user = User.objects.filter(id=user.id).first()
-            if user and not user.payment_status and user.account_status and user.fk_payment_billing != 1:
+            if STRIPE_SECRET_KEY and user and not user.payment_status and user.account_status and user.fk_payment_billing != 1:
                 return Response({'message': 'Complete your payment to login'}, status=status.HTTP_403_FORBIDDEN)
 
             payload = {
@@ -618,6 +625,8 @@ Sign-up or tap “Continue with Google” to register.
 
     @action(methods=["POST"], detail=False)
     def save_access_token(self, request):
+        if not getattr(settings, "GOOGLE_CALENDAR_ENABLED", False):
+            return JsonResponse({'status': False, 'message': 'Google Calendar integration is not configured in development.'}, status=400)
         try:
             user = get_user_from_token(request)
             code = request.data["code"]

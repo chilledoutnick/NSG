@@ -2,7 +2,7 @@
 import unicodedata
 
 import phonenumbers
-import stripe
+from api.utils.stripe_compat import stripe
 from django.db import models
 from rest_framework import status
 from rest_framework.response import Response
@@ -19,7 +19,7 @@ from django.template.loader import render_to_string
 from api.models.Email import Thread
 from api.models.PaymentBilling import Order
 from api.utils.encryption import decrypt_password
-from botocore.exceptions import ValidationError
+from django.core.exceptions import ValidationError
 from email.mime.multipart import MIMEMultipart
 from PIL import Image, ImageDraw, ImageFont
 from api.models.refer import ReferralCode
@@ -70,6 +70,32 @@ def get_user_from_token(request):
 
 def email_sender(server, sender_email, sender_password, receiver, subject, message, reply_to="team@nsgcrm.com",
                  attachment_type='html', marketing_digital_card=False, user=None):
+    if not getattr(settings, "SMTP_ENABLED", False):
+        try:
+            from django.core.mail import EmailMultiAlternatives
+            from_email = sender_email or getattr(settings, "DEFAULT_FROM_EMAIL", "noreply@nsgcrm.com")
+            email_msg = EmailMultiAlternatives(
+                subject=subject,
+                body=message if attachment_type != 'html' else "Please view this email in an HTML compatible email viewer.",
+                from_email=from_email,
+                to=[receiver] if isinstance(receiver, str) else receiver,
+                reply_to=[reply_to] if reply_to else None,
+            )
+            if attachment_type == 'html' or '<html' in message.lower() or '<p' in message.lower():
+                email_msg.attach_alternative(message, "text/html")
+            if marketing_digital_card and user:
+                try:
+                    image_data = marketing_card(user, "black", "Financial Education and Services").content
+                    email_msg.attach(f"{user.name}.png", image_data, "image/png")
+                except Exception as ex:
+                    logger.warning("Could not attach marketing card: %s", ex)
+            email_msg.send(fail_silently=False)
+            logger.info("Email dispatched to %s via %s", receiver, getattr(settings, "EMAIL_BACKEND", "console"))
+            return True
+        except Exception as e:
+            logger.warning("Django console/email backend error: %s", e)
+            return False
+
     try:
         smtp_port = 587
         smtp_server = smtplib.SMTP(server, smtp_port)
@@ -85,9 +111,7 @@ def email_sender(server, sender_email, sender_password, receiver, subject, messa
             msg.attach(html)
         else:
             msg.attach(MIMEText(message, 'plain'))
-        print(marketing_digital_card)
-        if marketing_digital_card:
-            print(user.name)
+        if marketing_digital_card and user:
             image_data = marketing_card(user, "black", "Financial Education and Services").content
             image_attachment = MIMEImage(image_data, name=f"{user.name}.png")
             msg.attach(image_attachment)
@@ -96,7 +120,6 @@ def email_sender(server, sender_email, sender_password, receiver, subject, messa
         return True
     except Exception as e:
         try:
-            str(e)
             sender_email = 'noreply@nsgcrm.com'
             sender_password = getattr(settings, "EMAIL_HOST_PASSWORD", "")
             server = 'smtp.gmail.com'
@@ -111,17 +134,36 @@ def email_sender(server, sender_email, sender_password, receiver, subject, messa
             msg['Reply-To'] = reply_to
             html = MIMEText(message, 'html')
             msg.attach(html)
-            if marketing_digital_card:
-                print("exception", user.name)
+            if marketing_digital_card and user:
                 image_data = marketing_card(user, "black", "Financial Education and Services").content
                 image_attachment = MIMEImage(image_data, name=f"{user.name}.png")
                 msg.attach(image_attachment)
             smtp_server.sendmail(sender_email, receiver, msg.as_string())
             smtp_server.quit()
-        except Exception as e:
-            raise Exception(str(e))
+            return True
+        except Exception as ex:
+            logger.warning("SMTP delivery failed: %s", ex)
+            return False
 
 def send_email(receiver_email, sender_email, subject, message, sender_password, server, reply_to=''):
+    if not getattr(settings, "SMTP_ENABLED", False):
+        try:
+            from django.core.mail import EmailMultiAlternatives
+            from_email = sender_email or getattr(settings, "DEFAULT_FROM_EMAIL", "noreply@nsgcrm.com")
+            email_msg = EmailMultiAlternatives(
+                subject=subject,
+                body="Please view this email in an HTML reader.",
+                from_email=from_email,
+                to=[receiver_email] if isinstance(receiver_email, str) else receiver_email,
+                reply_to=[reply_to] if reply_to else None,
+            )
+            email_msg.attach_alternative(message, "text/html")
+            email_msg.send(fail_silently=False)
+            return True
+        except Exception as e:
+            logger.warning("Django console/email backend error: %s", e)
+            return False
+
     try:
         msg = MIMEMultipart()
         msg['To'] = receiver_email
@@ -139,13 +181,13 @@ def send_email(receiver_email, sender_email, subject, message, sender_password, 
         server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
         server.login(smtp_username, smtp_password)
-        # print(smtp_username, user_email, email_text)
         server.sendmail(smtp_username, receiver_email, msg.as_string())
         server.quit()
 
         return True
     except Exception as e:
-        raise Exception(e)
+        logger.warning("send_email failed: %s", e)
+        return False
 
 def get_ordinal_suffix(day):
     if 10 <= day % 100 <= 20:  # Covers 'th' cases like 11th, 12th, 13th

@@ -10,9 +10,10 @@ from rest_framework import viewsets, status
 from api.views.Services import *
 from api.models.refer import *
 import time
-import stripe
+from api.utils.stripe_compat import stripe
 
-stripe.api_key = STRIPE_SECRET_KEY
+if STRIPE_SECRET_KEY and hasattr(stripe, 'api_key'):
+    stripe.api_key = STRIPE_SECRET_KEY
 
 
 def generate_referral_code():
